@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spoken English - SSCEC</title>
+<title>Spoken English & Grammar - SSCEC</title>
 <style>
   :root {
     --primary: #1e3a8a;
@@ -60,7 +60,7 @@
     gap: 25px; 
     width: 100%; 
     max-width: 900px;
-    padding-bottom: 50px;
+    margin-bottom: 20px;
   }
 
   /* Card Design */
@@ -72,7 +72,6 @@
     text-align: center; 
     transition: all 0.3s ease;
     border: 1px solid #e2e8f0;
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -121,22 +120,24 @@
     box-shadow: 0 6px 15px rgba(30, 58, 138, 0.4);
   }
 
-  /* Specific Card Colors */
-  .lesson-1 { border-top: 6px solid #10b981; }
-  .lesson-2 { border-top: 6px solid #f59e0b; }
-  .lesson-3 { border-top: 6px solid #8b5cf6; }
-  .lesson-4 { border-top: 6px solid #ef4444; }
-  .lesson-5 { border-top: 6px solid #334155; }
+  .section-title {
+    color: var(--primary);
+    margin: 40px 0 20px 0;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+  }
 
-  /* Footer Note */
   .footer-text {
-    margin-top: 20px;
+    margin: 40px 0 20px 0;
     font-size: 13px;
     color: #94a3b8;
     text-align: center;
   }
 
-  /* Responsive Adjustments */
   @media (max-width: 600px) {
     .header h1 { font-size: 24px; }
     .card-container { grid-template-columns: 1fr; }
@@ -152,26 +153,28 @@
     📞 8017247298 | 9874152080</p>
   </div>
 
+  <div class="section-title">🎙️ Spoken English Lessons</div>
+  
   <div class="card-container">
-    <div class="card lesson-1">
+    <div class="card" style="border-top: 6px solid #10b981;">
       <div>
         <span class="card-icon">👋</span>
         <h3>Lesson 1: Greetings</h3>
-        <p>মানুষের সাথে প্রথম দেখায় আত্মবিশ্বাসের সাথে কথা বলা শিখুন।</p>
+        <p>মানুষের সাথে প্রথম দেখায় আত্মবিশ্বাসের সাথে কথা বলা শিখুন।</p>
       </div>
       <a href="lesson1.html" class="btn" style="background: #10b981;">শুরু করুন</a>
     </div>
     
-    <div class="card lesson-2">
+    <div class="card" style="border-top: 6px solid #f59e0b;">
       <div>
         <span class="card-icon">⏰</span>
         <h3>Lesson 2: Daily Life</h3>
-        <p>সময় জিজ্ঞাসা করা এবং দৈনন্দিন প্রয়োজনীয় বাক্যগুলো শিখুন।</p>
+        <p>সময় জিজ্ঞাসা করা এবং দৈনন্দিন প্রয়োজনীয় বাক্যগুলো শিখুন।</p>
       </div>
       <a href="lesson2.html" class="btn" style="background: #f59e0b;">শুরু করুন</a>
     </div>
     
-    <div class="card lesson-3">
+    <div class="card" style="border-top: 6px solid #8b5cf6;">
       <div>
         <span class="card-icon">🛍️</span>
         <h3>Lesson 3: Market</h3>
@@ -180,16 +183,16 @@
       <a href="lesson3.html" class="btn" style="background: #8b5cf6;">শুরু করুন</a>
     </div>
     
-    <div class="card lesson-4">
+    <div class="card" style="border-top: 6px solid #ef4444;">
       <div>
         <span class="card-icon">🩺</span>
         <h3>Lesson 4: Health</h3>
-        <p>ডাক্তারের সাথে কথা বলা এবং অসুস্থতা বর্ণনা করার উপায়।</p>
+        <p>ডাক্তারের সাথে কথা বলা এবং অসুস্থতা বর্ণনা করার উপায়।</p>
       </div>
       <a href="lesson4.html" class="btn" style="background: #ef4444;">শুরু করুন</a>
     </div>
     
-    <div class="card lesson-5">
+    <div class="card" style="border-top: 6px solid #334155;">
       <div>
         <span class="card-icon">💼</span>
         <h3>Lesson 5: Interview</h3>
@@ -199,17 +202,17 @@
     </div>
     
     <div class="card" style="border-top: 6px solid #e11d48;">
-            <div>
-        <span style="font-size: 45px;">🚉</span>
+      <div>
+        <span class="card-icon">🚉</span>
         <h3>Lesson 6: Traveling</h3>
-        <p>ভ্রমণ এবং রাস্তা জিজ্ঞাসা করার প্রয়োজনীয় ইংরেজি শিখুন।</p>
+        <p>ভ্রমণ এবং রাস্তা জিজ্ঞাসা করার প্রয়োজনীয় ইংরেজি শিখুন।</p>
       </div>
       <a href="lesson6.html" class="btn" style="background: #e11d48;">শুরু করুন</a>
     </div>
     
     <div class="card" style="border-top: 6px solid #f59e0b;">
       <div>
-        <span style="font-size: 45px;">🍽️</span>
+        <span class="card-icon">🍽️</span>
         <h3>Lesson 7: Restaurant</h3>
         <p>রেস্টুরেন্টে খাবার অর্ডার করা এবং ডাইনিং এটিকেট শিখুন।</p>
       </div>
@@ -218,52 +221,52 @@
     
     <div class="card" style="border-top: 6px solid #1e40af;">
       <div>
-        <span style="font-size: 45px;">🏦</span>
+        <span class="card-icon">🏦</span>
         <h3>Lesson 8: Bank & Post</h3>
-        <p>ব্যাংক এবং পোস্ট অফিসে কথা বলার প্রয়োজনীয় ইংরেজি শিখুন।</p>
+        <p>ব্যাংক এবং পোস্ট অফিসে কথা বলার প্রয়োজনীয় ইংরেজি শিখুন।</p>
       </div>
       <a href="lesson8.html" class="btn" style="background: #1e40af;">শুরু করুন</a>
     </div>
+
     <div class="card" style="border-top: 6px solid #9d174d;">
       <div>
-        <span style="font-size: 45px;">🙋</span>
+        <span class="card-icon">🙋</span>
         <h3>Lesson 9: Manners</h3>
-        <p>ভদ্রভাবে অনুমতি নেওয়া এবং ভুল হলে ক্ষমা চাওয়ার ইংরেজি শিখুন।</p>
+        <p>ভদ্রভাবে অনুমতি নেওয়া এবং ভুল হলে ক্ষমা চাওয়ার ইংরেজি শিখুন।</p>
       </div>
       <a href="lesson9.html" class="btn" style="background: #9d174d;">শুরু করুন</a>
     </div>
     
     <div class="card" style="border-top: 6px solid #db2777;">
       <div>
-        <span style="font-size: 45px;">📞</span>
+        <span class="card-icon">📞</span>
         <h3>Lesson 10: Phone Call</h3>
-        <p>ফোনে কথা বলার সময় সঠিক শব্দ ও বাক্য ব্যবহারের নিয়ম শিখুন।</p>
+        <p>ফোনে কথা বলার সময় সঠিক শব্দ ও বাক্য ব্যবহারের নিয়ম শিখুন।</p>
       </div>
       <a href="lesson10.html" class="btn" style="background: #db2777;">শুরু করুন</a>
     </div>
+  </div>
 
-
-
-    <br><hr style="width: 80%; border: 1px solid #e2e8f0; margin: 40px 0;">
-
-  <h2 style="color: #1e3a8a; margin-bottom: 20px;">📘 English Grammar (বেসিক গ্রামার)</h2>
+  <div class="section-title">📘 English Grammar (বেসিক গ্রামার)</div>
   
   <div class="card-container">
-    <div class="card" style="border-top-color: #7c3aed;">
-      <span style="font-size: 45px;">⏳</span>
-      <h3>Grammar 1: Tense</h3>
-      <p>V1-V5 ফর্ম ব্যবহার করে সহজ নিয়মে Tense শিখুন।</p>
+    <div class="card" style="border-top: 6px solid #7c3aed;">
+      <div>
+        <span class="card-icon">⏳</span>
+        <h3>Grammar 1: Tense</h3>
+        <p>V1-V5 ফর্ম ব্যবহার করে সহজ নিয়মে Tense শিখুন।</p>
+      </div>
       <a href="grammar1.html" class="btn" style="background: #7c3aed;">শুরু করুন</a>
     </div>
 
-    <div class="card" style="border-top-color: #94a3b8; opacity: 0.7;">
-      <span style="font-size: 45px;">🔒</span>
-      <h3>Grammar 2</h3>
-      <p>পরবর্তী গ্রামার লেসন শীঘ্রই আসছে...</p>
-      <span class="btn" style="background: #94a3b8; cursor: not-allowed;">Coming Soon</span>
+    <div class="card" style="border-top: 6px solid #94a3b8; opacity: 0.7;">
+      <div>
+        <span class="card-icon">🔒</span>
+        <h3>Grammar 2</h3>
+        <p>পরবর্তী গ্রামার লেসন শীঘ্রই আসছে...</p>
+      </div>
+      <span class="btn" style="background: #94a3b8; cursor: not-allowed; box-shadow: none;">Coming Soon</span>
     </div>
-  </div>
-
   </div>
 
   <p class="footer-text">Designed with ❤️ for SSCEC Students</p>
