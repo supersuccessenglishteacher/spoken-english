@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test 9 - SSCEC</title>
+    <style>
+        :root { --primary: #9d174d; --secondary: #831843; --bg: #fef2f2; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        .inst-info { background: white; width: 100%; max-width: 600px; padding: 15px; border-radius: 15px; text-align: center; margin-bottom: 20px; border: 2px solid var(--primary); }
+        .inst-info h1 { margin: 0; color: var(--secondary); font-size: 18px; }
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); box-sizing: border-box; }
+        #name-section { text-align: center; padding: 10px 0; }
+        #student-name-input { width: 80%; padding: 12px; margin: 15px 0; border: 2px solid #ddd; border-radius: 10px; }
+        .btn-start { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .stats { display: none; justify-content: space-between; margin-bottom: 20px; font-weight: bold; }
+        .timer { background: #fce7f3; color: #9d174d; padding: 5px 15px; border-radius: 20px; }
+        .question { font-size: 19px; font-weight: bold; margin-bottom: 20px; }
+        .options-grid { display: grid; gap: 12px; }
+        .option { background: #f9fafb; border: 2px solid #e5e7eb; padding: 15px; border-radius: 12px; cursor: pointer; }
+        .option.correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .option.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+        .score-board { text-align: center; display: none; }
+        .score-text { font-size: 45px; color: var(--primary); font-weight: bold; }
+        .btn-report { background: #25d366; color: white; padding: 14px; border-radius: 10px; text-decoration: none; display: block; margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="inst-info">
+        <h1>SUPER SUCCESS COMPUTER EDUCATION CENTER</h1>
+        <p style="font-size:12px;">MANNERS & ETIQUETTE SKILLS</p>
+    </div>
+    <div class="quiz-container">
+        <div id="name-section">
+            <h3>Mock Test 9: Permission & Apology</h3>
+            <input type="text" id="student-name-input" placeholder="তোমার নাম লেখো...">
+            <button class="btn-start" onclick="startQuiz()">শুরু করো</button>
+        </div>
+        <div class="stats" id="stats-bar">
+            <span>Score: <span id="current-score">0</span></span>
+            <div class="timer">⏳ <span id="time-left">100</span>s</div>
+        </div>
+        <div id="quiz-content" style="display:none;">
+            <div class="question" id="question-text"></div>
+            <div class="options-grid" id="options-container"></div>
+        </div>
+        <div class="score-board" id="score-board">
+            <h2>টেস্ট সম্পন্ন!</h2>
+            <div class="score-text"><span id="final-score">0</span> / 10</div>
+            <a id="whatsapp-link" href="#" target="_blank" class="btn-report">📲 স্যারকে ফলাফল জানাও</a>
+            <a href="lesson9.html" style="display:block; margin-top:15px; color: #666;">⬅️ ফিরে যাও</a>
+        </div>
+    </div>
+
+    <script>
+        let studentName = ""; let currentIdx = 0; let score = 0; let timeLeft = 100;
+        const quizData = [
+            { q: "১. ঘরে ঢোকার সময় অনুমতি নিতে কী বলবেন?", o: ["May I come in?", "I am coming."], a: 0 },
+            { q: "২. কারো কলম নিতে চাইলে কোনটি বেশি ভদ্র?", o: ["Give me your pen.", "Could I use your pen, please?"], a: 1 },
+            { q: "৩. 'I beg your pardon' - কখন বলতে হয়?", o: ["কথা না শুনলে বা ভুল করলে", "খাবার চাইলে"], a: 0 },
+            { q: "৪. দেরি করে আসলে কী বলা উচিত?", o: ["I am late, so what?", "I am sorry for being late."], a: 1 },
+            { q: "৫. 'Forgive' (ফরগিভ) মানে কী?", o: ["ভুলে যাওয়া", "ক্ষমা করা"], a: 1 },
+            { q: "৬. কারো পাশে বসতে চাইলে কী বলবেন?", o: ["Do you mind if I sit here?", "Sit here, I will."], a: 0 },
+            { q: "৭. 'Mistake' (মিসটেক) এর বাংলা অর্থ কী?", o: ["সঠিক কাজ", "ভুল"], a: 1 },
+            { q: "৮. কোনো ভুল করার পর কোনটি বলা জরুরি?", o: ["I apologize.", "I don't care."], a: 0 },
+            { q: "৯. 'May I help you?' - এর অর্থ কী?", o: ["আমি কি আপনাকে সাহায্য করতে পারি?", "আপনি আমাকে সাহায্য করুন।"], a: 0 },
+            { q: "১০. অনুমতি পাওয়ার পর কী বলা উচিত?", o: ["Thank you.", "Okay."], a: 0 }
+        ];
+
+        function startQuiz() {
+            studentName = document.getElementById("student-name-input").value.trim();
+            if(!studentName) return alert("নাম লেখো!");
+            document.getElementById("name-section").style.display = "none";
+            document.getElementById("stats-bar").style.display = "flex";
+            document.getElementById("quiz-content").style.display = "block";
+            setInterval(() => { if(timeLeft>0) { timeLeft--; document.getElementById("time-left").innerText = timeLeft; } else endQuiz(); }, 1000);
+            loadQuestion();
+        }
+        function loadQuestion() {
+            if(currentIdx >= quizData.length) return endQuiz();
+            const q = quizData[currentIdx];
+            document.getElementById("question-text").innerText = q.q;
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+            q.o.forEach((opt, i) => {
+                const b = document.createElement("div"); b.className = "option"; b.innerText = opt;
+                b.onclick = () => {
+                    if(i===q.a) { score++; b.classList.add("correct"); } else b.classList.add("wrong");
+                    setTimeout(() => { currentIdx++; loadQuestion(); document.getElementById("current-score").innerText = score; }, 600);
+                };
+                container.appendChild(b);
+            });
+        }
+        function endQuiz() {
+            document.getElementById("quiz-content").style.display = "none";
+            document.getElementById("score-board").style.display = "block";
+            document.getElementById("final-score").innerText = score;
+            const msg = `স্যার, আমি Lesson 9 এর মক টেস্ট দিয়েছি। \nনাম: ${studentName}\nস্কোর: ${score}/10`;
+            document.getElementById("whatsapp-link").href = `https://wa.me/918017247298?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
