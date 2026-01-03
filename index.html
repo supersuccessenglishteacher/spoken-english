@@ -5,59 +5,202 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken English - SSCEC</title>
 <style>
-  body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f9ff; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-  .header { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; width: 100%; max-width: 800px; text-align: center; padding: 30px; border-radius: 20px; box-shadow: 0 10px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
-  .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 800px; }
-  .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 5px solid #3b82f6; text-align: center; }
-  .btn { display: inline-block; background: #3b82f6; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; margin-top: 10px; }
-  .btn:hover { background: #1e3a8a; }
+  :root {
+    --primary: #1e3a8a;
+    --secondary: #3b82f6;
+    --bg: #f8fafc;
+    --text: #1e293b;
+  }
+
+  body { 
+    font-family: 'Segoe UI', Roboto, sans-serif; 
+    background-color: var(--bg); 
+    margin: 0; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    color: var(--text);
+  }
+
+  /* Header Section */
+  .header { 
+    background: linear-gradient(135deg, #1e3a8a, #0284c7); 
+    color: white; 
+    width: 100%; 
+    max-width: 850px; 
+    text-align: center; 
+    padding: 40px 20px; 
+    border-radius: 30px; 
+    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.2); 
+    margin-bottom: 40px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header h1 { 
+    font-size: 32px; 
+    margin: 0; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .header p { 
+    opacity: 0.9; 
+    font-size: 16px; 
+    margin-top: 10px;
+    line-height: 1.6;
+  }
+
+  /* Grid Layout */
+  .card-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 25px; 
+    width: 100%; 
+    max-width: 900px;
+    padding-bottom: 50px;
+  }
+
+  /* Card Design */
+  .card { 
+    background: white; 
+    padding: 30px 20px; 
+    border-radius: 20px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    text-align: center; 
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+  }
+
+  .card-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .card h3 { 
+    margin: 10px 0; 
+    font-size: 20px;
+    color: var(--primary);
+  }
+
+  .card p { 
+    font-size: 14px; 
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  /* Modern Buttons */
+  .btn { 
+    display: block; 
+    background: var(--secondary); 
+    color: white; 
+    text-decoration: none; 
+    padding: 12px; 
+    border-radius: 12px; 
+    font-weight: bold; 
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn:hover { 
+    background: var(--primary); 
+    box-shadow: 0 6px 15px rgba(30, 58, 138, 0.4);
+  }
+
+  /* Specific Card Colors */
+  .lesson-1 { border-top: 6px solid #10b981; }
+  .lesson-2 { border-top: 6px solid #f59e0b; }
+  .lesson-3 { border-top: 6px solid #8b5cf6; }
+  .lesson-4 { border-top: 6px solid #ef4444; }
+  .lesson-5 { border-top: 6px solid #334155; }
+
+  /* Footer Note */
+  .footer-text {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #94a3b8;
+    text-align: center;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .header h1 { font-size: 24px; }
+    .card-container { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
   <div class="header">
     <h1>🗣️ Spoken English Mastery</h1>
-    <p>Super Success Computer Education Center </br> Mobile No. 8017247298 | 9874152080 </p>
+    <p><b>Super Success Computer Education Center</b><br>
+    📍 22/1 Bipin Paul Road, Nimta, Kolkata - 49<br>
+    📞 8017247298 | 9874152080</p>
   </div>
 
   <div class="card-container">
-    <div class="card">
-      <h3>👋 Lesson 1: Greetings</h3>
-      <p>মানুষের সাথে প্রথম দেখায় কথা বলা শিখুন।</p>
-      <a href="lesson1.html" class="btn">শুরু করুন</a>
+    <div class="card lesson-1">
+      <div>
+        <span class="card-icon">👋</span>
+        <h3>Lesson 1: Greetings</h3>
+        <p>মানুষের সাথে প্রথম দেখায় আত্মবিশ্বাসের সাথে কথা বলা শিখুন।</p>
+      </div>
+      <a href="lesson1.html" class="btn" style="background: #10b981;">শুরু করুন</a>
     </div>
     
-    <div class="card" style="border-top-color: #f59e0b;">
-      <span style="font-size: 40px;">⏰</span>
-      <h3>Lesson 2: Daily Life</h3>
-      <p>সময় জিজ্ঞাসা করা এবং সাহায্য চাওয়ার প্রয়োজনীয় বাক্যগুলো শিখুন।</p>
+    <div class="card lesson-2">
+      <div>
+        <span class="card-icon">⏰</span>
+        <h3>Lesson 2: Daily Life</h3>
+        <p>সময় জিজ্ঞাসা করা এবং দৈনন্দিন প্রয়োজনীয় বাক্যগুলো শিখুন।</p>
+      </div>
       <a href="lesson2.html" class="btn" style="background: #f59e0b;">শুরু করুন</a>
     </div>
     
-    <div class="card" style="border-top-color: #8b5cf6;">
-      <span style="font-size: 40px;">🛍️</span>
-      <h3>Lesson 3: At the Market</h3>
-      <p>কেনাকাটা এবং দরদাম করার ইংরেজি কথোপকথন শিখুন।</p>
+    <div class="card lesson-3">
+      <div>
+        <span class="card-icon">🛍️</span>
+        <h3>Lesson 3: Market</h3>
+        <p>কেনাকাটা এবং দরদাম করার প্র্যাকটিক্যাল ইংরেজি কথোপকথন।</p>
+      </div>
       <a href="lesson3.html" class="btn" style="background: #8b5cf6;">শুরু করুন</a>
     </div>
     
-    <div class="card" style="border-top-color: #10b981;">
-      <span style="font-size: 40px;">🩺</span>
-      <h3>Lesson 4: Health</h3>
-      <p>ডাক্তার ও স্বাস্থ্য সংক্রান্ত ইংরেজি কথোপকথন শিখুন।</p>
-      <a href="lesson4.html" class="btn" style="background: #10b981;">শুরু করুন</a>
+    <div class="card lesson-4">
+      <div>
+        <span class="card-icon">🩺</span>
+        <h3>Lesson 4: Health</h3>
+        <p>ডাক্তারের সাথে কথা বলা এবং অসুস্থতা বর্ণনা করার উপায়।</p>
+      </div>
+      <a href="lesson4.html" class="btn" style="background: #ef4444;">শুরু করুন</a>
     </div>
     
-    <div class="card" style="border-top-color: #334155;">
-      <span style="font-size: 40px;">💼</span>
-      <h3>Lesson 5: Job & Office</h3>
-      <p>অফিসের কাজ এবং ইন্টারভিউয়ের জন্য প্রয়োজনীয় ইংরেজি শিখুন।</p>
+    <div class="card lesson-5">
+      <div>
+        <span class="card-icon">💼</span>
+        <h3>Lesson 5: Interview</h3>
+        <p>চাকরির ইন্টারভিউ এবং অফিসের পরিবেশে পেশাদার ইংরেজি।</p>
+      </div>
       <a href="lesson5.html" class="btn" style="background: #334155;">শুরু করুন</a>
     </div>
 
+  </div>
 
-    
-    </div>
+  <p class="footer-text">Designed with ❤️ for SSCEC Students</p>
 
 </body>
 </html>
