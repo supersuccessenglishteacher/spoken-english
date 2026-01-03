@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Quiz 2 - SSCEC</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f9ff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #0891b2; }
+        .question { font-size: 20px; font-weight: bold; color: #164e63; margin-bottom: 15px; }
+        .option { background: #f9fafb; border: 2px solid #e5e7eb; padding: 15px; border-radius: 12px; cursor: pointer; margin-bottom: 10px; font-weight: bold; }
+        .option:hover { background: #ecfeff; border-color: #0891b2; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+        .btn-wa { display: none; background: #25d366; color: white; padding: 15px; border-radius: 12px; text-decoration: none; text-align: center; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 style="text-align:center; color:#0891b2;">📝 Continuous Tense Test</h2>
+        <div id="quiz">
+            <div class="question" id="q-text">১. 'I' এর সাথে কোনটি বসে?</div>
+            <div id="options">
+                <div class="option" onclick="check(0, this)">is</div>
+                <div class="option" onclick="check(1, this)">am</div>
+                <div class="option" onclick="check(2, this)">are</div>
+            </div>
+        </div>
+        <div id="result-board" style="display:none; text-align:center;">
+            <h1 id="score-text"></h1>
+            <a id="wa-link" href="#" class="btn-wa">স্যারকে ফলাফল পাঠান 📲</a>
+            <a href="grammar2.html" style="display:block; margin-top:15px;">আবার পড়ো ⬅️</a>
+        </div>
+    </div>
+
+    <script>
+        let currentQ = 0; let score = 0;
+        const questions = [
+            { q: "১. 'I' এর সাথে কোনটি বসে?", o: ["is", "am", "are"], a: 1 },
+            { q: "২. Continuous Tense-এ Verb-এর কোন রূপ বসে?", o: ["V1", "V2", "V4 (ing)"], a: 2 },
+            { q: "৩. 'They' এর সাথে কোনটি বসে?", o: ["is", "am", "are"], a: 2 },
+            { q: "৪. 'He is _____ football.' - শূন্যস্থানে কী হবে?", o: ["play", "playing", "played"], a: 1 },
+            { q: "৫. 'মা রান্না করছেন' - এর ইংরেজি কী?", o: ["Mother is cooking.", "Mother am cooking.", "Mother cooking."], a: 0 }
+        ];
+
+        function check(idx, el) {
+            if(idx === questions[currentQ].a) {
+                el.classList.add('correct'); score += 2;
+            } else { el.classList.add('wrong'); }
+            setTimeout(() => {
+                currentQ++;
+                if(currentQ < questions.length) loadQuestion();
+                else showResult();
+            }, 600);
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('q-text').innerText = q.q;
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = '';
+            q.o.forEach((opt, i) => {
+                optDiv.innerHTML += `<div class="option" onclick="check(${i}, this)">${opt}</div>`;
+            });
+        }
+
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result-board').style.display = 'block';
+            document.getElementById('score-text').innerText = `স্কোর: ${score} / 10`;
+            const wa = document.getElementById('wa-link');
+            wa.style.display = 'block';
+            wa.href = `https://wa.me/918017247298?text=${encodeURIComponent('স্যার, আমি Grammar Test 2 (Continuous) দিয়েছি। স্কোর: ' + score + '/10')}`;
+        }
+    </script>
+</body>
+</html>
