@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Test - Super Success Computer Education Center</title>
+    <style>
+        :root { --primary: #f59e0b; --secondary: #7c2d12; --bg: #fff7ed; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        
+        .inst-info { background: white; width: 100%; max-width: 600px; padding: 15px; border-radius: 15px; text-align: center; margin-bottom: 20px; border: 2px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .inst-info h1 { margin: 0; color: var(--secondary); font-size: 20px; }
+        .inst-info p { margin: 5px 0 0; color: #555; font-size: 13px; line-height: 1.4; }
+
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); position: relative; box-sizing: border-box; }
+        
+        #name-section { text-align: center; padding: 20px 0; }
+        #student-name-input { width: 80%; padding: 12px; margin: 15px 0; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; outline: none; }
+        #student-name-input:focus { border-color: var(--primary); }
+        .btn-start { background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px; }
+
+        .stats { display: none; justify-content: space-between; align-items: center; margin-bottom: 20px; font-weight: bold; color: var(--secondary); }
+        .timer { background: #fee2e2; color: #b91c1c; padding: 5px 15px; border-radius: 20px; border: 1px solid #f87171; }
+        
+        .question { font-size: 19px; color: #1f2937; margin-bottom: 20px; font-weight: bold; line-height: 1.5; }
+        #quiz-content { display: none; }
+        .options-grid { display: grid; gap: 12px; }
+        .option { background: #f9fafb; border: 2px solid #e5e7eb; padding: 15px; border-radius: 12px; cursor: pointer; transition: 0.2s; font-weight: 500; font-size: 16px; }
+        .option:hover { border-color: var(--primary); background: #fffaf0; }
+        .option.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #14532d; }
+        .option.wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d; }
+        
+        .score-board { text-align: center; display: none; padding: 20px 0; }
+        .score-text { font-size: 45px; color: var(--primary); font-weight: bold; margin: 15px 0; }
+        .btn-report { background: #25d366; color: white; border: none; padding: 14px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        
+        .footer-note { margin-top: 20px; font-size: 12px; color: #999; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="inst-info">
+        <h1>SUPER SUCCESS COMPUTER EDUCATION CENTER</h1>
+        <p>22/1 BIPIN PAUL ROAD, NIMTA SHYAMAPRASAD NAGAR, KOLKATA - 700049</p>
+        <p><b>Mobile: 8017247298</b></p>
+    </div>
+
+    <div class="quiz-container" id="quiz-box">
+        <div id="name-section">
+            <h3 style="color: var(--secondary);">পরীক্ষার্থীর নাম লেখো</h3>
+            <p style="font-size: 12px; color: #ef4444;">(সতর্কতা: একবারই সুযোগ পাবে, সাবধানে উত্তর দাও)</p>
+            <input type="text" id="student-name-input" placeholder="তোমার নাম এখানে লেখো..." autocomplete="off">
+            <br>
+            <button class="btn-start" onclick="startQuiz()">টেস্ট শুরু করো</button>
+        </div>
+
+        <div class="stats" id="stats-bar">
+            <span>Score: <span id="current-score">0</span></span>
+            <div class="timer">⏳ <span id="time-left">100</span>s</div>
+        </div>
+
+        <div id="quiz-content">
+            <div style="margin-bottom: 10px; color: #666; font-size: 14px;">পরীক্ষার্থী: <span id="display-name" style="font-weight: bold; color: var(--primary);"></span></div>
+            <div class="question" id="question-text">Loading question...</div>
+            <div class="options-grid" id="options-container"></div>
+        </div>
+
+        <div class="score-board" id="score-board">
+            <h2 style="color: #059669;">🎉 মক টেস্ট সম্পন্ন হয়েছে!</h2>
+            <p>নাম: <span id="final-name" style="font-weight: bold;"></span></p>
+            <div class="score-text"><span id="final-score">0</span> / 10</div>
+            <p id="feedback-msg" style="font-weight: bold; color: #4b5563;"></p>
+            
+            <a id="whatsapp-link" href="#" target="_blank" class="btn-report">
+                📲 স্যারকে ফলাফল জানাও (WhatsApp)
+            </a>
+            
+            <a href="lesson2.html" style="display:block; margin-top:25px; text-decoration:none; background: #64748b; color: white; padding: 12px; border-radius: 10px; font-weight: bold;">⬅️ লেসনে ফিরে যাও</a>
+        </div>
+    </div>
+
+    <div class="footer-note">Designed for SSCEC Students</div>
+
+    <audio id="correct-sound" src="https://www.soundjay.com/buttons/button-3.mp3"></audio>
+    <audio id="wrong-sound" src="https://www.soundjay.com/buttons/button-10.mp3"></audio>
+
+    <script>
+        let studentName = "";
+        const quizData = [
+            { q: "১. 'এখন কয়টা বাজে?' - এর ইংরেজি কোনটি?", o: ["What time is it?", "How is the clock?"], a: 0 },
+            { q: "২. কারো মনোযোগ আকর্ষণ করতে বিনীতভাবে কী বলবেন?", o: ["Listen to me", "Excuse me"], a: 1 },
+            { q: "৩. 'Can you help me?' - এর অর্থ কী?", o: ["আপনি কি আমাকে সাহায্য করতে পারেন?", "আমি কি সাহায্য করব?"], a: 0 },
+            { q: "৪. ধন্যবাদ দিলে উত্তরে সাধারণত কোনটি বলা হয়?", o: ["You're welcome", "I am sorry"], a: 0 },
+            { q: "৫. জিনিসের দাম জানতে কোনটি ব্যবহার করবেন?", o: ["How much is this?", "How many is this?"], a: 0 },
+            { q: "৬. 'Have a great day' - কথাটি কখন বলা হয়?", o: ["বিদায় নেওয়ার সময়", "প্রথমে দেখা হলে"], a: 0 },
+            { q: "৭. 'ফার্মেসি কোথায়?' - জিজ্ঞাসা করার সঠিক বাক্য কোনটি?", o: ["Where is the pharmacy?", "Pharmacy where is?"], a: 0 },
+            { q: "৮. 'No problem' - এর সঠিক বাংলা অর্থ কী?", o: ["আমার সমস্যা নেই", "কোনো সমস্যা নেই"], a: 1 },
+            { q: "৯. 'I need help' - এর অর্থ কী?", o: ["আমার সাহায্য প্রয়োজন", "আমি সাহায্য চাই না"], a: 0 },
+            { q: "১০. বিনীতভাবে কথা বলতে কোনটি বেশি ব্যবহার হয়?", o: ["Please & Excuse me", "Give me & Tell me"], a: 0 }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+        let timeLeft = 100;
+        let timerInterval;
+
+        function startQuiz() {
+            studentName = document.getElementById("student-name-input").value.trim();
+            if (studentName === "") {
+                alert("অনুগ্রহ করে তোমার নাম লেখো!");
+                return;
+            }
+            document.getElementById("name-section").style.display = "none";
+            document.getElementById("stats-bar").style.display = "flex";
+            document.getElementById("quiz-content").style.display = "block";
+            document.getElementById("display-name").innerText = studentName;
+            startTimer();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById("time-left").innerText = timeLeft;
+                if (timeLeft <= 0) endQuiz();
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            if (currentIdx >= quizData.length) {
+                endQuiz();
+                return;
+            }
+            const currentQ = quizData[currentIdx];
+            document.getElementById("question-text").innerText = currentQ.q;
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+            currentQ.o.forEach((opt, i) => {
+                const btn = document.createElement("div");
+                btn.className = "option";
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, btn) {
+            const options = document.querySelectorAll(".option");
+            options.forEach(o => o.style.pointerEvents = "none");
+
+            const correct = quizData[currentIdx].a;
+            if (selected === correct) {
+                score++;
+                btn.classList.add("correct");
+                document.getElementById("correct-sound").play().catch(e=>{});
+            } else {
+                btn.classList.add("wrong");
+                document.getElementById("wrong-sound").play().catch(e=>{});
+            }
+            
+            document.getElementById("current-score").innerText = score;
+            setTimeout(() => {
+                currentIdx++;
+                loadQuestion();
+            }, 800);
+        }
+
+        function endQuiz() {
+            clearInterval(timerInterval);
+            document.getElementById("quiz-content").style.display = "none";
+            document.getElementById("stats-bar").style.display = "none";
+            document.getElementById("score-board").style.display = "block";
+            document.getElementById("final-score").innerText = score;
+            document.getElementById("final-name").innerText = studentName;
+
+            let feedback = score >= 8 ? "অসাধারণ! তুমি খুব ভালো ইংরেজি পারো।" : (score >= 5 ? "ভালো হয়েছে, আরও প্র্যাকটিস করো।" : "আবার ভালো করে লেসনটি পড়ো।");
+            document.getElementById("feedback-msg").innerText = feedback;
+            
+            const message = `স্যার, আমি Spoken English Mock Test - 2 দিয়েছি। \nছাত্রের নাম: ${studentName} \nপ্রতিষ্ঠান: SSCEC \nস্কোর: ${score}/10 \nসময় লেগেছে: ${100 - timeLeft} সেকেন্ড।`;
+            const waLink = `https://wa.me/918017247298?text=${encodeURIComponent(message)}`;
+            document.getElementById("whatsapp-link").href = waLink;
+        }
+    </script>
+</body>
+</html>
