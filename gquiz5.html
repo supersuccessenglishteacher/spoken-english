@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Quiz 5 - SSCEC</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #eef2ff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #6366f1; }
+        .question { font-size: 20px; font-weight: bold; color: #312e81; margin-bottom: 15px; }
+        .option { background: #f9fafb; border: 2px solid #e5e7eb; padding: 15px; border-radius: 12px; cursor: pointer; margin-bottom: 10px; font-weight: bold; }
+        .option:hover { background: #eef2ff; border-color: #6366f1; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+        .btn-wa { display: none; background: #25d366; color: white; padding: 15px; border-radius: 12px; text-decoration: none; text-align: center; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 style="text-align:center; color:#6366f1;">📝 Future Continuous Test</h2>
+        <div id="quiz">
+            <div class="question" id="q-text">১. 'He' এর সাথে কোনটি বসবে?</div>
+            <div id="options">
+                <div class="option" onclick="check(0, this)">shall be</div>
+                <div class="option" onclick="check(1, this)">will be</div>
+                <div class="option" onclick="check(2, this)">was</div>
+            </div>
+        </div>
+        <div id="result-board" style="display:none; text-align:center;">
+            <h1 id="score-text"></h1>
+            <a id="wa-link" href="#" class="btn-wa">স্যারকে ফলাফল পাঠান 📲</a>
+            <a href="grammar5.html" style="display:block; margin-top:15px;">আবার পড়ো ⬅️</a>
+        </div>
+    </div>
+
+    <script>
+        let currentQ = 0; let score = 0;
+        const questions = [
+            { q: "১. 'He' এর সাথে কোনটি বসবে?", o: ["shall be", "will be", "was"], a: 1 },
+            { q: "২. Future Continuous-এ Verb-এর কোন রূপটি বসে?", o: ["V1", "V3", "V4 (ing)"], a: 2 },
+            { q: "৩. 'I ____ be going.' - শূন্যস্থানে কী হবে?", o: ["shall", "is", "were"], a: 0 },
+            { q: "৪. 'ভবিষ্যতে কাজ চলতে থাকবে' বোঝালে কোন Tense হয়?", o: ["Past Cont.", "Future Cont.", "Present Cont."], a: 1 },
+            { q: "৫. 'তারা ঘুমাতে থাকবে' - এর ইংরেজি কী?", o: ["They are sleeping.", "They will be sleeping.", "They were sleeping."], a: 1 }
+        ];
+
+        function check(idx, el) {
+            if(idx === questions[currentQ].a) {
+                el.classList.add('correct'); score += 2;
+            } else { el.classList.add('wrong'); }
+            setTimeout(() => {
+                currentQ++;
+                if(currentQ < questions.length) loadQuestion();
+                else showResult();
+            }, 600);
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('q-text').innerText = q.q;
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = '';
+            q.o.forEach((opt, i) => {
+                optDiv.innerHTML += `<div class="option" onclick="check(${i}, this)">${opt}</div>`;
+            });
+        }
+
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result-board').style.display = 'block';
+            document.getElementById('score-text').innerText = `স্কোর: ${score} / 10`;
+            const wa = document.getElementById('wa-link');
+            wa.style.display = 'block';
+            wa.href = `https://wa.me/918017247298?text=${encodeURIComponent('স্যার, আমি Grammar Test 5 (Future Continuous) দিয়েছি। স্কোর: ' + score + '/10')}`;
+        }
+    </script>
+</body>
+</html>
