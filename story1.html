@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Short Story: The Thirsty Crow - SSCEC</title>
+<style>
+  :root { --p-color: #f59e0b; --s-color: #d97706; --bg: #fffbeb; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  .header { background: linear-gradient(135deg, var(--p-color), var(--s-color)); color: white; width: 100%; max-width: 800px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  
+  .story-box { width: 100%; max-width: 800px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; line-height: 1.8; font-size: 18px; }
+  .story-title { color: #92400e; text-align: center; border-bottom: 2px dashed #fcd34d; padding-bottom: 10px; margin-bottom: 20px; }
+  
+  .btn-audio { background: #d97706; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 10px; margin: 10px auto; transition: 0.3s; }
+  
+  /* Name Input Style */
+  .name-input-box { margin-bottom: 20px; width: 100%; text-align: center; }
+  .name-input-box input { padding: 12px; border: 2px solid #fcd34d; border-radius: 10px; width: 80%; max-width: 300px; font-size: 16px; outline: none; }
+
+  .quiz-section { width: 100%; max-width: 800px; background: #fff; padding: 25px; border-radius: 15px; border-top: 5px solid #d97706; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .question { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #78350f; }
+  .option { background: #fef3c7; border: 1px solid #fcd34d; padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 8px; transition: 0.2s; font-weight: 500; }
+  .option:hover { background: #fde68a; }
+  .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+  .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+
+  .btn-wa { display: inline-block; background: #25d366; color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; font-size: 18px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>📖 English Short Story</h1>
+    <p>গল্পটি পড়ো, শোনো এবং কুইজে অংশ নাও</p>
+  </div>
+
+  <div class="name-input-box">
+    <input type="text" id="student-name" placeholder="তোমার নাম লেখো (Your Name)...">
+  </div>
+
+  <div class="story-box">
+    <h2 class="story-title">🦅 The Thirsty Crow</h2>
+    <button class="btn-audio" onclick="speakStory()">🔊 Listen to Story (শোনো)</button>
+    
+    
+
+    <p id="story-text" style="margin-top:20px;">
+      Once, there was a thirsty crow. He flew here and there in search of water. But he could not find water anywhere. 
+      At last, he saw a pitcher in a garden. There was very little water in the pitcher. 
+      His beak could not reach the water. He saw some pebbles nearby. 
+      He thought of a plan. He picked up the pebbles one by one and dropped them into the pitcher. 
+      The water level rose up. The crow drank the water and flew away happily.
+    </p>
+    <p style="color: #d97706; font-weight: bold; text-align: center;">Moral: Where there is a will, there is a way.</p>
+  </div>
+
+  <div class="quiz-section">
+    <div id="quiz-container">
+      <div class="question" id="q-text">1. Who was thirsty in the story?</div>
+      <div id="options"></div>
+    </div>
+    
+    <div id="result" style="display:none; text-align:center;">
+      <h2 id="score-display"></h2>
+      <p id="feedback-text"></p>
+      <a id="wa-link" href="#" class="btn-wa">📲 স্যারকে ফলাফল পাঠাও</a>
+      <br>
+      <button onclick="location.reload()" style="margin-top:15px; background:none; border:none; color:blue; cursor:pointer; text-decoration:underline;">আবার পরীক্ষা দাও</button>
+    </div>
+  </div>
+
+  <script>
+    function speakStory() {
+      const text = document.getElementById('story-text').innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.85; 
+      speechSynthesis.speak(utterance);
+    }
+
+    const questions = [
+      { q: "1. Who was thirsty in the story?", o: ["A Sparrow", "A Crow", "A Parrot"], a: 1 },
+      { q: "2. What did the crow find in the garden?", o: ["A Pitcher", "A River", "A Bucket"], a: 0 },
+      { q: "3. What was in the pitcher?", o: ["Milk", "Juice", "Water"], a: 2 },
+      { q: "4. What did the crow drop into the pitcher?", o: ["Leaves", "Pebbles", "Sand"], a: 1 },
+      { q: "5. How did the crow fly away?", o: ["Sadly", "Angrily", "Happily"], a: 2 }
+    ];
+
+    let currentQ = 0; let score = 0;
+
+    function loadQuestion() {
+      const q = questions[currentQ];
+      document.getElementById('q-text').innerText = q.q;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      q.o.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerText = opt;
+        div.onclick = () => checkAnswer(i, div);
+        optionsDiv.appendChild(div);
+      });
+    }
+
+    function checkAnswer(idx, el) {
+      if(idx === questions[currentQ].a) {
+        el.classList.add('correct'); score++;
+      } else { el.classList.add('wrong'); }
+
+      setTimeout(() => {
+        currentQ++;
+        if(currentQ < questions.length) loadQuestion();
+        else showResult();
+      }, 600);
+    }
+
+    function showResult() {
+      const name = document.getElementById('student-name').value || "ছাত্র/ছাত্রী";
+      document.getElementById('quiz-container').style.display = 'none';
+      const resDiv = document.getElementById('result');
+      resDiv.style.display = 'block';
+      
+      document.getElementById('score-display').innerText = `${name}, তোমার স্কোর: ${score} / ${questions.length}`;
+      
+      // WhatsApp Link Generation
+      const message = `স্যার, আমি ${name}, "The Thirsty Crow" গল্পের পরীক্ষা দিয়েছি। আমার স্কোর: ${score}/${questions.length}`;
+      const waLink = `https://wa.me/918017247298?text=${encodeURIComponent(message)}`;
+      document.getElementById('wa-link').href = waLink;
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
