@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Short Story: The Greedy Dog - SSCEC</title>
+<style>
+  :root { --p-color: #1e293b; --s-color: #475569; --bg: #f1f5f9; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  .header { background: linear-gradient(135deg, var(--p-color), var(--s-color)); color: white; width: 100%; max-width: 800px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  .name-input-box { margin-bottom: 20px; width: 100%; text-align: center; }
+  .name-input-box input { padding: 12px; border: 2px solid #94a3b8; border-radius: 10px; width: 80%; max-width: 300px; font-size: 16px; outline: none; }
+  .story-box { width: 100%; max-width: 800px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; line-height: 1.8; font-size: 18px; }
+  .btn-audio { background: #1e293b; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; margin: 10px auto; transition: 0.3s; }
+  .quiz-section { width: 100%; max-width: 800px; background: #fff; padding: 25px; border-radius: 15px; border-top: 5px solid #1e293b; }
+  .option { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 8px; font-weight: 500; }
+  .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+  .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+  .btn-wa { display: inline-block; background: #25d366; color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🐕 The Greedy Dog</h1>
+    <p>অতি লোভে তাঁতি নষ্ট</p>
+  </div>
+
+  <div class="name-input-box">
+    <input type="text" id="student-name" placeholder="তোমার নাম লেখো (Your Name)...">
+  </div>
+
+  <div class="story-box">
+    <button class="btn-audio" onclick="speakStory()">🔊 Listen to Story (শোনো)</button>
+    <p id="story-text">
+      Once there was a dog. He found a piece of bone. He was crossing a bridge over a river. He saw his own shadow in the water. He thought it was another dog with a piece of bone. He was greedy. He wanted to take that bone too. He opened his mouth to bark. His own bone fell into the water. The greedy dog lost his bone.
+    </p>
+    <p style="color: #1e293b; font-weight: bold; text-align: center;">Moral: Grasp all, lose all.</p>
+  </div>
+
+  <div class="quiz-section">
+    <div id="quiz-container">
+      <div class="question" id="q-text" style="font-weight:bold; margin-bottom:10px;">1. What did the dog find?</div>
+      <div id="options"></div>
+    </div>
+    <div id="result" style="display:none; text-align:center;">
+      <h2 id="score-display"></h2>
+      <a id="wa-link" href="#" class="btn-wa">📲 স্যারকে ফলাফল পাঠাও</a>
+    </div>
+  </div>
+
+  <script>
+    function speakStory() {
+      const text = document.getElementById('story-text').innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US'; utterance.rate = 0.85;
+      speechSynthesis.speak(utterance);
+    }
+
+    const questions = [
+      { q: "1. What did the dog find?", o: ["A Ball", "A Bone", "A Stick"], a: 1 },
+      { q: "2. Where was he crossing?", o: ["A Road", "A Bridge", "A Forest"], a: 1 },
+      { q: "3. What did he see in the water?", o: ["Fish", "Another Dog", "His Shadow"], a: 2 },
+      { q: "4. Why did he lose his bone?", o: ["He was hungry", "He was greedy", "He was sleepy"], a: 1 }
+    ];
+
+    let currentQ = 0; let score = 0;
+    function loadQuestion() {
+      const q = questions[currentQ];
+      document.getElementById('q-text').innerText = q.q;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      q.o.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option'; div.innerText = opt;
+        div.onclick = () => checkAnswer(i, div);
+        optionsDiv.appendChild(div);
+      });
+    }
+
+    function checkAnswer(idx, el) {
+      if(idx === questions[currentQ].a) { el.classList.add('correct'); score++; }
+      else { el.classList.add('wrong'); }
+      setTimeout(() => {
+        currentQ++;
+        if(currentQ < questions.length) loadQuestion();
+        else showResult();
+      }, 600);
+    }
+
+    function showResult() {
+      const name = document.getElementById('student-name').value || "ছাত্র/ছাত্রী";
+      document.getElementById('quiz-container').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('score-display').innerText = `${name}, স্কোর: ${score} / ${questions.length}`;
+      const message = `স্যার, আমি ${name}, "Greedy Dog" গল্পের পরীক্ষা দিয়েছি। স্কোর: ${score}/${questions.length}`;
+      document.getElementById('wa-link').href = `https://wa.me/918017247298?text=${encodeURIComponent(message)}`;
+    }
+    loadQuestion();
+  </script>
+</body>
+</html>
