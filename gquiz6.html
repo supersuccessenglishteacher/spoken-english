@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Quiz 6 - SSCEC</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0fdfa; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #0d9488; }
+        .question { font-size: 20px; font-weight: bold; color: #134e4a; margin-bottom: 15px; }
+        .option { background: #f9fafb; border: 2px solid #e5e7eb; padding: 15px; border-radius: 12px; cursor: pointer; margin-bottom: 10px; font-weight: bold; }
+        .option:hover { background: #f0fdfa; border-color: #0d9488; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+        .btn-wa { display: none; background: #25d366; color: white; padding: 15px; border-radius: 12px; text-decoration: none; text-align: center; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 style="text-align:center; color:#0d9488;">📝 Article Mock Test</h2>
+        <div id="quiz">
+            <div class="question" id="q-text">১. '____ Orange' - শূন্যস্থানে কী হবে?</div>
+            <div id="options">
+                <div class="option" onclick="check(0, this)">A</div>
+                <div class="option" onclick="check(1, this)">An</div>
+                <div class="option" onclick="check(2, this)">The</div>
+            </div>
+        </div>
+        <div id="result-board" style="display:none; text-align:center;">
+            <h1 id="score-text"></h1>
+            <a id="wa-link" href="#" class="btn-wa">স্যারকে ফলাফল পাঠান 📲</a>
+            <a href="grammar6.html" style="display:block; margin-top:15px;">আবার পড়ো ⬅️</a>
+        </div>
+    </div>
+
+    <script>
+        let currentQ = 0; let score = 0;
+        const questions = [
+            { q: "১. '____ Orange' - শূন্যস্থানে কী হবে?", o: ["A", "An", "The"], a: 1 },
+            { q: "২. '____ Sun is hot.' - এখানে কোনটি সঠিক?", o: ["A", "An", "The"], a: 2 },
+            { q: "৩. 'I have ____ bag.' - কোনটি বসবে?", o: ["a", "an", "the"], a: 0 },
+            { q: "৪. '____ Elephant is big.' - কোনটি সঠিক?", o: ["A", "An", "The"], a: 1 },
+            { q: "৫. নিচের কোনটির আগে 'An' বসে?", o: ["Cat", "Umbrella", "Dog"], a: 1 }
+        ];
+
+        function check(idx, el) {
+            if(idx === questions[currentQ].a) {
+                el.classList.add('correct'); score += 2;
+            } else { el.classList.add('wrong'); }
+            setTimeout(() => {
+                currentQ++;
+                if(currentQ < questions.length) loadQuestion();
+                else showResult();
+            }, 600);
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('q-text').innerText = q.q;
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = '';
+            q.o.forEach((opt, i) => {
+                optDiv.innerHTML += `<div class="option" onclick="check(${i}, this)">${opt}</div>`;
+            });
+        }
+
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result-board').style.display = 'block';
+            document.getElementById('score-text').innerText = `স্কোর: ${score} / 10`;
+            const wa = document.getElementById('wa-link');
+            wa.style.display = 'block';
+            wa.href = `https://wa.me/918017247298?text=${encodeURIComponent('স্যার, আমি Grammar Test 6 (Articles) দিয়েছি। স্কোর: ' + score + '/10')}`;
+        }
+    </script>
+</body>
+</html>
