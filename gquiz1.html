@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Mock Test 1 - SSCEC</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f7ff; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .quiz-container { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #7c3aed; }
+        #question-box { margin-bottom: 20px; }
+        .question { font-size: 20px; font-weight: bold; color: #1e3a8a; margin-bottom: 15px; }
+        .option { background: #f9fafb; border: 2px solid #e5e7eb; padding: 15px; border-radius: 12px; cursor: pointer; margin-bottom: 10px; font-weight: bold; }
+        .option:hover { background: #ede9fe; border-color: #7c3aed; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+        .btn-wa { display: none; background: #25d366; color: white; padding: 15px; border-radius: 12px; text-decoration: none; text-align: center; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h2 style="text-align:center; color:#7c3aed;">📝 Grammar Test (Tense)</h2>
+        <div id="quiz">
+            <div class="question" id="q-text">১. 'Go' এর V2 রূপ কোনটি?</div>
+            <div id="options">
+                <div class="option" onclick="checkAnswer(0, this)">Gone</div>
+                <div class="option" onclick="checkAnswer(1, this)">Went</div>
+                <div class="option" onclick="checkAnswer(2, this)">Going</div>
+            </div>
+        </div>
+        <div id="result-board" style="display:none; text-align:center;">
+            <h1 id="score-text"></h1>
+            <a id="wa-link" href="#" class="btn-wa">স্যারকে ফলাফল পাঠান 📲</a>
+            <a href="grammar1.html" style="display:block; margin-top:15px;">আবার পড়ো ⬅️</a>
+        </div>
+    </div>
+
+    <script>
+        let currentQ = 0; let score = 0;
+        const questions = [
+            { q: "১. 'Go' এর V2 রূপ কোনটি?", o: ["Gone", "Went", "Going"], a: 1 },
+            { q: "২. 'I ate rice' - এটি কোন Tense?", o: ["Present", "Past", "Future"], a: 1 },
+            { q: "৩. Future Indefinite এর স্ট্রাকচার কোনটি?", o: ["Sub+V2", "Sub+V1", "Sub+Will+V1"], a: 2 },
+            { q: "৪. 'He plays cricket' - এখানে Plays হলো:", o: ["V1", "V2", "V5"], a: 2 },
+            { q: "৫. 'আমি একটি চিঠি লিখব' - এর ইংরেজি কী?", o: ["I wrote a letter.", "I will write a letter.", "I writing a letter."], a: 1 }
+        ];
+
+        function checkAnswer(idx, el) {
+            const correct = questions[currentQ].a;
+            if(idx === correct) {
+                el.classList.add('correct'); score += 2;
+            } else {
+                el.classList.add('wrong');
+            }
+            setTimeout(() => {
+                currentQ++;
+                if(currentQ < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }, 800);
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQ];
+            document.getElementById('q-text').innerText = q.q;
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = '';
+            q.o.forEach((opt, i) => {
+                optDiv.innerHTML += `<div class="option" onclick="checkAnswer(${i}, this)">${opt}</div>`;
+            });
+        }
+
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            const board = document.getElementById('result-board');
+            board.style.display = 'block';
+            document.getElementById('score-text').innerText = `তোমার স্কোর: ${score} / 10`;
+            const wa = document.getElementById('wa-link');
+            wa.style.display = 'block';
+            const msg = `স্যার, আমি গ্রামার মক টেস্ট ১ দিয়েছি। আমার স্কোর: ${score}/10`;
+            wa.href = `https://wa.me/918017247298?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
