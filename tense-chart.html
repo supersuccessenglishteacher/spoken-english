@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tense Wall Chart - SSCEC</title>
+<style>
+  :root {
+    --pres: #10b981; --past: #f59e0b; --fut: #3b82f6; --bg: #f8fafc;
+  }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); padding: 20px; color: #1e293b; }
+  .main-container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e2e8f0; }
+  
+  .header { text-align: center; margin-bottom: 30px; }
+  .header h1 { color: #1e3a8a; font-size: 32px; margin-bottom: 10px; }
+  .header p { font-size: 18px; color: #64748b; }
+
+  /* Magic Questions Box */
+  .magic-box { background: #eff6ff; border: 2px dashed #3b82f6; border-radius: 15px; padding: 20px; margin-bottom: 30px; display: flex; flex-wrap: wrap; justify-content: space-around; }
+  .q-item { text-align: center; padding: 10px; }
+  .q-num { background: #3b82f6; color: white; width: 30px; height: 30px; display: inline-block; border-radius: 50%; font-weight: bold; margin-bottom: 5px; }
+  .q-text { font-weight: bold; font-size: 18px; color: #1e40af; display: block; }
+
+  /* Table Style */
+  table { width: 100%; border-collapse: collapse; margin-bottom: 40px; overflow: hidden; border-radius: 12px; }
+  th, td { padding: 15px; text-align: center; border: 1px solid #e2e8f0; }
+  th { color: white; font-size: 18px; }
+  
+  .pres-head { background: var(--pres); }
+  .past-head { background: var(--past); }
+  .fut-head { background: var(--fut); }
+  
+  .tense-name { font-weight: bold; color: #1e3a8a; background: #f1f5f9; width: 25%; }
+  .answer { color: #db2777; font-weight: bold; width: 25%; }
+  .status { font-style: italic; color: #475569; }
+  .example { font-size: 18px; font-weight: bold; color: #000; }
+  
+  .check { color: #10b981; font-size: 20px; }
+  .cross { color: #ef4444; font-size: 20px; }
+
+  .footer-note { text-align: center; font-weight: bold; font-size: 18px; color: #1e3a8a; padding: 15px; background: #f1f5f9; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<div class="main-container">
+  <div class="header">
+    <h1>🧱 12 Tense Wall Chart</h1>
+    <p>৪টি জাদু প্রশ্ন দিয়ে Tense চেনার সহজ উপায়</p>
+  </div>
+
+  <div class="magic-box">
+    <div class="q-item"><span class="q-num">১</span><span class="q-text">এখন হচ্ছে?</span></div>
+    <div class="q-item"><span class="q-num">২</span><span class="q-text">আগে হয়েছিল?</span></div>
+    <div class="q-item"><span class="q-num">৩</span><span class="q-text">কাজ কি শেষ?</span></div>
+    <div class="q-item"><span class="q-num">৪</span><span class="q-text">পরে হবে?</span></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr class="pres-head"><th colspan="4">🟢 PRESENT (এখন)</th></tr>
+      <tr style="background: #ecfdf5; color: #065f46;">
+        <th>Tense নাম</th><th>জাদু প্রশ্নের উত্তর</th><th>কাজের অবস্থা</th><th>উদাহরণ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tense-name">Indefinite</td>
+        <td class="answer">এখন <span class="cross">✗</span> / আগে <span class="cross">✗</span></td>
+        <td class="status">অভ্যাস বা অনির্দিষ্ট </td>
+        <td class="example">আমি লিখি</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Continuous</td>
+        <td class="answer">এখন <span class="check">✓</span></td>
+        <td class="status">এখন চলছে</td>
+        <td class="example">আমি লিখছি</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Perfect</td>
+        <td class="answer">কাজ শেষ <span class="check">✓</span></td>
+        <td class="status">ফল আছে</td>
+        <td class="example">আমি লিখেছি</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Perfect Cont.</td>
+        <td class="answer">শেষ <span class="check">✓</span> + কতক্ষণ <span class="check">✓</span></td>
+        <td class="status">সময় ধরে চলছে</td>
+        <td class="example">আমি ২ ঘণ্টা ধরে লিখছি</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr class="past-head"><th colspan="4">🟠 PAST (আগে)</th></tr>
+      <tr style="background: #fffbeb; color: #92400e;">
+        <th>Tense নাম</th><th>জাদু প্রশ্নের উত্তর</th><th>কাজের অবস্থা</th><th>উদাহরণ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tense-name">Indefinite</td>
+        <td class="answer">আগে <span class="check">✓</span></td>
+        <td class="status">আগে হয়েছিল</td>
+        <td class="example">আমি লিখেছিলাম</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Continuous</td>
+        <td class="answer">আগে <span class="check">✓</span> + চলছিল <span class="check">✓</span></td>
+        <td class="status">আগে চলছিল</td>
+        <td class="example">আমি লিখছিলাম</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Perfect</td>
+        <td class="answer">আগে শেষ <span class="check">✓✓</span></td>
+        <td class="status">আরও আগে শেষ</td>
+        <td class="example">আমি লিখে ফেলেছিলাম</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Perfect Cont.</td>
+        <td class="answer">আগে চলছিল <span class="check">✓</span> + কতক্ষণ <span class="check">✓</span></td>
+        <td class="status">আগে সময় ধরে চলছিল</td>
+        <td class="example">আমি ২ ঘণ্টা ধরে লিখছিলাম</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr class="fut-head"><th colspan="4">🔵 FUTURE (পরে)</th></tr>
+      <tr style="background: #eff6ff; color: #1e40af;">
+        <th>Tense নাম</th><th>জাদু প্রশ্নের উত্তর</th><th>কাজের অবস্থা</th><th>উদাহরণ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tense-name">Indefinite</td>
+        <td class="answer">পরে <span class="check">✓</span></td>
+        <td class="status">পরে হবে</td>
+        <td class="example">আমি লিখব</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Continuous</td>
+        <td class="answer">পরে <span class="check">✓</span> + চলবে <span class="check">✓</span></td>
+        <td class="status">পরে চলতে থাকবে</td>
+        <td class="example">আমি লিখতে থাকব</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Perfect</td>
+        <td class="answer">পরে শেষ <span class="check">✓</span></td>
+        <td class="status">পরে শেষ হয়ে যাবে</td>
+        <td class="example">আমি লিখে ফেলব</td>
+      </tr>
+      <tr>
+        <td class="tense-name">Perfect Cont.</td>
+        <td class="answer">পরে চলবে <span class="check">✓</span> + কতক্ষণ <span class="check">✓</span></td>
+        <td class="status">পরে সময় ধরে চলবে</td>
+        <td class="example">আমি ২ ঘণ্টা ধরে লিখতে থাকব</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer-note">
+    💡 নিয়ম: প্রশ্ন দেখো → মনে মনে ✓ চিহ্ন দাও → Tense বলো!
+  </div>
+</div>
+
+</body>
+</html>
