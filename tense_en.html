@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Tense Quiz - SSCEC</title>
+<style>
+  /* [Same Style as above for brand header and game] */
+  :root { --primary: #1e3a8a; --bg: #f8fafc; }
+  body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+  .brand-header { background: white; width: 100%; max-width: 800px; padding: 15px; border-radius: 15px; text-align: center; border-bottom: 5px solid var(--primary); margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .brand-header h2 { margin: 0; color: var(--primary); font-size: 18px; }
+  .brand-header p { margin: 5px 0; font-size: 11px; color: #475569; line-height: 1.4; }
+  .game-container { width: 100%; max-width: 600px; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+  .stats-bar { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; background: #f1f5f9; padding: 10px; border-radius: 10px; color: var(--primary); }
+  .sentence-display { background: #1e293b; color: #38bdf8; padding: 25px; border-radius: 12px; font-size: 24px; text-align: center; margin-bottom: 20px; font-weight: bold; }
+  .ans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ans-opt { background: #fff; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; }
+  .correct { background: #22c55e !important; color: white; }
+  .wrong { background: #ef4444 !important; color: white; }
+  .next-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; margin-top: 20px; cursor: pointer; font-weight: bold; display: none; }
+</style>
+</head>
+<body>
+
+  <div class="brand-header">
+    <h2>SUPER SUCCESS COMPUTER EDUCATION CENTER</h2>
+    <p>22/1 BIPIN PAUL ROAD, NIMTA SHYAMAPRASAD NAGAR, KOLKATA- 700049<br>
+    📞 8017247298 | 9874152080</p>
+  </div>
+
+  <div class="game-container">
+    <div class="stats-bar">
+      <span>Score: <span id="score-val">0</span></span>
+      <span style="color: #e11d48;">⏱ Timer: <span id="timer-val">15</span>s</span>
+    </div>
+
+    <div id="game-ui">
+      <div class="sentence-display" id="sentence-text">Loading...</div>
+      <p style="text-align:center; font-weight:bold; color:var(--primary);">Identify the Tense</p>
+      <div class="ans-grid" id="options-box"></div>
+      <button class="next-btn" id="next-btn" onclick="nextQ()">Next Question ⮕</button>
+    </div>
+
+    <div id="result-ui" style="display:none; text-align:center;">
+      <h1 id="final-score"></h1>
+      <button class="next-btn" style="display:block;" onclick="location.reload()">Play Again</button>
+    </div>
+  </div>
+
+<script>
+  const data = [
+    { s: "I play cricket.", t: "Present Indefinite" },
+    { s: "She is singing a song.", t: "Present Continuous" },
+    { s: "They have finished the work.", t: "Present Perfect" },
+    { s: "It was raining yesterday.", t: "Past Continuous" },
+    { s: "He went to school.", t: "Past Indefinite" },
+    { s: "We will go to Delhi.", t: "Future Indefinite" },
+    { s: "I am reading a book.", t: "Present Continuous" },
+    { s: "You will be writing a letter.", t: "Future Continuous" },
+    { s: "She has been crying for an hour.", t: "Present Perfect Continuous" },
+    { s: "Mother had cooked food.", t: "Past Perfect" }
+  ];
+
+  let current = 0, score = 0, timer, timeLeft = 15;
+  const tenses = ["Present Indefinite", "Present Continuous", "Present Perfect", "Past Indefinite", "Past Continuous", "Future Indefinite", "Future Continuous", "Present Perfect Continuous", "Past Perfect"];
+
+  function startTimer() {
+    clearInterval(timer);
+    timeLeft = 15;
+    document.getElementById('timer-val').innerText = timeLeft;
+    timer = setInterval(() => {
+      timeLeft--;
+      document.getElementById('timer-val').innerText = timeLeft;
+      if(timeLeft <= 0) { clearInterval(timer); checkAns('TIMEOUT'); }
+    }, 1000);
+  }
+
+  function loadQ() {
+    if(current >= data.length) return showResult();
+    startTimer();
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('sentence-text').innerText = data[current].s;
+    
+    let opts = [data[current].t];
+    while(opts.length < 4) {
+      let r = tenses[Math.floor(Math.random()*tenses.length)];
+      if(!opts.includes(r)) opts.push(r);
+    }
+    opts.sort(() => Math.random() - 0.5);
+
+    const box = document.getElementById('options-box');
+    box.innerHTML = '';
+    opts.forEach(o => {
+      const b = document.createElement('div');
+      b.className = 'ans-opt'; b.innerText = o;
+      b.onclick = () => checkAns(o, b);
+      box.appendChild(b);
+    });
+  }
+
+  function checkAns(selected, el) {
+    clearInterval(timer);
+    const correct = data[current].t;
+    document.querySelectorAll('.ans-opt').forEach(b => {
+      if(b.innerText === correct) b.classList.add('correct');
+      b.onclick = null;
+    });
+    if(selected === correct) { score++; document.getElementById('score-val').innerText = score; }
+    else if(el) { el.classList.add('wrong'); }
+    document.getElementById('next-btn').style.display = 'block';
+  }
+
+  function nextQ() { current++; loadQ(); }
+  function showResult() {
+    document.getElementById('game-ui').style.display = 'none';
+    document.getElementById('result-ui').style.display = 'block';
+    document.getElementById('final-score').innerText = `Your Score: ${score} / ${data.length}`;
+  }
+  loadQ();
+</script>
+</body>
+</html>
