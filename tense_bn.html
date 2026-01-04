@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tense Identifier (Bengali) - SSCEC</title>
+<style>
+  :root { --primary: #1e3a8a; --sec: #3b82f6; --bg: #f0f9ff; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+  
+  /* Branding Header */
+  .brand-header { background: white; width: 100%; max-width: 800px; padding: 15px; border-radius: 15px; text-align: center; border-bottom: 5px solid var(--primary); margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .brand-header h2 { margin: 0; color: var(--primary); font-size: 20px; }
+  .brand-header p { margin: 5px 0; font-size: 12px; color: #475569; line-height: 1.4; }
+
+  .game-container { width: 100%; max-width: 600px; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+  
+  .stats-bar { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; background: #e0f2fe; padding: 10px; border-radius: 10px; color: var(--primary); }
+  
+  .sentence-display { background: #1e293b; color: #facc15; padding: 25px; border-radius: 12px; font-size: 24px; text-align: center; margin-bottom: 20px; border: 2px solid #334155; }
+  
+  .magic-q { display: grid; gap: 8px; margin-bottom: 20px; }
+  .q-btn { background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; transition: 0.2s; font-size: 14px; }
+  .q-btn.active { border-color: #22c55e; background: #f0fdf4; }
+
+  .ans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ans-opt { background: #fff; border: 1px solid #cbd5e1; padding: 12px; border-radius: 8px; cursor: pointer; text-align: center; font-weight: 500; font-size: 14px; }
+  .correct { background: #22c55e !important; color: white; }
+  .wrong { background: #ef4444 !important; color: white; }
+
+  .next-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; margin-top: 20px; cursor: pointer; font-weight: bold; display: none; }
+</style>
+</head>
+<body>
+
+  <div class="brand-header">
+    <h2>SUPER SUCCESS COMPUTER EDUCATION CENTER</h2>
+    <p>22/1 BIPIN PAUL ROAD, NIMTA SHYAMAPRASAD NAGAR, KOLKATA- 700049<br>
+    📞 8017247298 | 9874152080</p>
+  </div>
+
+  <div class="game-container">
+    <div class="stats-bar">
+      <span>Score: <span id="score-val">0</span></span>
+      <span style="color: #e11d48;">⏱ Time: <span id="timer-val">15</span>s</span>
+    </div>
+
+    <div id="game-ui">
+      <div class="sentence-display" id="sentence-text">বাক্য লোড হচ্ছে...</div>
+      
+      <div class="magic-q">
+        <div class="q-btn" onclick="this.classList.toggle('active')">১. এখন হচ্ছে? <span>✓</span></div>
+        <div class="q-btn" onclick="this.classList.toggle('active')">২. আগে হয়েছিল? <span>✓</span></div>
+        <div class="q-btn" onclick="this.classList.toggle('active')">৩. কাজ কি শেষ? <span>✓</span></div>
+        <div class="q-btn" onclick="this.classList.toggle('active')">৪. পরে হবে? <span>✓</span></div>
+      </div>
+
+      <div class="ans-grid" id="options-box"></div>
+      <button class="next-btn" id="next-btn" onclick="nextQ()">পরের বাক্য ⮕</button>
+    </div>
+
+    <div id="result-ui" style="display:none; text-align:center;">
+      <h1 id="final-score"></h1>
+      <button class="next-btn" style="display:block;" onclick="location.reload()">আবার শুরু করো</button>
+    </div>
+  </div>
+
+<script>
+  const data = [
+    { s: "আমি ছবি আঁকি।", t: "Present Indefinite" },
+    { s: "সে গান গাইছে।", t: "Present Continuous" },
+    { s: "মা ভাত রেঁধেছেন।", t: "Present Perfect" },
+    { s: "বৃষ্টি পড়ছিল।", t: "Past Continuous" },
+    { s: "বাবা অফিস গিয়েছিলেন।", t: "Past Indefinite" },
+    { s: "আমরা কাল খেলব।", t: "Future Indefinite" },
+    { s: "তারা বই পড়তে থাকবে।", t: "Future Continuous" },
+    { s: "পাখিটি উড়ছে।", t: "Present Continuous" },
+    { s: "তুমি কি যাবে?", t: "Future Indefinite" },
+    { s: "সে কাজটি শেষ করেছে।", t: "Present Perfect" }
+  ];
+
+  let current = 0, score = 0, timer, timeLeft = 15;
+  const tenses = ["Present Indefinite", "Present Continuous", "Present Perfect", "Past Indefinite", "Past Continuous", "Future Indefinite", "Future Continuous", "Present Perfect Continuous"];
+
+  function startTimer() {
+    clearInterval(timer);
+    timeLeft = 15;
+    document.getElementById('timer-val').innerText = timeLeft;
+    timer = setInterval(() => {
+      timeLeft--;
+      document.getElementById('timer-val').innerText = timeLeft;
+      if(timeLeft <= 0) { clearInterval(timer); checkAns('TIMEOUT'); }
+    }, 1000);
+  }
+
+  function loadQ() {
+    if(current >= data.length) return showResult();
+    startTimer();
+    document.getElementById('next-btn').style.display = 'none';
+    document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sentence-text').innerText = `"${data[current].s}"`;
+    
+    let opts = [data[current].t];
+    while(opts.length < 4) {
+      let r = tenses[Math.floor(Math.random()*tenses.length)];
+      if(!opts.includes(r)) opts.push(r);
+    }
+    opts.sort(() => Math.random() - 0.5);
+
+    const box = document.getElementById('options-box');
+    box.innerHTML = '';
+    opts.forEach(o => {
+      const b = document.createElement('div');
+      b.className = 'ans-opt'; b.innerText = o;
+      b.onclick = () => checkAns(o, b);
+      box.appendChild(b);
+    });
+  }
+
+  function checkAns(selected, el) {
+    clearInterval(timer);
+    const correct = data[current].t;
+    document.querySelectorAll('.ans-opt').forEach(b => {
+      if(b.innerText === correct) b.classList.add('correct');
+      b.onclick = null;
+    });
+    if(selected === correct) { score++; document.getElementById('score-val').innerText = score; }
+    else if(el) { el.classList.add('wrong'); }
+    document.getElementById('next-btn').style.display = 'block';
+  }
+
+  function nextQ() { current++; loadQ(); }
+  function showResult() {
+    document.getElementById('game-ui').style.display = 'none';
+    document.getElementById('result-ui').style.display = 'block';
+    document.getElementById('final-score').innerText = `তোমার স্কোর: ${score} / ${data.length}`;
+  }
+  loadQ();
+</script>
+</body>
+</html>
