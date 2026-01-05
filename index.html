@@ -10,6 +10,10 @@
     --secondary: #3b82f6;
     --bg: #f8fafc;
     --text: #1e293b;
+    --spoken: #059669;
+    --tense: #d97706;
+    --grammar: #7c3aed;
+    --story: #db2777;
   }
 
   body { 
@@ -28,52 +32,71 @@
     background: linear-gradient(135deg, #1e3a8a, #0284c7); 
     color: white; 
     width: 100%; 
-    max-width: 850px; 
+    max-width: 900px; 
     text-align: center; 
     padding: 40px 20px; 
     border-radius: 30px; 
     box-shadow: 0 15px 30px rgba(30, 58, 138, 0.2); 
-    margin-bottom: 40px;
-    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    box-sizing: border-box;
   }
 
-  .header h1 { font-size: 32px; margin: 0; text-transform: uppercase; }
-  .header p { opacity: 0.9; font-size: 16px; margin-top: 10px; line-height: 1.6; }
+  .header h1 { font-size: 28px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+  .header p { opacity: 0.9; font-size: 15px; margin-top: 10px; line-height: 1.6; }
+
+  /* Section Title Styling */
+  .section-container {
+    width: 100%;
+    max-width: 950px;
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    margin: 30px 0 20px 0;
+    font-size: 22px;
+    font-weight: 800;
+    padding-left: 10px;
+    border-left: 5px solid var(--primary);
+  }
 
   /* Grid Layout */
   .card-container { 
     display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-    gap: 25px; 
-    width: 100%; 
-    max-width: 900px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; 
+    width: 100%;
   }
 
   /* Card Design */
   .card { 
     background: white; 
-    padding: 30px 20px; 
+    padding: 25px 20px; 
     border-radius: 20px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    text-align: center; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
     transition: all 0.3s ease;
     border: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
   }
 
   .card:hover { 
-    transform: translateY(-10px); 
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   }
 
-  .card-icon { font-size: 45px; margin-bottom: 15px; display: block; }
-  .card h3 { margin: 10px 0; font-size: 20px; color: var(--primary); }
-  .card p { font-size: 14px; color: #64748b; margin-bottom: 20px; flex-grow: 1; }
+  .card-icon { font-size: 40px; margin-bottom: 15px; display: block; }
+  .card h3 { margin: 5px 0; font-size: 18px; color: var(--primary); }
+  .card p { font-size: 14px; color: #64748b; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
 
-  /* Modern Buttons */
+  /* Buttons */
   .btn { 
     display: block; 
     background: var(--secondary); 
@@ -82,27 +105,26 @@
     padding: 12px; 
     border-radius: 12px; 
     font-weight: bold; 
-    transition: 0.3s;
-  }
-
-  .btn:hover { background: var(--primary); }
-
-  .section-title {
-    color: var(--primary);
-    margin: 40px 0 20px 0;
-    font-size: 24px;
     text-align: center;
-    width: 100%;
-    max-width: 900px;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 10px;
-    font-weight: bold;
+    transition: 0.3s;
+    font-size: 15px;
   }
 
-  .footer-text { margin: 40px 0 20px 0; font-size: 13px; color: #94a3b8; }
+  .btn:hover { filter: brightness(1.1); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+
+  /* Advance Badge */
+  .badge {
+    position: absolute; top: 10px; right: -30px; 
+    background: #ef4444; color: white; 
+    padding: 3px 35px; transform: rotate(45deg); 
+    font-size: 9px; font-weight: bold; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .footer-text { margin: 50px 0 20px 0; font-size: 14px; color: #64748b; font-weight: bold; }
 
   @media (max-width: 600px) {
-    .header h1 { font-size: 24px; }
+    .header h1 { font-size: 22px; }
     .card-container { grid-template-columns: 1fr; }
   }
 </style>
@@ -110,201 +132,107 @@
 <body>
 
   <div class="header">
-    <h1>🗣️ Spoken English Mastery</h1>
-    <p><b>Super Success Computer Education Center</b><br>
+    <h1>🗣️ Spoken English & Grammar</h1>
+    <p><b>SUPER SUCCESS COMPUTER EDUCATION CENTER</b><br>
     📍 22/1 Bipin Paul Road, Nimta, Kolkata - 49<br>
     📞 8017247298 | 9874152080</p>
   </div>
 
-  <div class="section-title">🎙️ Spoken English Lessons</div>
-  <div class="card-container">
-    <div class="card" style="border-top: 6px solid #10b981;">
-      <div><span class="card-icon">👋</span><h3>Lesson 1: Greetings</h3><p>আত্মবিশ্বাসের সাথে কথা বলা শিখুন।</p></div>
-      <a href="lesson1.html" class="btn" style="background: #10b981;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #f59e0b;">
-      <div><span class="card-icon">⏰</span><h3>Lesson 2: Daily Life</h3><p>দৈনন্দিন প্রয়োজনীয় বাক্যগুলো শিখুন।</p></div>
-      <a href="lesson2.html" class="btn" style="background: #f59e0b;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #8b5cf6;">
-      <div><span class="card-icon">🛍️</span><h3>Lesson 3: Market</h3><p>কেনাকাটা ও দরদাম করার কথোপকথন।</p></div>
-      <a href="lesson3.html" class="btn" style="background: #8b5cf6;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #ef4444;">
-      <div><span class="card-icon">🩺</span><h3>Lesson 4: Health</h3><p>ডাক্তারের সাথে কথা বলার উপায়।</p></div>
-      <a href="lesson4.html" class="btn" style="background: #ef4444;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #334155;">
-      <div><span class="card-icon">💼</span><h3>Lesson 5: Interview</h3><p>পেশাদার ইংরেজি কথোপকথন।</p></div>
-      <a href="lesson5.html" class="btn" style="background: #334155;">শুরু করুন</a>
+  <div class="section-container">
+    <div class="section-title" style="border-color: var(--spoken);">🎙️ Spoken English Lessons</div>
+    <div class="card-container">
+      <div class="card" style="border-top: 6px solid var(--spoken);">
+        <div><span class="card-icon">👋</span><h3>Lesson 1: Greetings</h3><p>আত্মবিশ্বাসের সাথে কথা বলা শুরু করার প্রথম ধাপ।</p></div>
+        <a href="lesson1.html" class="btn" style="background: var(--spoken);">শুরু করুন</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--spoken);">
+        <div><span class="card-icon">⏰</span><h3>Lesson 2: Daily Life</h3><p>প্রতিদিনের কাজ নিয়ে কথা বলার সাধারণ বাক্য।</p></div>
+        <a href="lesson2.html" class="btn" style="background: var(--spoken);">শুরু করুন</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--spoken);">
+        <div><span class="card-icon">🛍️</span><h3>Lesson 3: Market</h3><p>কেনাকাটা ও দরদাম করার স্মার্ট কথোপকথন।</p></div>
+        <a href="lesson3.html" class="btn" style="background: var(--spoken);">শুরু করুন</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--spoken);">
+        <div><span class="card-icon">🩺</span><h3>Lesson 4: Health</h3><p>শারীরিক সমস্যা নিয়ে ডাক্তারের সাথে কথা বলা।</p></div>
+        <a href="lesson4.html" class="btn" style="background: var(--spoken);">শুরু করুন</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--spoken);">
+        <div><span class="card-icon">💼</span><h3>Lesson 5: Interview</h3><p>ক্যারিয়ার গড়ার জন্য পেশাদার ইংরেজি কথোপকথন।</p></div>
+        <a href="lesson5.html" class="btn" style="background: var(--spoken);">শুরু করুন</a>
+      </div>
     </div>
   </div>
 
-  <div class="section-title">🎯 Tense Mastery & Games</div>
-  <div class="card-container">
-    <div class="card" style="border-top: 6px solid #1e3a8a; background: #f0f9ff;">
-      <div><span class="card-icon">🧱</span><h3>Tense Wall Chart</h3><p>৪টি জাদু প্রশ্ন দিয়ে ১২টি Tense চেনার সবথেকে সহজ নিয়ম।</p></div>
-      <a href="tense-chart.html" class="btn" style="background: #1e3a8a;">চার্টটি দেখো 🖼️</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #d97706; background: #fffbeb;">
-      <div><span class="card-icon">🔍</span><h3>Bengali Tense Game</h3><p>বাংলা বাক্য দেখে টাইমার ও স্কোরসহ Tense চেনার গেম।</p></div>
-      <a href="tense_bn.html" class="btn" style="background: #d97706;">গেম খেলো (BN) 🎮</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #059669; background: #f0fdf4;">
-      <div><span class="card-icon">🧠</span><h3>English Tense Quiz</h3><p>ইংরেজি বাক্য দেখে Tense আইডেন্টিফাই করো এবং স্কোর বাড়াও।</p></div>
-      <a href="tense_en.html" class="btn" style="background: #059669;">Start Quiz (EN) 🚀</a>
+  <div class="section-container">
+    <div class="section-title" style="border-color: var(--tense);">🎮 Tense Mastery & Games</div>
+    <div class="card-container">
+      <div class="card" style="border-top: 6px solid var(--tense); background: #fffbeb;">
+        <div><span class="card-icon">🖼️</span><h3>Tense Wall Chart</h3><p>৪টি জাদু প্রশ্ন দিয়ে ১২টি Tense চেনার সহজ চার্ট।</p></div>
+        <a href="tense-chart.html" class="btn" style="background: var(--tense);">চার্টটি দেখো</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--tense); background: #fffbeb;">
+        <div><span class="card-icon">🔍</span><h3>Bengali Tense Game</h3><p>বাংলা বাক্য দেখে Tense চেনার কুইজ গেম।</p></div>
+        <a href="tense_bn.html" class="btn" style="background: var(--tense);">গেম খেলো (BN)</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--tense); background: #fffbeb;">
+        <div><span class="card-icon">🧠</span><h3>English Tense Quiz</h3><p>ইংরেজি বাক্য দেখে Tense আইডেন্টিফাই করো।</p></div>
+        <a href="tense_en.html" class="btn" style="background: var(--tense);">শুরু করো (EN)</a>
+      </div>
     </div>
   </div>
 
-  <div class="section-title">📘 English Grammar Lessons</div>
-  <div class="card-container">
-    <div class="card" style="border-top: 6px solid #7c3aed;">
-      <div><span class="card-icon">⏳</span><h3>Grammar 1: Tense</h3><p>V1-V5 ফর্ম দিয়ে Tense শিখুন।</p></div>
-      <a href="grammar1.html" class="btn" style="background: #7c3aed;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #0891b2;">
-      <div><span class="card-icon">🏃</span><h3>Grammar 2: Continuous</h3><p>কাজটি এখনই চলছে বোঝালে কী হয়।</p></div>
-      <a href="grammar2.html" class="btn" style="background: #0891b2;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #be185d;">
-      <div><span class="card-icon">✅</span><h3>Grammar 3: Perfect</h3><p>কাজটি এইমাত্র শেষ হওয়া বোঝালে।</p></div>
-      <a href="grammar3.html" class="btn" style="background: #be185d;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #ea580c;">
-      <div><span class="card-icon">🏃</span><h3>Grammar 4: Past Cont.</h3><p>অতীতকালে কাজ চলছিল বোঝালে।</p></div>
-      <a href="grammar4.html" class="btn" style="background: #ea580c;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #6366f1;">
-      <div><span class="card-icon">🚀</span><h3>Grammar 5: Future Cont.</h3><p>ভবিষ্যতে কাজ চলতে থাকলে।</p></div>
-      <a href="grammar5.html" class="btn" style="background: #6366f1;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #0d9488;">
-      <div><span class="card-icon">🍎</span><h3>Grammar 6: Articles</h3><p>A, An এবং The-এর সহজ ব্যবহার।</p></div>
-      <a href="grammar6.html" class="btn" style="background: #0d9488;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #7c3aed;">
-      <div><span class="card-icon">📍</span><h3>Grammar 7: Preposition P1</h3><p>অবস্থান (In, On, Under) শিখুন।</p></div>
-      <a href="grammar7.html" class="btn" style="background: #7c3aed;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #db2777;">
-      <div><span class="card-icon">⏰</span><h3>Grammar 8: Preposition P2</h3><p>সময়ের আগে (At, In, On) ব্যবহার।</p></div>
-      <a href="grammar8.html" class="btn" style="background: #db2777;">Coming Soon</a>
-    </div>
-     
-    <div class="card" style="border-top: 6px solid #0d9488;">
-      <div>
-        <span class="card-icon">🎒</span>
-        <h3>Grammar 9: Preposition P3</h3>
-        <p>গতি বা নড়াচড়া (To, Into, Off) বোঝাতে প্রিপজিশন।</p>
+  <div class="section-container">
+    <div class="section-title" style="border-color: var(--grammar);">📘 English Grammar Mastery</div>
+    <div class="card-container">
+      <div class="card" style="border-top: 6px solid var(--grammar);">
+        <div><span class="card-icon">⏳</span><h3>Grammar 1: Tense</h3><p>V1-V5 ফর্ম দিয়ে সঠিক কাল চেনার নিয়ম।</p></div>
+        <a href="grammar1.html" class="btn" style="background: var(--grammar);">শুরু করুন</a>
       </div>
-      <a href="grammar9.html" class="btn" style="background: #0d9488;">শুরু করুন</a>
-    </div>
-    
-    <div class="card" style="border-top: 6px solid #be185d;">
-      <div>
-        <span class="card-icon">🤝</span>
-        <h3>Grammar 10: Preposition P4</h3>
-        <p>সম্পর্ক ও সাথী (With, Between, Among) চেনার সহজ নিয়ম।</p>
+      <div class="card" style="border-top: 6px solid var(--grammar);">
+        <div><span class="card-icon">🍎</span><h3>Grammar 6: Articles</h3><p>A, An এবং The-এর সঠিক ব্যবহারের জাদু।</p></div>
+        <a href="grammar6.html" class="btn" style="background: var(--grammar);">শুরু করুন</a>
       </div>
-      <a href="grammar10.html" class="btn" style="background: #be185d;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #0369a1;">
-      <div>
-        <span class="card-icon">🛠️</span>
-        <h3>Grammar 11: Preposition P5</h3>
-        <p>কাজের মাধ্যম ও উপায় (By, With, On, In) ব্যবহারের সঠিক নিয়ম।</p>
-      </div>
-      <a href="grammar11.html" class="btn" style="background: #0369a1;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #dc2626; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: 10px; right: -30px; background: #dc2626; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">ADVANCE</div>
-      
-      <div>
-        <span class="card-icon">🧠</span>
-        <h3>Grammar 12: Preposition P6</h3>
-        <p><b>Advance Level:</b> কারণ ও ফলাফল (Due to, Thanks to) ব্যবহারের সঠিক কৌশল।</p>
-      </div>
-      <a href="grammar12.html" class="btn" style="background: #dc2626;">শিখতে চাই</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #f59e0b; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: 10px; right: -30px; background: #f59e0b; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold;">ADVANCE</div>
-      
-      <div>
-        <span class="card-icon">🎯</span>
-        <h3>Grammar 13: Preposition P7</h3>
-        <p><b>Advance Level:</b> কাজের উদ্দেশ্য (For, To, In order to) চেনার সহজ নিয়ম।</p>
-      </div>
-      <a href="grammar13.html" class="btn" style="background: #f59e0b;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #8b5cf6; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: 10px; right: -30px; background: #8b5cf6; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold;">ADVANCE</div>
-      
-      <div>
-        <span class="card-icon">🟣</span>
-        <h3>Grammar 14: Preposition P8</h3>
-        <p><b>Advance Level:</b> তুলনা করা (Like, As, Than) চেনার সহজ ম্যাজিক ট্রিক।</p>
-      </div>
-      <a href="grammar14.html" class="btn" style="background: #8b5cf6;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #be123c; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: 10px; right: -30px; background: #be123c; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold;">ADVANCE</div>
-            <div>
-        <span class="card-icon">🔴</span>
-        <h3>Grammar 15: Preposition P9</h3>
-        <p><b>Advance Level:</b> বাদ দেওয়া বা বদলে দেওয়া (Except, Besides, Instead of) চেনার সঠিক উপায়।</p>
-      </div>
-      <a href="grammar15.html" class="btn" style="background: #be123c;">শুরু করুন</a>
-    </div>
-      <div class="card" style="border-top: 6px solid #78350f; position: relative; overflow: hidden;">
-      <div style="position: absolute; top: 10px; right: -30px; background: #78350f; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold;">ADVANCE</div>
-      
-      <div>
-        <span class="card-icon">🟤</span>
-        <h3>Grammar 16: Preposition P10</h3>
-        <p><b>Advance Level:</b> মালিকানা ও সম্পর্ক (Of, With, Owned by) চেনার দারুণ নিয়ম।</p>
-      </div>
-      <a href="grammar16.html" class="btn" style="background: #78350f;">শুরু করুন</a>
-    </div>
-    <div class="card" style="border: 3px solid #fbbf24; background: #eff6ff; position: relative; overflow: hidden; grid-column: 1 / -1;">
-      <div style="position: absolute; top: 15px; right: -35px; background: #fbbf24; color: #1e3a8a; padding: 5px 40px; transform: rotate(45deg); font-size: 12px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">MOCK TEST</div>
-      
-      <div style="display: flex; align-items: center; gap: 20px;">
-        <div style="font-size: 50px;">🏆</div>
-        <div>
-          <h3 style="color: #1e3a8a; margin: 0;">Grand Mock Test (Prepositions)</h3>
-          <p style="color: #334155; margin: 5px 0;"><b>Challenge:</b> ২৫টি প্রশ্নের সঠিক উত্তর দিয়ে নিজেকে যাচাই করো।</p>
-          <div style="font-size: 12px; color: #1e40af; font-weight: bold;">
-             ⏱️ ৫ মিনিট | ✅ ২৫ মার্কস | 🔊 সাউন্ড এফেক্ট
-          </div>
+      <div class="card" style="border-top: 6px solid #3b82f6;">
+        <div class="badge">ADVANCE</div>
+        <div><span class="card-icon">📍</span><h3>Preposition Master</h3><p>P1 থেকে P10 পর্যন্ত সবকটি অ্যাডভান্স লেসন এখানে।</p></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+           <a href="grammar7.html" class="btn" style="font-size: 11px; padding: 5px;">P1</a>
+           <a href="grammar9.html" class="btn" style="font-size: 11px; padding: 5px;">P3</a>
+           <a href="grammar10.html" class="btn" style="font-size: 11px; padding: 5px;">P4</a>
+           <a href="grammar12.html" class="btn" style="font-size: 11px; padding: 5px; background: #dc2626;">P6</a>
+           <a href="grammar16.html" class="btn" style="font-size: 11px; padding: 5px; background: #78350f;">P10</a>
+           <span style="font-size: 10px; color: #64748b; text-align: center;">আরও আছে...</span>
         </div>
       </div>
-      <a href="mock-test-prep.html" class="btn" style="background: #1e3a8a; margin-top: 15px; width: 100%; text-align: center; border-radius: 10px;">পরীক্ষা শুরু করো ⮕</a>
+      <div class="card" style="border: 3px solid #fbbf24; background: #eff6ff; grid-column: 1 / -1;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="font-size: 40px;">🏆</div>
+          <div style="text-align: left;">
+            <h3 style="margin: 0;">Grand Mock Test (Prepositions)</h3>
+            <p style="margin: 5px 0;">২৫টি চ্যালেঞ্জিং প্রশ্ন | ৫ মিনিট সময় | সঠিক উত্তর দিয়ে সার্টিফিকেট জেতো!</p>
+          </div>
+        </div>
+        <a href="mock-test-prep.html" class="btn" style="background: #1e3a8a;">ফাইনাল পরীক্ষা শুরু করো ⮕</a>
+      </div>
     </div>
-
-    
   </div>
 
-  <div class="section-title">📚 English Story Reading Corner</div>
-  <div class="card-container">
-    <div class="card" style="border-top: 6px solid #f59e0b; background: #fffbeb;">
-      <div><span class="card-icon">🦅</span><h3>The Thirsty Crow</h3><p>গল্পটি পড়ো, শোনো এবং কুইজে অংশগ্রহণ করো।</p></div>
-      <a href="story1.html" class="btn" style="background: #d97706;">গল্পটি পড়ো 📖</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #e11d48; background: #fff1f2;">
-      <div><span class="card-icon">🦁</span><h3>The Lion & Mouse</h3><p>সিংহ ও ইঁদুরের বন্ধুত্বের গল্পটি শোনো এবং কুইজ দাও।</p></div>
-      <a href="story2.html" class="btn" style="background: #e11d48;">গল্পটি পড়ো 📖</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #1e293b; background: #f1f5f9;">
-      <div><span class="card-icon">🐕</span><h3>The Greedy Dog</h3><p>লোভী কুকুরের শিক্ষণীয় গল্পটি পড়ে কুইজে অংশ নাও।</p></div>
-      <a href="story3.html" class="btn" style="background: #1e293b;">গল্পটি পড়ো 📖</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #059669; background: #f0fdf4;">
-      <div><span class="card-icon">🐢</span><h3>Hare & Tortoise</h3><p>খরগোশ ও কচ্ছপের সেই বিখ্যাত দৌড় প্রতিযোগিতার গল্প।</p></div>
-      <a href="story4.html" class="btn" style="background: #059669;">গল্পটি পড়ো 📖</a>
-    </div>
-    <div class="card" style="border-top: 6px solid #3b82f6; background: #eff6ff;">
-      <div><span class="card-icon">🕊️</span><h3>The Ant & Dove</h3><p>পিঁপড়া ও ঘুঘুর একে অপরকে বাঁচানোর সুন্দর গল্প।</p></div>
-      <a href="story5.html" class="btn" style="background: #3b82f6;">গল্পটি পড়ো 📖</a>
+  <div class="section-container">
+    <div class="section-title" style="border-color: var(--story);">📚 Story Reading Corner</div>
+    <div class="card-container">
+      <div class="card" style="border-top: 6px solid var(--story); background: #fff1f2;">
+        <div><span class="card-icon">🦅</span><h3>The Thirsty Crow</h3><p>গল্পটি পড়ো, শোনো এবং কুইজে অংশ নাও।</p></div>
+        <a href="story1.html" class="btn" style="background: var(--story);">গল্পটি পড়ো</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--story); background: #fff1f2;">
+        <div><span class="card-icon">🦁</span><h3>The Lion & Mouse</h3><p>সিংহ ও ইঁদুরের বন্ধুত্বের শিক্ষণীয় গল্প।</p></div>
+        <a href="story2.html" class="btn" style="background: var(--story);">গল্পটি পড়ো</a>
+      </div>
+      <div class="card" style="border-top: 6px solid var(--story); background: #fff1f2;">
+        <div><span class="card-icon">🐢</span><h3>Hare & Tortoise</h3><p>ধৈর্য ও পরিশ্রমের সেই বিখ্যাত দৌড় প্রতিযোগিতা।</p></div>
+        <a href="story4.html" class="btn" style="background: var(--story);">গল্পটি পড়ো</a>
+      </div>
     </div>
   </div>
 
