@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 13: Purpose - SSCEC</title>
+<style>
+  :root { --p-color: #f59e0b; --s-color: #b45309; --bg: #fffbeb; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #fbbf24); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  .advance-tag { background: rgba(0,0,0,0.2); display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+
+  .golden-rule { background: #451a03; color: #fef3c7; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #78350f; }
+
+  .purpose-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .purpose-card { background: white; padding: 18px; border-radius: 15px; border-left: 8px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .purpose-card h3 { margin: 0 0 10px 0; color: var(--s-color); font-size: 19px; }
+  .jadu-logic { background: #fffbeb; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--s-color); margin-top: 10px; border: 1px dashed #fcd34d; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #fffbeb; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="advance-tag">⭐ Advance Level</div>
+    <h1>🎯 Preposition of Purpose</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 কোনো কাজ কী উদ্দেশ্যে করা হচ্ছে তা বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    💡 গোল্ডেন রুল: কাজ কেন করা হলো? ➞ Purpose Preposition
+  </div>
+
+  <div class="purpose-grid">
+    <div class="purpose-card"><h3>🟢 FOR (জন্য)</h3><p>Gift <b>for</b> sister | Medicine <b>for</b> fever</p><div class="jadu-logic">🧠 ভাবনা: কার বা কিসের জন্য? (Noun-এর আগে)।</div></div>
+    <div class="purpose-card"><h3>🔵 TO (করার জন্য)</h3><p>I went <b>to</b> help him.</p><div class="jadu-logic">🧠 ভাবনা: কাজ করার উদ্দেশ্য (Verb-এর আগে)।</div></div>
+    <div class="purpose-card"><h3>🟡 IN ORDER TO (উদ্দেশ্যে)</h3><p>Worked hard <b>in order to</b> succeed.</p><div class="jadu-logic">🧠 ভাবনা: 'TO'-এর আরও শক্তিশালী রূপ।</div></div>
+    <div class="purpose-card"><h3>🟣 WITH A VIEW TO(উদ্দেশ্যে) </h3><p>Saved money <b>with a view to</b> buying a car.</p><div class="jadu-logic">🧠 ভাবনা: কোনো বড় উদ্দেশ্য (এরপর Verb+ing হয়)।</div></div>
+    <div class="purpose-card"><h3>🟤 FOR THE SAKE OF (স্বার্থে / জন্য)</h3><p>Sacrificed life <b>for the sake of</b> country.</p><div class="jadu-logic">🧠 ভাবনা: কিছুর স্বার্থে বা সম্মানে।</div></div>
+    <div class="purpose-card"><h3>🔴 FOR FEAR OF (ভয়ে)</h3><p>He hid <b>for fear of</b> punishment.</p><div class="jadu-logic">🧠 ভাবনা: যাতে খারাপ কিছু না হয় সেই ভয়ে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Purpose Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "I bought this pen ____ my brother.", b: "আমি আমার ভাইয়ের জন্য এই কলমটি কিনেছি।", o: ["for", "to", "with"], a: "for" },
+      { s: "We eat ____ live.", b: "আমরা বাঁচার জন্য খাই।", o: ["to", "for", "in order"], a: "to" },
+      { s: "She studies hard ____ pass the exam.", b: "সে পরীক্ষায় পাশ করার জন্য কঠোর পড়াশোনা করে।", o: ["in order to", "for", "with a view to"], a: "in order to" },
+      { s: "This room is ____ study.", b: "এই ঘরটি পড়ার জন্য।", o: ["for", "to", "by"], a: "for" },
+      { s: "He came here ____ meeting me.", b: "সে আমার সাথে দেখা করার উদ্দেশ্যে এখানে এসেছে।", o: ["with a view to", "to", "for"], a: "with a view to" },
+      { s: "I drink water ____ stay healthy.", b: "সুস্থ থাকার জন্য আমি জল খাই।", o: ["to", "for", "off"], a: "to" },
+      { s: "They fought ____ their country.", b: "তারা তাদের দেশের স্বার্থে যুদ্ধ করেছিল।", o: ["for the sake of", "to", "in"], a: "for the sake of" },
+      { s: "He ran away ____ fear of the dog.", b: "সে কুকুরের ভয়ে পালিয়ে গেল।", o: ["for", "from", "to"], a: "for" },
+      { s: "This knife is ____ cutting fruit.", b: "এই ছুরিটি ফল কাটার জন্য।", o: ["for", "to", "by"], a: "for" },
+      { s: "I use a computer ____ learning English.", b: "আমি ইংরেজি শেখার উদ্দেশ্যে কম্পিউটার ব্যবহার করি।", o: ["for", "to", "with"], a: "for" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      // ইংরেজি বাক্য এবং নিচে ছোট করে বাংলা অর্থ দেখা যাবে
+      document.getElementById('sentence').innerHTML = `
+        <div>${q.s}</div>
+        <div style="font-size: 16px; color: #78350f; font-weight: normal; margin-top: 8px;">(${q.b})</div>
+      `;
+      
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 13 (Purpose) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">অসাধারণ! 🎯<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
