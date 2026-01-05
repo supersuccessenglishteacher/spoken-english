@@ -3,51 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 1: Greetings & Intro</title>
+<title>SSCEC Digital Learning Portal</title>
 <style>
-  body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0fdf4; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-  .lesson-header { background: #10b981; color: white; width: 100%; max-width: 800px; text-align: center; padding: 25px; border-radius: 15px; margin-bottom: 25px; }
-  .content-section { width: 100%; max-width: 800px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
-  h2 { color: #065f46; border-bottom: 2px solid #10b981; padding-bottom: 5px; }
-  .phrase-box { background: #ecfdf5; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 5px solid #10b981; }
-  .en { font-size: 18px; font-weight: bold; color: #047857; display: block; }
-  .bn { font-size: 15px; color: #374151; }
-  .btn-back { display: inline-block; margin-top: 20px; text-decoration: none; color: #10b981; font-weight: bold; border: 2px solid #10b981; padding: 8px 20px; border-radius: 20px; }
-  .btn-back:hover { background: #10b981; color: white; }
+  :root {
+    --primary: #2563eb;
+    --spoken: #059669;
+    --tense: #ea580c;
+    --grammar: #7c3aed;
+    --prefix: #0891b2;
+    --story: #db2777;
+    --card-bg: #ffffff;
+  }
+
+  body { 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+    background-color: #f1f5f9; 
+    margin: 0; padding: 0; 
+    display: flex; flex-direction: column; align-items: center;
+    color: #1e293b;
+  }
+
+  /* Stylish Header */
+  .header { 
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); 
+    color: white; width: 100%; text-align: center; 
+    padding: 50px 20px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+  }
+  .header h1 { font-size: 32px; margin: 0; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+  .header p { opacity: 0.9; margin-top: 10px; font-size: 16px; line-height: 1.6; }
+
+  .main-container { width: 95%; max-width: 1100px; padding: 20px; box-sizing: border-box; }
+
+  /* Section Title */
+  .section-title {
+    font-size: 24px; font-weight: 800; margin: 40px 0 20px;
+    display: flex; align-items: center; gap: 12px;
+    padding-left: 15px; border-left: 6px solid var(--primary);
+  }
+
+  /* Grid Layout */
+  .card-container { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; 
+    margin-bottom: 20px;
+  }
+
+  /* Elegant Card Design */
+  .card { 
+    background: var(--card-bg); border-radius: 24px; padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255,255,255,0.8);
+    display: flex; flex-direction: column; position: relative;
+    box-sizing: border-box;
+  }
+  .card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+
+  .card-icon { font-size: 45px; margin-bottom: 15px; }
+  .card h3 { margin: 10px 0; font-size: 19px; color: #1e3a8a; }
+  .card p { font-size: 14px; color: #64748b; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+
+  /* Premium Buttons */
+  .btn { 
+    text-decoration: none; padding: 12px; border-radius: 15px; 
+    font-weight: bold; text-align: center; font-size: 14px;
+    transition: 0.3s; color: white; border: none; cursor: pointer;
+  }
+  .btn-study { background: var(--primary); }
+  .btn-quiz { background: #fbbf24; color: #1e3a8a !important; }
+  .btn:hover { filter: brightness(1.1); }
+
+  .badge {
+    position: absolute; top: 15px; right: 15px; background: #fee2e2;
+    color: #ef4444; padding: 4px 10px; border-radius: 10px; font-size: 10px; font-weight: 900;
+  }
+
+  /* Footer */
+  .footer { margin: 60px 0 30px; text-align: center; color: #94a3b8; font-weight: 600; }
+
+  @media (max-width: 600px) { 
+    .header h1 { font-size: 24px; }
+    .card-container { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 
-  <div class="lesson-header">
-    <h1>Lesson 1: Greetings & Introductions</h1>
-    <p>সঠিকভাবে অভিবাদন জানানো এবং নিজের পরিচয় দেওয়া শিখুন</p>
+  <div class="header">
+    <h1>🗣️ SSCEC Digital Classroom</h1>
+    <p><b>SUPER SUCCESS COMPUTER EDUCATION CENTER</b><br>
+    📍 22/1 Bipin Paul Road, Nimta, Kolkata - 49</p>
   </div>
 
-  <div class="content-section">
-    <h2>👋 Common Greetings</h2>
-    <div class="phrase-box">
-      <span class="en">"Good morning! How are you today?"</span>
-      <span class="bn">শুভ সকাল! আজ আপনি কেমন আছেন?</span>
+  <div class="main-container">
+
+    <div class="section-title" style="border-color: var(--spoken);">🎙️ Spoken English Mastery</div>
+    <div class="card-container">
+      <div class="card" style="border-bottom: 5px solid var(--spoken);">
+        <span class="card-icon">👋</span><h3>Lesson 1: Greetings</h3><p>আত্মবিশ্বাসের সাথে ইংরেজিতে কথা বলা শুরু করুন।</p>
+        <a href="lesson1.html" class="btn btn-study" style="background:var(--spoken)">লেসন শুরু করুন</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid var(--spoken);">
+        <span class="card-icon">⏰</span><h3>Lesson 2: Daily Life</h3><p>প্রতিদিনের কাজের ইংরেজি বর্ণনা শিখুন।</p>
+        <a href="lesson2.html" class="btn btn-study" style="background:var(--spoken)">লেসন শুরু করুন</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid var(--spoken);">
+        <span class="card-icon">🛍️</span><h3>Lesson 3: Market Talk</h3><p>কেনাকাটা ও দরদাম করার স্মার্ট কথোপকথন।</p>
+        <a href="lesson3.html" class="btn btn-study" style="background:var(--spoken)">লেসন শুরু করুন</a>
+      </div>
     </div>
-    <div class="phrase-box">
-      <span class="en">"I'm fine, thank you. And you?"</span>
-      <span class="bn">আমি ভালো আছি, ধন্যবাদ। আর আপনি?</span>
+
+    <div class="section-title" style="border-color: var(--grammar);">📘 Grammar Foundation</div>
+    <div class="card-container">
+      <div class="card" style="border-bottom: 5px solid var(--grammar);">
+        <span class="card-icon">⏳</span><h3>Tense (V1-V5)</h3><p>ভার্ব ফর্ম দিয়ে টেন্সের সহজ সমাধান।</p>
+        <a href="grammar1.html" class="btn btn-study" style="background:var(--grammar)">শিখতে চাই</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid #0d9488;">
+        <span class="card-icon">🍎</span><h3>Articles</h3><p>A, An এবং The এর নির্ভুল ব্যবহার।</p>
+        <a href="grammar6.html" class="btn btn-study" style="background:#0d9488">শিখতে চাই</a>
+      </div>
     </div>
+
+    <div class="section-title" style="border-color: #f59e0b;">📍 Preposition Adventure (Part 1-10)</div>
+    <p style="padding-left: 15px; color: #64748b; font-size: 14px; margin-top: -15px;">রঙিন কার্ডে ক্লিক করে মজার সাথে প্রেপজিশন শেখো!</p>
+    
+    <div class="card-container">
+      <div class="card" style="border-top: 5px solid #7c3aed; background: #f5f3ff;">
+        <span style="font-size: 30px;">🏠</span><h3>Grammar 7: P-1</h3><p>In, On, Under (অবস্থান)</p>
+        <a href="grammar7.html" class="btn btn-study" style="background:#7c3aed; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #db2777; background: #fdf2f8;">
+        <span style="font-size: 30px;">⏰</span><h3>Grammar 8: P-2</h3><p>At, In, On (সময়)</p>
+        <a href="grammar8.html" class="btn btn-study" style="background:#db2777; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #0d9488; background: #f0fdfa;">
+        <span style="font-size: 30px;">🏃</span><h3>Grammar 9: P-3</h3><p>To, Into, Off (গতি)</p>
+        <a href="grammar9.html" class="btn btn-study" style="background:#0d9488; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #be185d; background: #fff1f2;">
+        <span style="font-size: 30px;">👫</span><h3>Grammar 10: P-4</h3><p>With, Between (সাথী)</p>
+        <a href="grammar10.html" class="btn btn-study" style="background:#be185d; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #0369a1; background: #f0f9ff;">
+        <span style="font-size: 30px;">🚲</span><h3>Grammar 11: P-5</h3><p>By, With (মাধ্যম)</p>
+        <a href="grammar11.html" class="btn btn-study" style="background:#0369a1; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #dc2626; background: #fef2f2;">
+        <div class="badge">PRO</div><span style="font-size: 30px;">🧠</span><h3>Grammar 12: P-6</h3><p>Due to, Thanks to (কারণ)</p>
+        <a href="grammar12.html" class="btn btn-study" style="background:#dc2626; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #f59e0b; background: #fffbeb;">
+        <div class="badge">PRO</div><span style="font-size: 30px;">🎯</span><h3>Grammar 13: P-7</h3><p>For, To (উদ্দেশ্য)</p>
+        <a href="grammar13.html" class="btn btn-study" style="background:#f59e0b; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #8b5cf6; background: #f5f3ff;">
+        <div class="badge">PRO</div><span style="font-size: 30px;">⚖️</span><h3>Grammar 14: P-8</h3><p>Like, As, Than (তুলনা)</p>
+        <a href="grammar14.html" class="btn btn-study" style="background:#8b5cf6; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #be123c; background: #fff1f2;">
+        <div class="badge">PRO</div><span style="font-size: 30px;">🚫</span><h3>Grammar 15: P-9</h3><p>Except, Instead of (ব্যতীত)</p>
+        <a href="grammar15.html" class="btn btn-study" style="background:#be123c; padding: 8px;">শিখবো ⮕</a>
+      </div>
+      <div class="card" style="border-top: 5px solid #78350f; background: #fef3c7;">
+        <div class="badge">PRO</div><span style="font-size: 30px;">🔑</span><h3>Grammar 16: P-10</h3><p>Of, Owned by (মালিকানা)</p>
+        <a href="grammar16.html" class="btn btn-study" style="background:#78350f; padding: 8px;">শিখবো ⮕</a>
+      </div>
+
+      <div class="card" style="grid-column: 1 / -1; border: 3px solid #fbbf24; background: #fffbeb; flex-direction: row; align-items: center; justify-content: space-between; padding: 20px;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <span style="font-size: 45px;">🏆</span>
+          <div style="text-align: left;">
+            <h3 style="margin: 0; color: #1e3a8a;">Grand Preposition Mock Test</h3>
+            <p style="margin: 5px 0; font-size: 14px; color: #475569;">সবগুলো পার্ট শেষ করে নিজেকে যাচাই করো!</p>
+          </div>
+        </div>
+        <a href="mock-test-prep.html" class="btn btn-quiz" style="min-width: 150px;">পরীক্ষা দাও ⮕</a>
+      </div>
+    </div>
+
+    <div class="section-title" style="border-color: var(--prefix);">🧱 Vocabulary Builder (Prefix)</div>
+    <div class="card-container">
+      <div class="card" style="border-bottom: 5px solid var(--prefix); background: #f0fdfa;">
+        <span class="card-icon">🧱</span><h3>Prefix Part-1</h3><p>UN, IM, IN এর মাধ্যমে নতুন শব্দ গঠন।</p>
+        <div style="display:flex; gap:10px">
+          <a href="grammar17.html" class="btn btn-study" style="flex:1; background:var(--prefix)">পড়া 📖</a>
+          <a href="prefix-quiz.html" class="btn btn-quiz" style="flex:1">কুইজ 🎮</a>
+        </div>
+      </div>
+      <div class="card" style="border-bottom: 5px solid #e11d48; background: #fff1f2;">
+        <span class="card-icon">🧱</span><h3>Prefix Part-2</h3><p>IL, IR, DIS এর নিয়ম ও প্র্যাকটিস।</p>
+        <div style="display:flex; gap:10px">
+          <a href="grammar18.html" class="btn btn-study" style="flex:1; background:#e11d48">পড়া 📖</a>
+          <a href="prefix-quiz-p2.html" class="btn btn-quiz" style="flex:1">কুইজ 🎮</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="border-color: var(--story);">📚 Story Reading Corner</div>
+    <div class="card-container">
+      <div class="card" style="border-bottom: 5px solid var(--story);">
+        <span class="card-icon">🦅</span><h3>The Thirsty Crow</h3><p>তৃষ্ণার্ত কাকের বুদ্ধির গল্প।</p>
+        <a href="story1.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid var(--story);">
+        <span class="card-icon">🦁</span><h3>Lion & Mouse</h3><p>উপকার করলে উপকার পাওয়া যায়।</p>
+        <a href="story2.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid var(--story);">
+        <span class="card-icon">🐕</span><h3>The Greedy Dog</h3><p>অতি লোভে তাঁতি নষ্ট - শিখুন এখান থেকে।</p>
+        <a href="story3.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid var(--story);">
+        <span class="card-icon">🐢</span><h3>Hare & Tortoise</h3><p>ধৈর্য ও পরিশ্রমের মহান শিক্ষা।</p>
+        <a href="story4.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+      </div>
+      <div class="card" style="border-bottom: 5px solid var(--story);">
+        <span class="card-icon">🕊️</span><h3>Ant & Dove</h3><p>পিঁপড়া ও ঘুঘুর বন্ধুত্বের গল্প।</p>
+        <a href="story5.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+      </div>
+    </div>
+
   </div>
 
-  <div class="content-section">
-    <h2>🆔 Introducing Yourself</h2>
-    <div class="phrase-box">
-      <span class="en">"My name is [Your Name]. What's yours?"</span>
-      <span class="bn">আমার নাম [আপনার নাম]। আপনার নাম কি?</span>
-    </div>
-    <div class="phrase-box">
-      <span class="en">"Nice to meet you!"</span>
-      <span class="bn">আপনার সাথে দেখা হয়ে ভালো লাগল!</span>
-    </div>
+  <div class="footer">
+    <p>Made with ❤️ for SSCEC Students | 2026</p>
   </div>
-
-  <a href="index.html" class="btn-back">⬅️ ফিরে যান</a>
 
 </body>
 </html>
