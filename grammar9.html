@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 9: Direction & Movement - SSCEC</title>
+<style>
+  :root { --p-color: #0d9488; --s-color: #0f766e; --bg: #f0fdfa; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #2dd4bf); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  
+  .golden-rule { background: #111827; color: #fbbf24; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 3px solid #374151; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+  .movement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .move-card { background: white; padding: 15px; border-radius: 15px; border-left: 6px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .move-card h3 { margin: 0 0 10px 0; color: var(--s-color); display: flex; align-items: center; }
+  .move-card p { margin: 5px 0; font-size: 14px; color: #4b5563; }
+  .logic { background: #f0fdfa; padding: 5px 10px; border-radius: 5px; font-size: 13px; font-weight: bold; color: #0d9488; border: 1px dashed #5eead4; }
+
+  /* Quiz Style */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #f0fdfa; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🎒 Preposition of Movement</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 গতি বা নড়াচড়া বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    🎯 গোল্ডেন রুল: যেখানে নড়াচড়া আছে ➞ Direction Preposition
+  </div>
+
+  <div class="movement-grid">
+    <div class="move-card"><h3>🟢 TO (দিকে)</h3><p>go <b>to</b> school</p><div class="logic">🧠 লক্ষ্যের দিকে যাচ্ছে</div></div>
+    <div class="move-card"><h3>🔵 FROM (থেকে)</h3><p>come <b>from</b> home</p><div class="logic">🧠 শুরুর জায়গা থেকে</div></div>
+    <div class="move-card"><h3>🟡 INTO (ভেতরে)</h3><p>jump <b>into</b> the pool</p><div class="logic">🧠 বাইরে ➞ ভেতরে ঢোকা</div></div>
+    <div class="move-card"><h3>🟠 OUT OF (বাইরে)</h3><p>run <b>out of</b> the house</p><div class="logic">🧠 ভেতর ➞ বাইরে আসা</div></div>
+    <div class="move-card"><h3>🟣 ONTO (উপরে)</h3><p>cat jumped <b>onto</b> the table</p><div class="logic">🧠 নিচ ➞ উপরে উঠে যাওয়া</div></div>
+    <div class="move-card"><h3>🟤 OFF (নিচে নামা)</h3><p>get <b>off</b> the bus</p><div class="logic">🧠 উপর ➞ নিচে নেমে যাওয়া</div></div>
+    <div class="move-card"><h3>🔴 OVER (উপর দিয়ে)</h3><p>fly <b>over</b> the bridge</p><div class="logic">🧠 উপর দিয়ে পার হওয়া (না ছুঁয়ে)</div></div>
+    <div class="move-card"><h3>⚫ THROUGH (ভেতর দিয়ে)</h3><p>go <b>through</b> the tunnel</p><div class="logic">🧠 একপাশে ঢুকে অন্যপাশে বেরোনো</div></div>
+    <div class="move-card"><h3>⚪ ACROSS (পার হওয়া)</h3><p>walk <b>across</b> the road</p><div class="logic">🧠 চওড়া জায়গা পার হওয়া</div></div>
+    <div class="move-card"><h3>🟩 ALONG (পাশে পাশে)</h3><p>walk <b>along</b> the river</p><div class="logic">🧠 সোজা লাইনে চলা</div></div>
+    <div class="move-card"><h3>🟦 UP / DOWN</h3><p>go <b>up/down</b> the stairs</p><div class="logic">🧠 সিঁড়ি দিয়ে উপরে বা নিচে</div></div>
+    <div class="move-card"><h3>🟪 AROUND (চারদিকে)</h3><p>run <b>around</b> the park</p><div class="logic">🧠 গোল হয়ে চারদিকে ঘোরা</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Movement Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold; min-height: 24px;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:10px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "The boy is going ____ school.", o: ["to", "from", "into"], a: "to" },
+      { s: "The frog jumped ____ the pond.", o: ["into", "onto", "off"], a: "into" },
+      { s: "I am coming ____ Kolkata.", o: ["from", "to", "over"], a: "from" },
+      { s: "The cat jumped ____ the chair.", o: ["onto", "through", "across"], a: "onto" },
+      { s: "Please get ____ the car now.", o: ["off", "out of", "under"], a: "out of" },
+      { s: "The plane is flying ____ the clouds.", o: ["over", "along", "into"], a: "over" },
+      { s: "We walked ____ the beach.", o: ["along", "through", "off"], a: "along" },
+      { s: "The train went ____ the tunnel.", o: ["through", "across", "onto"], a: "through" },
+      { s: "He ran ____ the stairs to the roof.", o: ["up", "down", "off"], a: "up" },
+      { s: "Don't run ____ the road blindly.", o: ["across", "through", "along"], a: "across" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerText = q.s;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 9 (Movement) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">দুর্দান্ত! 🎉<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
