@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 15: Contrast & Exception - SSCEC</title>
+<style>
+  :root { --p-color: #be123c; --s-color: #881337; --bg: #fff1f2; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #fb7185); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  .advance-tag { background: rgba(0,0,0,0.2); display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+
+  .golden-rule { background: #4c0519; color: #fecdd3; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #881337; }
+
+  .contrast-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .contrast-card { background: white; padding: 18px; border-radius: 15px; border-top: 5px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .contrast-card h3 { margin: 0 0 10px 0; color: var(--s-color); font-size: 19px; }
+  .logic { background: #fff1f2; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--s-color); margin-top: 10px; border: 1px dashed #fda4af; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #fff1f2; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="advance-tag">⭐ Advance Level</div>
+    <h1>🔴 Contrast & Exception</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 বাদ দেওয়া বা বিপরীতে কিছু বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    💡 জাদু রুল: বাদ দিলে ➞ EXCEPT | যোগ করলে ➞ BESIDES
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-card"><h3>🟢 EXCEPT (ছাড়া/বাদে)</h3><p>Everyone came <b>except</b> Rina.</p><div class="logic">🧠 ভাবনা: সব আছে কিন্তু একজন নেই। (সব − ১)</div></div>
+    <div class="contrast-card"><h3>🔵 BESIDES (ছাড়াও)</h3><p><b>Besides</b> milk, I like tea.</p><div class="logic">🧠 ভাবনা: এটাও আছে সাথে ওটাও। (১ + ১)</div></div>
+    <div class="contrast-card"><h3>🟡 INSTEAD OF (পরিবর্তে)</h3><p>Tea <b>instead of</b> coffee.</p><div class="logic">🧠 ভাবনা: একটার বদলে অন্যটা। (A নয়, B)</div></div>
+    <div class="contrast-card"><h3>🟠 BUT FOR (না হলে)</h3><p><b>But for</b> your help, I would fail.</p><div class="logic">🧠 ভাবনা: এই জিনিসটা না থাকলে অন্য কিছু হতো।</div></div>
+    <div class="contrast-card"><h3>🟣 APART FROM (ছাড়া/ছাড়াও)</h3><p><b>Apart from</b> apples, I like pears.</p><div class="logic">🧠 ভাবনা: এটি ছাড়া বা এছাড়াও—দুইভাবেই বসে।</div></div>
+    <div class="contrast-card"><h3>🟤 CONTRARY TO (বিপরীতে)</h3><p><b>Contrary to</b> advice, he went.</p><div class="logic">🧠 ভাবনা: কথা না শুনে ঠিক উল্টোটা করলে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Contrast Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "All students are present ____ Ram.", b: "রাম ছাড়া সব ছাত্ররাই উপস্থিত আছে।", o: ["except", "besides", "instead of"], a: "except" },
+      { s: "____ English, he speaks Hindi.", b: "ইংরেজি ছাড়াও সে হিন্দি বলতে পারে।", o: ["besides", "except", "but"], a: "besides" },
+      { s: "He took tea ____ coffee.", b: "সে কফির বদলে চা নিয়েছিল।", o: ["instead of", "besides", "but for"], a: "instead of" },
+      { s: "I like all colors ____ black.", b: "কালো ছাড়া আমি সব রঙ পছন্দ করি।", o: ["except", "besides", "contrary to"], a: "except" },
+      { s: "____ your help, I would be lost.", b: "তোমার সাহায্য না পেলে আমি হারিয়ে যেতাম।", o: ["but for", "except", "besides"], a: "but for" },
+      { s: "____ Rina, everyone was invited.", b: "রিনা ছাড়া সবাই আমন্ত্রিত ছিল।", o: ["except", "besides", "instead of"], a: "except" },
+      { s: "She has no friends ____ me.", b: "আমি ছাড়া তার কোনো বন্ধু নেই।", o: ["but", "besides", "contrary to"], a: "but" },
+      { s: "____ my warning, he touched the wire.", b: "আমার সতর্কবার্তা অগ্রাহ্য করে (বিপরীতে) সে তারটি ছুঁয়েছিল।", o: ["contrary to", "besides", "instead of"], a: "contrary to" },
+      { s: "The room was empty ____ a chair.", b: "একটি চেয়ার ছাড়া ঘরটি খালি ছিল।", o: ["except for", "besides", "instead of"], a: "except for" },
+      { s: "He played football ____ studying.", b: "পড়াশোনা করার বদলে সে ফুটবল খেলেছিল।", o: ["instead of", "besides", "except"], a: "instead of" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerHTML = `
+        <div>${q.s}</div>
+        <div style="font-size: 16px; color: #881337; font-weight: normal; margin-top: 8px;">(${q.b})</div>
+      `;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 15 (Contrast) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">দুর্দান্ত! ❤️<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
