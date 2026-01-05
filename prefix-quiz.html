@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prefix Challenge - SSCEC Quiz</title>
+<style>
+  :root { --p-color: #0891b2; --s-color: #164e63; --bg: #f0fdfa; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+  
+  .stats-bar { display: flex; justify-content: space-between; width: 100%; max-width: 600px; margin: 20px 0; gap: 10px; }
+  .stat-card { background: white; padding: 10px; border-radius: 10px; flex: 1; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-bottom: 4px solid var(--p-color); }
+  .stat-card b { font-size: 20px; color: var(--p-color); }
+
+  .quiz-box { background: white; width: 100%; max-width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; box-sizing: border-box; }
+  .word-display { background: #f0f9ff; padding: 30px; border-radius: 15px; margin-bottom: 20px; border: 2px dashed #0891b2; }
+  .word-display h1 { font-size: 40px; margin: 0; color: var(--s-color); letter-spacing: 2px; }
+
+  .options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .opt-btn { background: white; border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { border-color: var(--p-color); background: #f0f9ff; }
+
+  .result-screen { display: none; }
+  .wa-btn { background: #25d366; color: white; padding: 15px 25px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+  <h2 style="color: var(--s-color);">Prefix Master Challenge</h2>
+
+  <div class="stats-bar">
+    <div class="stat-card"><span>সময় বাকি</span><br><b id="timer">03:00</b></div>
+    <div class="stat-card"><span>স্কোর</span><br><b id="score">0</b></div>
+  </div>
+
+  <div class="quiz-box">
+    <div id="game-area">
+      <div class="word-display"><h1 id="target-word">HAPPY</h1></div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="handleChoice('un')">UN-</button>
+        <button class="opt-btn" onclick="handleChoice('im')">IM-</button>
+        <button class="opt-btn" onclick="handleChoice('in')">IN-</button>
+      </div>
+      <p id="feedback" style="margin-top: 15px; font-weight: bold; min-height: 20px;"></p>
+    </div>
+
+    <div id="result-area" class="result-screen">
+      <h2>পরীক্ষা শেষ! 🎉</h2>
+      <h1 id="final-score" style="font-size: 48px; color: var(--p-color);">0/15</h1>
+      <a href="#" id="wa-link" class="wa-btn">📲 স্যারকে ফলাফল পাঠাও</a>
+      <br><br>
+      <a href="grammar17.html" style="color: var(--s-color); font-weight: bold;">ফিরে যাও</a>
+    </div>
+  </div>
+
+  <script>
+    const wordList = [
+      { w: "Happy", a: "un" }, { w: "Possible", a: "im" }, { w: "Correct", a: "in" },
+      { w: "Kind", a: "un" }, { w: "Polite", a: "im" }, { w: "Complete", a: "in" },
+      { w: "Safe", a: "un" }, { w: "Moral", a: "im" }, { w: "Active", a: "in" },
+      { w: "Lucky", a: "un" }, { w: "Patient", a: "im" }, { w: "Visible", a: "in" },
+      { w: "Healthy", a: "un" }, { w: "Fair", a: "un" }, { w: "Direct", a: "in" }
+    ];
+
+    let currentQ = 0, score = 0, timeLeft = 180;
+    let shuffled = wordList.sort(() => Math.random() - 0.5);
+
+    function startTimer() {
+      const timerInt = setInterval(() => {
+        timeLeft--;
+        let min = Math.floor(timeLeft / 60);
+        let sec = timeLeft % 60;
+        document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        if (timeLeft <= 0) { clearInterval(timerInt); endQuiz(); }
+      }, 1000);
+    }
+
+    function loadWord() {
+      if (currentQ >= 15) { endQuiz(); return; }
+      document.getElementById('target-word').innerText = shuffled[currentQ].w.toUpperCase();
+      document.getElementById('feedback').innerText = "";
+    }
+
+    function handleChoice(choice) {
+      if (choice === shuffled[currentQ].a) {
+        score++;
+        document.getElementById('score').innerText = score;
+        document.getElementById('feedback').innerText = "✅ সঠিক!";
+        document.getElementById('feedback').style.color = "green";
+      } else {
+        document.getElementById('feedback').innerText = "❌ ভুল!";
+        document.getElementById('feedback').style.color = "red";
+      }
+      setTimeout(() => { currentQ++; loadWord(); }, 1000);
+    }
+
+    function endQuiz() {
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('result-area').style.display = 'block';
+      document.getElementById('final-score').innerText = `${score}/15`;
+      const msg = `স্যার, আমার Prefix কুইজ স্কোর: ${score}/15`;
+      document.getElementById('wa-link').href = `https://wa.me/918017247298?text=${encodeURIComponent(msg)}`;
+    }
+
+    startTimer(); loadWord();
+  </script>
+</body>
+</html>
