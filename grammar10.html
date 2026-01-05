@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 10: Relation & Company - SSCEC</title>
+<style>
+  :root { --p-color: #be185d; --s-color: #9d174d; --bg: #fff1f2; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #f43f5e); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  
+  .golden-rule { background: #1e293b; color: #fb7185; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #334155; }
+
+  .relation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .rel-card { background: white; padding: 18px; border-radius: 15px; border-bottom: 5px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .rel-card h3 { margin: 0 0 10px 0; color: var(--s-color); display: flex; align-items: center; font-size: 19px; }
+  .rel-card p { margin: 5px 0; font-size: 15px; color: #4b5563; }
+  .logic-box { background: #fff1f2; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--p-color); margin-top: 10px; border: 1px dashed #fecdd3; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #fff1f2; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🤝 Preposition of Relation & Company</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 সম্পর্ক বা সাথী বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    🎯 গোল্ডেন রুল: মানুষ–মানুষ বা জিনিসের সম্পর্ক ➞ Relation Preposition
+  </div>
+
+  <div class="relation-grid">
+    <div class="rel-card"><h3>🟢 WITH (সাথে)</h3><p>I play <b>with</b> my friend.</p><div class="logic-box">🧠 ভাবনা: যখন কেউ একসাথে থাকে।</div></div>
+    <div class="rel-card"><h3>🔵 WITHOUT (ছাড়া)</h3><p>Tea <b>without</b> sugar.</p><div class="logic-box">🧠 ভাবনা: যখন কোনো কিছু বাদ থাকে।</div></div>
+    <div class="rel-card"><h3>🟡 BETWEEN (মাঝে)</h3><p>Sit <b>between</b> Ram and Shyam.</p><div class="logic-box">🧠 ভাবনা: যখন ঠিক দুইজন বা দুইটির মাঝে।</div></div>
+    <div class="rel-card"><h3>🟠 AMONG (মাঝে)</h3><p>Distribution <b>among</b> children.</p><div class="logic-box">🧠 ভাবনা: যখন অনেক লোকের মাঝে।</div></div>
+    <div class="rel-card"><h3>🟣 FOR (জন্য)</h3><p>This pen is <b>for</b> you.</p><div class="logic-box">🧠 ভাবনা: কাজটা কার জন্য হচ্ছে?</div></div>
+    <div class="rel-card"><h3>🟤 OF (এর / মালিকানা)</h3><p>The leg <b>of</b> the table.</p><div class="logic-box">🧠 ভাবনা: এর সঙ্গে সম্পর্ক বা মালিকানা।</div></div>
+    <div class="rel-card"><h3>⚫ ABOUT (সম্পর্কে)</h3><p>Tell me <b>about</b> your school.</p><div class="logic-box">🧠 ভাবনা: কোনো বিষয় বা টপিক নিয়ে।</div></div>
+    <div class="rel-card"><h3>🔴 AGAINST (বিরুদ্ধে)</h3><p>Fight <b>against</b> the disease.</p><div class="logic-box">🧠 ভাবনা: কারোর বিপক্ষে বা উল্টো দিকে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Relation Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "I drink coffee ____ milk.", o: ["with", "without", "between"], a: "with" },
+      { s: "This chocolate is ____ my sister.", o: ["for", "of", "about"], a: "for" },
+      { s: "He is standing ____ his two brothers.", o: ["between", "among", "with"], a: "between" },
+      { s: "The teacher is ____ the students.", o: ["among", "between", "of"], a: "among" },
+      { s: "We should not talk ____ others.", o: ["about", "against", "with"], a: "about" },
+      { s: "A friend ____ mine is coming.", o: ["of", "for", "about"], a: "of" },
+      { s: "I cannot see ____ my glasses.", o: ["without", "with", "against"], a: "without" },
+      { s: "Be kind ____ everyone.", o: ["to", "of", "for"], a: "to" },
+      { s: "We must fight ____ plastic pollution.", o: ["against", "for", "about"], a: "against" },
+      { s: "She is angry ____ me.", o: ["with", "for", "to"], a: "with" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerText = q.s;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 10 (Relation) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">দুর্দান্ত! 🎉<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
