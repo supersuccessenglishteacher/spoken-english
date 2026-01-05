@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 14: Comparison - SSCEC</title>
+<style>
+  :root { --p-color: #8b5cf6; --s-color: #5b21b6; --bg: #f5f3ff; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #a78bfa); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  .advance-tag { background: rgba(255,255,255,0.2); display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+
+  .golden-rule { background: #2e1065; color: #ddd6fe; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #4c1d95; }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .compare-card { background: white; padding: 18px; border-radius: 15px; border-left: 8px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .compare-card h3 { margin: 0 0 10px 0; color: var(--s-color); font-size: 19px; }
+  .logic { background: #f5f3ff; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--s-color); margin-top: 10px; border: 1px dashed #c4b5fd; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #f5f3ff; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="advance-tag">⭐ Advance Level</div>
+    <h1>🟣 Preposition of Comparison</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 কেমন বা কার সাথে তুলনা করা হচ্ছে তা বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    💡 জাদু রুল: মতো ➞ LIKE | হিসেবে ➞ AS | তুলনায় ➞ THAN
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-card"><h3>🟢 LIKE (মতো)</h3><p>He runs <b>like</b> a deer.</p><div class="logic">🧠 ভাবনা: দেখতে বা করতে কার মতো?</div></div>
+    <div class="compare-card"><h3>🔵 AS (হিসেবে)</h3><p>He works <b>as</b> a teacher.</p><div class="logic">🧠 ভাবনা: পরিচয় বা ভূমিকা বোঝাতে।</div></div>
+    <div class="compare-card"><h3>🟡 THAN (থেকে/তুলনায়)</h3><p>He is taller <b>than</b> me.</p><div class="logic">🧠 ভাবনা: একজনের চেয়ে অন্যজন বেশি কিছু হলে।</div></div>
+    <div class="compare-card"><h3>🟠 UNLIKE (মতো নয়)</h3><p><b>Unlike</b> him, I am lazy.</p><div class="logic">🧠 ভাবনা: যখন কোনো মিল নেই।</div></div>
+    <div class="compare-card"><h3>🟣 AS...AS (সমান সমান)</h3><p>He is <b>as</b> tall <b>as</b> his father.</p><div class="logic">🧠 ভাবনা: যখন দুজনেই একদম সমান।</div></div>
+    <div class="compare-card"><h3>🟤 COMPARED TO</h3><p>Easy <b>compared to</b> the past.</p><div class="logic">🧠 ভাবনা: পরিস্থিতির সাথে তুলনা করলে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Comparison Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "She sings ____ a bird.", b: "সে পাখির মতো গান গায়।", o: ["like", "as", "than"], a: "like" },
+      { s: "He works ____ a doctor.", b: "সে ডাক্তার হিসেবে কাজ করে।", o: ["as", "like", "than"], a: "as" },
+      { s: "Ram is stronger ____ Rahim.", b: "রাম রহিমের চেয়ে বেশি শক্তিশালী।", o: ["than", "as", "like"], a: "than" },
+      { s: "____ his father, he is very tall.", b: "তার বাবার মতোই সে খুব লম্বা।", o: ["like", "as", "unlike"], a: "like" },
+      { s: "This mobile is ____ good ____ that one.", b: "এই মোবাইলটি ওইটির মতোই ভালো।", o: ["as...as", "than", "like"], a: "as...as" },
+      { s: "____ her sister, she is very shy.", b: "তার বোনের মতো না হয়ে সে খুব লাজুক (অমিল)।", o: ["unlike", "like", "as"], a: "unlike" },
+      { s: "He is not so clever ____ you.", b: "সে তোমার মতো অতটা চালাক নয়।", o: ["as", "than", "like"], a: "as" },
+      { s: "My house is small ____ yours.", b: "তোমার বাড়ির তুলনায় আমার বাড়িটি ছোট।", o: ["compared to", "like", "as"], a: "compared to" },
+      { s: "Treat me ____ a friend.", b: "আমার সাথে বন্ধুর মতো ব্যবহার করো।", o: ["like", "as", "than"], a: "like" },
+      { s: "I use this box ____ a chair.", b: "আমি এই বক্সটি চেয়ার হিসেবে ব্যবহার করি।", o: ["as", "like", "than"], a: "as" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerHTML = `
+        <div>${q.s}</div>
+        <div style="font-size: 16px; color: #5b21b6; font-weight: normal; margin-top: 8px;">(${q.b})</div>
+      `;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 14 (Comparison) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">অসাধারণ! 💜<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
