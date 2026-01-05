@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 11: Method & Means - SSCEC</title>
+<style>
+  :root { --p-color: #0369a1; --s-color: #075985; --bg: #f0f9ff; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #38bdf8); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  
+  .golden-rule { background: #0f172a; color: #7dd3fc; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #1e293b; }
+
+  .method-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .method-card { background: white; padding: 18px; border-radius: 15px; border-left: 8px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .method-card h3 { margin: 0 0 10px 0; color: var(--s-color); display: flex; align-items: center; font-size: 19px; }
+  .method-card p { margin: 5px 0; font-size: 15px; color: #475569; }
+  .jadu-logic { background: #e0f2fe; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--s-color); margin-top: 10px; border: 1px dashed #7dd3fc; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #e0f2fe; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🛠️ Preposition of Method & Means</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 কাজ করার মাধ্যম বা উপায় বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    🎯 গোল্ডেন রুল: যখন প্রশ্ন হবে “কিভাবে?” ➞ Method Preposition
+  </div>
+
+  <div class="method-grid">
+    <div class="method-card"><h3>🔵 BY (যানবাহন/উপায়)</h3><p>Go <b>by</b> bus | Pay <b>by</b> card</p><div class="jadu-logic">🧠 ভাবনা: কোনো যানবাহন বা পেমেন্টের মাধ্যম।</div></div>
+    <div class="method-card"><h3>🟢 WITH (যন্ত্র/হাতিয়ার)</h3><p>Write <b>with</b> a pen | Cut <b>with</b> a knife</p><div class="jadu-logic">🧠 ভাবনা: হাত দিয়ে কোনো যন্ত্র ব্যবহার করলে।</div></div>
+    <div class="method-card"><h3>🟡 ON (ডিভাইস)</h3><p>Talk <b>on</b> the phone | Watch <b>on</b> TV</p><div class="jadu-logic">🧠 ভাবনা: স্ক্রিন বা ইলেকট্রনিক ডিভাইসের মাধ্যমে।</div></div>
+    <div class="method-card"><h3>🟣 IN (ভাষা/ভঙ্গি)</h3><p>Write <b>in</b> English | Answer <b>in</b> short</p><div class="jadu-logic">🧠 ভাবনা: কোনো নির্দিষ্ট ভাষা বা কথা বলার স্টাইল।</div></div>
+    <div class="method-card"><h3>🟤 THROUGH (প্রসেস)</h3><p>Learn <b>through</b> practice | Send <b>through</b> UPI</p><div class="jadu-logic">🧠 ভাবনা: এক মাধ্যম বা প্রসেস পার হয়ে আসলে।</div></div>
+    <div class="method-card"><h3>🔴 VIA (হয়ে/পথ ধরে)</h3><p>Go <b>via</b> Kolkata | Send <b>via</b> post</p><div class="jadu-logic">🧠 ভাবনা: নির্দিষ্ট কোনো জায়গা বা পথ হয়ে গেলে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Method Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "We travel to school ____ bus.", o: ["by", "with", "on"], a: "by" },
+      { s: "I am writing ____ a pencil.", o: ["with", "by", "in"], a: "with" },
+      { s: "She is talking ____ the phone.", o: ["on", "in", "with"], a: "on" },
+      { s: "Can you speak ____ English?", o: ["in", "by", "on"], a: "in" },
+      { s: "He sent the money ____ UPI.", o: ["through", "with", "by"], a: "through" },
+      { s: "Cut the apple ____ a knife.", o: ["with", "by", "in"], a: "with" },
+      { s: "I watched the match ____ TV.", o: ["on", "in", "by"], a: "on" },
+      { s: "We pay the bill ____ card.", o: ["by", "with", "through"], a: "by" },
+      { s: "The train goes to Delhi ____ Patna.", o: ["via", "by", "through"], a: "via" },
+      { s: "Learn the lesson ____ heart.", o: ["by", "with", "in"], a: "by" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerText = q.s;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 11 (Method) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">অসাধারণ! 🏆<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
