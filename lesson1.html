@@ -21,6 +21,7 @@
     margin: 0; padding: 0; 
     display: flex; flex-direction: column; align-items: center;
     color: #1e293b;
+    overflow-x: hidden;
   }
 
   /* Stylish Header */
@@ -29,11 +30,16 @@
     color: white; width: 100%; text-align: center; 
     padding: 50px 20px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
     box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+    box-sizing: border-box;
   }
   .header h1 { font-size: 32px; margin: 0; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
   .header p { opacity: 0.9; margin-top: 10px; font-size: 16px; line-height: 1.6; }
 
-  .main-container { width: 95%; max-width: 1100px; padding: 20px; box-sizing: border-box; }
+  .main-container { 
+    width: 95%; max-width: 1100px; padding: 20px; 
+    box-sizing: border-box;
+    display: block; /* Flex থেকে সরিয়ে Block করা হয়েছে সঠিক অ্যালাইনমেন্টের জন্য */
+  }
 
   /* Section Title */
   .section-title {
@@ -42,12 +48,12 @@
     padding-left: 15px; border-left: 6px solid var(--primary);
   }
 
-  /* Grid Layout */
+  /* Grid Layout - Fixed */
   .card-container { 
     display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 25px; 
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     width: 100%;
   }
 
@@ -55,10 +61,11 @@
   .card { 
     background: var(--card-bg); border-radius: 24px; padding: 25px;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255,255,255,0.8);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0,0,0,0.05);
     display: flex; flex-direction: column; position: relative;
     box-sizing: border-box;
+    height: 100%;
   }
   .card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
 
@@ -82,7 +89,7 @@
   }
 
   /* Footer */
-  .footer { margin: 60px 0 30px; text-align: center; color: #94a3b8; font-weight: 600; }
+  .footer { margin: 60px 0 30px; text-align: center; color: #94a3b8; font-weight: 600; width: 100%; }
 
   @media (max-width: 600px) { 
     .header h1 { font-size: 24px; }
@@ -103,15 +110,18 @@
     <div class="section-title" style="border-color: var(--spoken);">🎙️ Spoken English Mastery</div>
     <div class="card-container">
       <div class="card" style="border-bottom: 5px solid var(--spoken);">
-        <span class="card-icon">👋</span><h3>Lesson 1: Greetings</h3><p>আত্মবিশ্বাসের সাথে ইংরেজিতে কথা বলা শুরু করুন।</p>
+        <span class="card-icon">👋</span><h3>Lesson 1: Greetings</h3>
+        <p>আত্মবিশ্বাসের সাথে ইংরেজিতে কথা বলা শুরু করুন।</p>
         <a href="lesson1.html" class="btn btn-study" style="background:var(--spoken)">লেসন শুরু করুন</a>
       </div>
       <div class="card" style="border-bottom: 5px solid var(--spoken);">
-        <span class="card-icon">⏰</span><h3>Lesson 2: Daily Life</h3><p>প্রতিদিনের কাজের ইংরেজি বর্ণনা শিখুন।</p>
+        <span class="card-icon">⏰</span><h3>Lesson 2: Daily Life</h3>
+        <p>প্রতিদিনের কাজের ইংরেজি বর্ণনা শিখুন।</p>
         <a href="lesson2.html" class="btn btn-study" style="background:var(--spoken)">লেসন শুরু করুন</a>
       </div>
       <div class="card" style="border-bottom: 5px solid var(--spoken);">
-        <span class="card-icon">🛍️</span><h3>Lesson 3: Market Talk</h3><p>কেনাকাটা ও দরদাম করার স্মার্ট কথোপকথন।</p>
+        <span class="card-icon">🛍️</span><h3>Lesson 3: Market Talk</h3>
+        <p>কেনাকাটা ও দরদাম করার স্মার্ট কথোপকথন।</p>
         <a href="lesson3.html" class="btn btn-study" style="background:var(--spoken)">লেসন শুরু করুন</a>
       </div>
     </div>
@@ -119,16 +129,18 @@
     <div class="section-title" style="border-color: var(--grammar);">📘 Grammar Foundation</div>
     <div class="card-container">
       <div class="card" style="border-bottom: 5px solid var(--grammar);">
-        <span class="card-icon">⏳</span><h3>Tense (V1-V5)</h3><p>ভার্ব ফর্ম দিয়ে টেন্সের সহজ সমাধান।</p>
+        <span class="card-icon">⏳</span><h3>Tense (V1-V5)</h3>
+        <p>ভার্ব ফর্ম দিয়ে টেন্সের সহজ সমাধান।</p>
         <a href="grammar1.html" class="btn btn-study" style="background:var(--grammar)">শিখতে চাই</a>
       </div>
       <div class="card" style="border-bottom: 5px solid #0d9488;">
-        <span class="card-icon">🍎</span><h3>Articles</h3><p>A, An এবং The এর নির্ভুল ব্যবহার।</p>
+        <span class="card-icon">🍎</span><h3>Articles</h3>
+        <p>A, An এবং The এর নির্ভুল ব্যবহার।</p>
         <a href="grammar6.html" class="btn btn-study" style="background:#0d9488">শিখতে চাই</a>
       </div>
     </div>
 
-    <div class="section-title" style="border-color: #f59e0b;">📍 Preposition Adventure (Part 1-10)</div>
+    <div class="section-title" style="border-color: #f59e0b;">📍 Preposition Adventure</div>
     <p style="padding-left: 15px; color: #64748b; font-size: 14px; margin-top: -15px;">রঙিন কার্ডে ক্লিক করে মজার সাথে প্রেপজিশন শেখো!</p>
     
     <div class="card-container">
@@ -173,7 +185,7 @@
         <a href="grammar16.html" class="btn btn-study" style="background:#78350f; padding: 8px;">শিখবো ⮕</a>
       </div>
 
-      <div class="card" style="grid-column: 1 / -1; border: 3px solid #fbbf24; background: #fffbeb; flex-direction: row; align-items: center; justify-content: space-between; padding: 20px;">
+      <div class="card" style="grid-column: 1 / -1; border: 3px solid #fbbf24; background: #fffbeb; flex-direction: row; align-items: center; justify-content: space-between; padding: 20px; display: flex;">
         <div style="display: flex; align-items: center; gap: 15px;">
           <span style="font-size: 45px;">🏆</span>
           <div style="text-align: left;">
@@ -194,7 +206,7 @@
         <h3>Grammar 17: Prefix (P-1)</h3>
         <p>UN, IM, IN প্রিফিক্স ব্যবহার করে বিপরীত শব্দ গঠন।</p>
         <div style="display: flex; gap: 10px; margin-top: auto;">
-          <a href="grammar17.html" class="btn btn-study" style="flex: 1; background:var(--prefix)">পড়া 📖</a>
+          <a href="grammar17.html" class="btn btn-study" style="flex: 1; background:var(--prefix)">পড়া 📖</a>
           <a href="prefix-quiz.html" class="btn btn-quiz" style="flex: 1;">কুইজ 🎮</a>
         </div>
       </div>
@@ -202,9 +214,9 @@
       <div class="card" style="border-top: 6px solid #e11d48; background: #fff1f2;">
         <span class="card-icon">🧱</span>
         <h3>Grammar 18: Prefix (P-2)</h3>
-        <p>IL, IR, DIS প্রিফিক্স ব্যবহারের সঠিক নিয়ম ও প্র্যাকটিস।</p>
+        <p>IL, IR, DIS প্রিফিক্স ব্যবহারের সঠিক নিয়ম ও প্র্যাকটিস।</p>
         <div style="display: flex; gap: 10px; margin-top: auto;">
-          <a href="grammar18.html" class="btn btn-study" style="flex: 1; background:#e11d48">পড়া 📖</a>
+          <a href="grammar18.html" class="btn btn-study" style="flex: 1; background:#e11d48">পড়া 📖</a>
           <a href="prefix-quiz-p2.html" class="btn btn-quiz" style="flex: 1;">কুইজ 🎮</a>
         </div>
       </div>
@@ -215,28 +227,33 @@
     
     <div class="card-container">
       <div class="card" style="border-bottom: 5px solid var(--story);">
-        <span class="card-icon">🦅</span><h3>The Thirsty Crow</h3><p>তৃষ্ণার্ত কাকের বুদ্ধির গল্প।</p>
-        <a href="story1.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+        <span class="card-icon">🦅</span><h3>The Thirsty Crow</h3>
+        <p>তৃষ্ণার্ত কাকের বুদ্ধির গল্প।</p>
+        <a href="story1.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
       </div>
       <div class="card" style="border-bottom: 5px solid var(--story);">
-        <span class="card-icon">🦁</span><h3>Lion & Mouse</h3><p>উপকার করলে উপকার পাওয়া যায়।</p>
-        <a href="story2.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+        <span class="card-icon">🦁</span><h3>Lion & Mouse</h3>
+        <p>উপকার করলে উপকার পাওয়া যায়।</p>
+        <a href="story2.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
       </div>
       <div class="card" style="border-bottom: 5px solid var(--story);">
-        <span class="card-icon">🐕</span><h3>The Greedy Dog</h3><p>অতি লোভে তাঁতি নষ্ট - এই গল্পটি পড়ো।</p>
-        <a href="story3.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+        <span class="card-icon">🐕</span><h3>The Greedy Dog</h3>
+        <p>অতি লোভে তাঁতি নষ্ট - এই গল্পটি পড়ো।</p>
+        <a href="story3.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
       </div>
       <div class="card" style="border-bottom: 5px solid var(--story);">
-        <span class="card-icon">🐢</span><h3>Hare & Tortoise</h3><p>ধৈর্য ও পরিশ্রমের মহান শিক্ষা।</p>
-        <a href="story4.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+        <span class="card-icon">🐢</span><h3>Hare & Tortoise</h3>
+        <p>ধৈর্য ও পরিশ্রমের মহান শিক্ষা।</p>
+        <a href="story4.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
       </div>
       <div class="card" style="border-bottom: 5px solid var(--story);">
-        <span class="card-icon">🕊️</span><h3>Ant & Dove</h3><p>পিঁপড়া ও ঘুঘুর বন্ধুত্বের গল্প।</p>
-        <a href="story5.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
+        <span class="card-icon">🕊️</span><h3>Ant & Dove</h3>
+        <p>পিঁপড়া ও ঘুঘুর বন্ধুত্বের গল্প।</p>
+        <a href="story5.html" class="btn btn-study" style="background:var(--story)">গল্পটি পড়ো</a>
       </div>
     </div>
 
-  <div class="footer">
+  </div> <div class="footer">
     <p>Made with ❤️ for SSCEC Students | 2026</p>
   </div>
 
