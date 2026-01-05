@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 12: Cause & Reason - SSCEC</title>
+<style>
+  :root { --p-color: #dc2626; --s-color: #991b1b; --bg: #fef2f2; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #f87171); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  
+  .golden-rule { background: #450a0a; color: #fecaca; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #7f1d1d; }
+
+  .reason-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .reason-card { background: white; padding: 18px; border-radius: 15px; border-top: 5px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .reason-card h3 { margin: 0 0 10px 0; color: var(--s-color); font-size: 19px; }
+  .reason-card p { margin: 5px 0; font-size: 15px; color: #4b5563; line-height: 1.5; }
+  .logic { background: #fef2f2; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--p-color); margin-top: 10px; border: 1px dashed #fca5a5; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #fef2f2; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div style="background: rgba(255,255,255,0.2); display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">⭐ Advance Level</div>
+    <h1>🔴 Preposition of Cause & Reason</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+  
+    <p>📍 কেন বা কী কারণে কোনো কিছু ঘটলে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    🎯 গোল্ডেন রুল: যখন প্রশ্ন হবে “কেন হলো?” ➞ Reason Preposition
+  </div>
+
+  <div class="reason-grid">
+    <div class="reason-card"><h3>🟢 BECAUSE OF (কারণে)</h3><p>Canceled <b>because of</b> rain.</p><div class="logic">🧠 ভাবনা: সাধারণ কোনো কারণে।</div></div>
+    <div class="reason-card"><h3>🔵 DUE TO / OWING TO</h3><p>The delay was <b>due to</b> fog.</p><div class="logic">🧠 ভাবনা: কোনো ফলাফলের কারণ (Formal)।</div></div>
+    <div class="reason-card"><h3>🟡 THANKS TO (কারণে)</h3><p>Passed <b>thanks to</b> your help.</p><div class="logic">🧠 ভাবনা: যখন ভালো কিছু ঘটে।</div></div>
+    <div class="reason-card"><h3>🟣 FOR (জন্য/কারণে)</h3><p>Famous <b>for</b> honesty.</p><div class="logic">🧠 ভাবনা: কোনো গুণ বা দোষের কারণে।</div></div>
+    <div class="reason-card"><h3>🟤 FROM (কারণে)</h3><p>Tired <b>from</b> hard work.</p><div class="logic">🧠 ভাবনা: অবস্থার পরিবর্তন হলে।</div></div>
+    <div class="reason-card"><h3>⚫ AS A RESULT OF</h3><p>Injured <b>as a result of</b> accident.</p><div class="logic">🧠 ভাবনা: কারণ ও ফল জোর দিয়ে বলতে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Reason Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "We stayed home ____ the rain.", o: ["because of", "thanks to", "from"], a: "because of" },
+      { s: "I won the game ____ your advice.", o: ["thanks to", "for", "from"], a: "thanks to" },
+      { s: "The flight was late ____ thick fog.", o: ["due to", "for", "with"], a: "due to" },
+      { s: "He was punished ____ his lies.", o: ["for", "thanks to", "from"], a: "for" },
+      { s: "She is tired ____ walking.", o: ["from", "due to", "for"], a: "from" },
+      { s: "School is closed ____ the heatwave.", o: ["because of", "thanks to", "for"], a: "because of" },
+      { s: "I succeeded ____ hard work.", o: ["as a result of", "for", "from"], a: "as a result of" },
+      { s: "The failure was ____ carelessness.", o: ["due to", "thanks to", "with"], a: "due to" },
+      { s: "Netaji is famous ____ his bravery.", o: ["for", "because of", "from"], a: "for" },
+      { s: "He became weak ____ illness.", o: ["from", "for", "on"], a: "from" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerText = q.s;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 12 (Reason) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">দুর্দান্ত! 🌟<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
