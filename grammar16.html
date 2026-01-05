@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar 16: Possession - SSCEC</title>
+<style>
+  :root { --p-color: #78350f; --s-color: #451a03; --bg: #fffbeb; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+  
+  .header { background: linear-gradient(135deg, var(--p-color), #b45309); color: white; width: 100%; max-width: 850px; text-align: center; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 25px; }
+  .advance-tag { background: rgba(255,255,255,0.2); display: inline-block; padding: 5px 15px; border-radius: 50px; font-size: 12px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+
+  .golden-rule { background: #451a03; color: #fef3c7; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 18px; width: 90%; text-align: center; margin-bottom: 25px; border: 2px solid #92400e; }
+
+  .possess-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; width: 100%; max-width: 900px; }
+  .possess-card { background: white; padding: 18px; border-radius: 15px; border-top: 5px solid var(--p-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+  .possess-card h3 { margin: 0 0 10px 0; color: var(--s-color); font-size: 19px; }
+  .logic { background: #fffbeb; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold; color: var(--s-color); margin-top: 10px; border: 1px dashed #d97706; }
+
+  /* Quiz Section */
+  .quiz-section { width: 100%; max-width: 850px; background: white; padding: 25px; border-radius: 20px; border: 2px solid var(--p-color); margin-top: 30px; }
+  .sentence { background: #fffbeb; padding: 20px; border-radius: 12px; font-size: 22px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--s-color); }
+  .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .opt-btn { background: white; border: 2px solid var(--p-color); padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+  .opt-btn:hover { background: var(--p-color); color: white; }
+  .correct { background: #22c55e !important; color: white; border-color: #166534; }
+  .wrong { background: #ef4444 !important; color: white; border-color: #991b1b; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="advance-tag">⭐ Advance Level</div>
+    <h1>🟤 Preposition of Possession</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p>📍 মালিকানা বা অধিকার কার—তা বোঝাতে এগুলো ব্যবহার করো</p>
+  </div>
+
+  <div class="golden-rule">
+    💡 জাদু রুল: কার জিনিস? ➞ Possession Preposition
+  </div>
+
+  <div class="possess-grid">
+    <div class="possess-card"><h3>🟢 OF (এর)</h3><p>The color <b>of</b> the sky.</p><div class="logic">🧠 ভাবনা: যখন কিছুর সাথে কিছুর মালিকানা থাকে।</div></div>
+    <div class="possess-card"><h3>🔵 WITH (যার কাছে আছে)</h3><p>A man <b>with</b> a stick.</p><div class="logic">🧠 ভাবনা: কোনো মানুষ বা জিনিসের বর্ণনা দিতে।</div></div>
+    <div class="possess-card"><h3>🟡 BELONGING TO (অন্তর্ভুক্ত)</h3><p>The bag <b>belonging to</b> Rina.</p><div class="logic">🧠 ভাবনা: এটি নির্দিষ্টভাবে কার জিনিস?</div></div>
+    <div class="possess-card"><h3>🟠 OF ONE'S OWN (নিজের)</h3><p>A house <b>of</b> his own.</p><div class="logic">🧠 ভাবনা: কারোর নিজের একান্ত কিছু বোঝালে।</div></div>
+    <div class="possess-card"><h3>🟣 OWNED BY (মালিক)</h3><p>House <b>owned by</b> the King.</p><div class="logic">🧠 ভাবনা: এটি কার সম্পত্তি? (Formal)</div></div>
+    <div class="possess-card"><h3>🟤 HAVING (যার আছে)</h3><p>A boy <b>having</b> two pens.</p><div class="logic">🧠 ভাবনা: কারো কাছে কী কী আছে তা বলতে।</div></div>
+  </div>
+
+  <div class="quiz-section">
+    <h2 style="text-align:center;">🎮 Possession Quiz (১০টি প্রশ্ন)</h2>
+    <div class="sentence" id="sentence">Loading...</div>
+    <div class="options" id="options"></div>
+    <div id="feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+    <button id="next-btn" style="display:none; width:100%; padding:15px; background:var(--p-color); color:white; border:none; border-radius:10px; cursor:pointer; margin-top:15px;" onclick="loadNext()">পরের প্রশ্ন ⮕</button>
+  </div>
+
+  <script>
+    const quizData = [
+      { s: "This is the pen ____ Ram.", b: "এটি রামের কলম।", o: ["of", "with", "in"], a: "of" },
+      { s: "A girl ____ blue eyes is dancing.", b: "নীল চোখের সেই মেয়েটি নাচছে।", o: ["with", "of", "having"], a: "with" },
+      { s: "The car ____ my uncle is new.", b: "আমার কাকার গাড়িটি নতুন।", o: ["of", "with", "to"], a: "of" },
+      { s: "The book ____ to Rina is lost.", b: "রিনার সেই বইটি হারিয়ে গেছে।", o: ["belonging", "owned", "of"], a: "belonging" },
+      { s: "I want a room ____ my own.", b: "আমি আমার নিজের একটি ঘর চাই।", o: ["of", "with", "having"], a: "of" },
+      { s: "A man ____ a hat came here.", b: "টুপি পরা এক লোক এখানে এসেছিল।", o: ["with", "of", "by"], a: "with" },
+      { s: "This land is ____ by the farmer.", b: "এই জমিটির মালিক ওই চাষি।", o: ["owned", "belonging", "having"], a: "owned" },
+      { s: "Look at the beauty ____ nature.", b: "প্রকৃতির সৌন্দর্যের দিকে তাকাও।", o: ["of", "in", "with"], a: "of" },
+      { s: "He is a boy ____ two brothers.", b: "সে এমন এক ছেলে যার দুই ভাই আছে।", o: ["having", "of", "with"], a: "having" },
+      { s: "The friend ____ mine is very kind.", b: "আমার বন্ধুটি খুব দয়ালু।", o: ["of", "with", "to"], a: "of" }
+    ];
+
+    let current = 0; let score = 0;
+
+    function loadQuiz() {
+      const q = quizData[current];
+      document.getElementById('sentence').innerHTML = `
+        <div>${q.s}</div>
+        <div style="font-size: 16px; color: #78350f; font-weight: normal; margin-top: 8px;">(${q.b})</div>
+      `;
+      const optsDiv = document.getElementById('options');
+      optsDiv.innerHTML = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      q.o.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn'; btn.innerText = opt;
+        btn.onclick = () => checkAns(opt, btn);
+        optsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAns(selected, btn) {
+      const correct = quizData[current].a;
+      if (selected === correct) { btn.classList.add('correct'); score++; }
+      else { btn.classList.add('wrong'); }
+      document.querySelectorAll('.opt-btn').forEach(b => b.onclick = null);
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function loadNext() {
+      current++;
+      if (current < quizData.length) loadQuiz();
+      else showResult();
+    }
+
+    function showResult() {
+      const msg = `স্যার, আমি Grammar Lesson 16 (Possession) পরীক্ষা দিয়েছি। স্কোর: ${score}/10`;
+      document.querySelector('.quiz-section').innerHTML = `<h2 style="text-align:center;">দুর্দান্ত! 🟤<br>তোমার স্কোর: ${score}/১০</h2><button onclick="window.open('https://wa.me/918017247298?text=${encodeURIComponent(msg)}')" style="width:100%; padding:15px; background:#25d366; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">📲 স্যারকে ফলাফল পাঠাও</button>`;
+    }
+
+    loadQuiz();
+  </script>
+</body>
+</html>
