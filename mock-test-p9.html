@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mock Test Part-9 - SSCEC</title>
+<style>
+  :root { --primary: #059669; --secondary: #064e3b; --bg: #f0fdf4; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; }
+  
+  .quiz-container { background: white; max-width: 600px; width: 100%; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+  
+  .header { text-align: center; border-bottom: 2px solid #eee; margin-bottom: 20px; padding-bottom: 10px; }
+  .center-info { font-size: 12px; color: #666; margin-top: 5px; }
+  
+  .stats-bar { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; color: var(--secondary); }
+  
+  .question { font-size: 1.2rem; margin-bottom: 20px; color: #1f2937; }
+  .options { display: grid; gap: 10px; }
+  button.option-btn { padding: 12px; border: 2px solid #e5e7eb; border-radius: 10px; background: white; cursor: pointer; transition: 0.3s; font-size: 1rem; text-align: left; }
+  button.option-btn:hover { border-color: var(--primary); background: #ecfdf5; }
+  
+  .feedback { margin-top: 15px; font-weight: bold; text-align: center; display: none; }
+  
+  #score-screen { text-align: center; display: none; }
+  .btn-action { margin-top: 20px; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; }
+  .whatsapp-btn { background: #25d366; color: white; }
+  
+  #timer { color: #dc2626; }
+</style>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz-box">
+  <div class="header">
+    <h2 style="margin:0; color:var(--primary);">Word Family Part-9 Mock Test</h2>
+    <div class="center-info">
+      <b>SUPER SUCCESS COMPUTER EDUCATION CENTER</b><br>
+      22/1 BIPIN PAUL ROAD, NIMTA, KOLKATA-49<br>
+      📞 8017247298 | 9874152080
+    </div>
+  </div>
+
+  <div id="game-info">
+    <div class="stats-bar">
+      <span>প্রশ্ন: <span id="q-count">1</span>/15</span>
+      <span>সময় বাকি: <span id="timer">20</span>s</span>
+    </div>
+    
+    <div class="question" id="question-text">Loading question...</div>
+    <div class="options" id="options-container"></div>
+    <div class="feedback" id="feedback-text"></div>
+  </div>
+
+  <div id="score-screen">
+    <h2>🎉 টেস্ট সম্পন্ন হয়েছে!</h2>
+    <p style="font-size: 1.5rem;">আপনার স্কোর: <span id="final-score" style="color:var(--primary);">0</span>/15</p>
+    <button class="btn-action whatsapp-btn" onclick="sendToSir()">Sir-কে রেজাল্ট জানান (WhatsApp)</button>
+    <br>
+    <button class="btn-action" style="background:#6b7280; color:white;" onclick="location.reload()">আবার চেষ্টা করুন</button>
+  </div>
+</div>
+
+<audio id="correct-sound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="wrong-sound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+<script>
+const questions = [
+  { q: "Success-এর Verb রূপ কোনটি?", o: ["Successful", "Succeed", "Successfully", "Succeeding"], a: 1 },
+  { q: "He thinks _______ (Differently/Difference) than others.", o: ["Different", "Difference", "Differ", "Differently"], a: 3 },
+  { q: "Education একটি কি?", o: ["Verb", "Noun", "Adjective", "Adverb"], a: 1 },
+  { q: "Attract-এর Adjective রূপ কি?", o: ["Attraction", "Attractive", "Attractively", "Attracted"], a: 1 },
+  { q: "The Taj Mahal is a beautiful _______.", o: ["Create", "Creative", "Creation", "Creatively"], a: 2 },
+  { q: "We must _______ every child.", o: ["Education", "Educate", "Educational", "Educationally"], a: 1 },
+  { q: "What is the _______ between them?", o: ["Differ", "Different", "Difference", "Differently"], a: 2 },
+  { q: "She is a _______ entrepreneur.", o: ["Success", "Successful", "Succeed", "Successfully"], a: 1 },
+  { q: "The gift was _______ wrapped.", o: ["Attract", "Attraction", "Attractive", "Attractively"], a: 3 },
+  { q: "Artists _______ beautiful things.", o: ["Create", "Creation", "Creative", "Creatively"], a: 0 },
+  { q: "Successfully শব্দটি একটি _______?", o: ["Noun", "Adjective", "Adverb", "Verb"], a: 2 },
+  { q: "Creative-এর Noun রূপ কোনটি?", o: ["Create", "Creation", "Creatively", "Creates"], a: 1 },
+  { q: "Educationally শব্দটি কোন Part of Speech?", o: ["Verb", "Noun", "Adjective", "Adverb"], a: 3 },
+  { q: "Flowers _______ bees.", o: ["Attract", "Attraction", "Attractive", "Attractively"], a: 0 },
+  { q: "The trip was very _______.", o: ["Educate", "Education", "Educational", "Educationally"], a: 2 }
+];
+
+let currentQ = 0;
+let score = 0;
+let timeLeft = 20;
+let timer;
+
+function startTimer() {
+  timeLeft = 20;
+  document.getElementById('timer').innerText = timeLeft;
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').innerText = timeLeft;
+    if(timeLeft <= 0) {
+      clearInterval(timer);
+      nextQuestion();
+    }
+  }, 1000);
+}
+
+function loadQuestion() {
+  const qData = questions[currentQ];
+  document.getElementById('q-count').innerText = currentQ + 1;
+  document.getElementById('question-text').innerText = qData.q;
+  const optionsHtml = qData.o.map((opt, index) => 
+    `<button class="option-btn" onclick="checkAnswer(${index})">${opt}</button>`
+  ).join('');
+  document.getElementById('options-container').innerHTML = optionsHtml;
+  document.getElementById('feedback-text').style.display = 'none';
+  startTimer();
+}
+
+function checkAnswer(idx) {
+  clearInterval(timer);
+  const correct = questions[currentQ].a;
+  const feedback = document.getElementById('feedback-text');
+  feedback.style.display = 'block';
+  
+  if(idx === correct) {
+    score++;
+    feedback.innerText = "சঠিক! (Correct)";
+    feedback.style.color = "green";
+    document.getElementById('correct-sound').play();
+  } else {
+    feedback.innerText = "ভুল! সঠিক উত্তর: " + questions[currentQ].o[correct];
+    feedback.style.color = "red";
+    document.getElementById('wrong-sound').play();
+  }
+  
+  setTimeout(nextQuestion, 1500);
+}
+
+function nextQuestion() {
+  currentQ++;
+  if(currentQ < questions.length) {
+    loadQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('game-info').style.display = 'none';
+  document.getElementById('score-screen').style.display = 'block';
+  document.getElementById('final-score').innerText = score;
+}
+
+function sendToSir() {
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি Word Family Part-9 মক টেস্ট সম্পন্ন করেছি।\nআমার স্কোর: ${score}/15\nনাম: [আপনার নাম লিখুন]`;
+  const url = `https://wa.me/918017247298?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
