@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Family Quiz P4 - SSCEC</title>
+<style>
+  :root { --p-color: #059669; --s-color: #064e3b; --bg: #ecfdf5; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+  .header-box { background: linear-gradient(135deg, var(--p-color), #34d399); color: white; width: 100%; max-width: 600px; text-align: center; padding: 15px; border-radius: 15px; margin-bottom: 15px; }
+  .stats-bar { display: flex; justify-content: space-between; width: 100%; max-width: 600px; margin-bottom: 15px; gap: 10px; }
+  .stat-card { background: white; padding: 10px; border-radius: 12px; flex: 1; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-bottom: 4px solid var(--p-color); }
+  .stat-card b { font-size: 20px; color: var(--p-color); }
+  .quiz-container { background: white; width: 100%; max-width: 600px; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+  .word-box { background: #f0fdf4; padding: 25px; border-radius: 15px; margin: 15px 0; border: 2px dashed var(--p-color); }
+  .word-box h1 { font-size: 32px; margin: 0; color: var(--s-color); }
+  .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+  .opt-btn { background: white; border: 2px solid #d1fae5; padding: 15px; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; color: var(--s-color); }
+  .opt-btn.correct { background: #22c55e !important; color: white !important; border-color: #16a34a !important; }
+  .opt-btn.wrong { background: #ef4444 !important; color: white !important; border-color: #dc2626 !important; }
+  .result-screen { display: none; }
+  .wa-btn { background: #25d366; color: white; padding: 15px 25px; border-radius: 12px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+  <audio id="correctSound" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+  <audio id="wrongSound" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
+
+  <div class="header-box">
+    <h2 style="margin:0;">Word Family Quiz (Part-4)</h2>
+    <small>SSCEC • সঠিক Parts of Speech নির্বাচন করো</small>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-card">সময়<br><b id="timer">03:00</b></div>
+    <div class="stat-card">প্রশ্ন<br><b id="q-no">1/10</b></div>
+    <div class="stat-card">স্কোর<br><b id="score">0</b></div>
+  </div>
+
+  <div class="quiz-container">
+    <div id="game-area">
+      <div class="word-box"><h1 id="target-word">LOADING...</h1></div>
+      <div class="options-grid">
+        <button class="opt-btn" onclick="handleChoice(this, 'Verb')">Verb</button>
+        <button class="opt-btn" onclick="handleChoice(this, 'Noun')">Noun</button>
+        <button class="opt-btn" onclick="handleChoice(this, 'Adjective')">Adjective</button>
+        <button class="opt-btn" onclick="handleChoice(this, 'Adverb')">Adverb</button>
+      </div>
+      <p id="feedback" style="margin-top: 20px; font-weight: bold; min-height: 25px;"></p>
+    </div>
+
+    <div id="result-area" class="result-screen">
+      <h2 id="final-score"></h2>
+      <a href="#" id="wa-link" class="wa-btn">📲 স্যারকে রেজাল্ট জানাও</a>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { w: "Informative", a: "Adjective" }, { w: "Information", a: "Noun" }, { w: "Informatively", a: "Adverb" },
+      { w: "Believe", a: "Verb" }, { w: "Belief", a: "Noun" }, { w: "Freedom", a: "Noun" },
+      { w: "Freely", a: "Adverb" }, { w: "Creation", a: "Noun" }, { w: "Knowledgeable", a: "Adjective" }, { w: "Knowingly", a: "Adverb" }
+    ];
+
+    let currentQ = 0, score = 0, timeLeft = 180, timerInterval;
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        let min = Math.floor(timeLeft / 60), sec = timeLeft % 60;
+        document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        if (timeLeft <= 0) endQuiz();
+      }, 1000);
+    }
+
+    function loadQuestion() {
+      if (currentQ >= 10) { endQuiz(); return; }
+      document.getElementById('q-no').innerText = `${currentQ + 1}/10`;
+      document.getElementById('target-word').innerText = questions[currentQ].w;
+      document.getElementById('feedback').innerText = "";
+      document.querySelectorAll('.opt-btn').forEach(b => { b.disabled = false; b.className = 'opt-btn'; });
+    }
+
+    function handleChoice(btn, choice) {
+      const correct = questions[currentQ].a;
+      const btns = document.querySelectorAll('.opt-btn');
+      btns.forEach(b => b.disabled = true);
+
+      if (choice === correct) {
+        score++;
+        document.getElementById('score').innerText = score;
+        btn.classList.add('correct');
+        document.getElementById('correctSound').play();
+      } else {
+        btn.classList.add('wrong');
+        document.getElementById('wrongSound').play();
+        btns.forEach(b => { if (b.innerText === correct) b.classList.add('correct'); });
+      }
+
+      setTimeout(() => { currentQ++; loadQuestion(); }, 1500);
+    }
+
+    function endQuiz() {
+      clearInterval(timerInterval);
+      document.getElementById('game-area').style.display = 'none';
+      document.getElementById('result-area').style.display = 'block';
+      document.getElementById('final-score').innerText = `তোমার স্কোর: ${score}/10`;
+      const msg = `স্যার, আমি Word Family Quiz-4 শেষ করেছি। স্কোর: ${score}/10`;
+      document.getElementById('wa-link').href = `https://wa.me/918017247298?text=${encodeURIComponent(msg)}`;
+    }
+
+    window.onload = () => { startTimer(); loadQuestion(); };
+  </script>
+</body>
+</html>
