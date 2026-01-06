@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synonym Antonym Quiz P-1 - SSCEC</title>
+<style>
+  :root { --primary: #8b5cf6; --secondary: #4c1d95; --bg: #f5f3ff; --wrong: #ef4444; --correct: #10b981; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  
+  .quiz-card { background: white; max-width: 650px; width: 100%; padding: 25px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  
+  .header-box { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px; }
+  .center-name { color: var(--secondary); font-weight: bold; font-size: 1.1rem; margin: 0; }
+  .center-addr { font-size: 11px; color: #6b7280; }
+
+  .stats-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: #ede9fe; padding: 10px; border-radius: 12px; font-weight: bold; }
+  
+  #timer-box { font-size: 1.2rem; color: #dc2626; }
+  
+  .question-area { font-size: 1.25rem; font-weight: bold; margin-bottom: 25px; color: #1f2937; text-align: center; min-height: 60px; line-height: 1.4; }
+  
+  .options-grid { display: grid; gap: 12px; }
+  .opt-btn { padding: 15px; border: 2px solid #e5e7eb; border-radius: 15px; background: #fff; cursor: pointer; transition: all 0.2s; font-size: 1.05rem; font-weight: 500; }
+  .opt-btn:hover { background: #f9fafb; border-color: var(--primary); transform: translateY(-2px); }
+  
+  .correct-ans { background: var(--correct) !important; color: white !important; border-color: var(--secondary) !important; }
+  .wrong-ans { background: var(--wrong) !important; color: white !important; border-color: #991b1b !important; }
+
+  #result-screen { display: none; text-align: center; padding: 30px; }
+  .score-circle { width: 120px; height: 120px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 20px auto; border: 5px solid #fff; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+  
+  .wa-btn { background: #25d366; color: white; padding: 15px 25px; border-radius: 12px; text-decoration: none; display: inline-block; font-weight: bold; margin-top: 15px; }
+  .retry-btn { margin-top: 20px; background: #64748b; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="quiz-card" id="quiz-container">
+  <div class="header-box">
+    <p class="center-name">SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+    <p class="center-addr">22/1 Bipin Paul Road, Nimta, Kolkata-49 | 8017247298</p>
+    <h2 style="margin: 10px 0; color: var(--secondary);">🎮 Vocabulary Quiz (P-1)</h2>
+  </div>
+
+  <div id="game-ui">
+    <div class="stats-container">
+      <span>প্রশ্ন: <span id="q-num">1</span>/15</span>
+      <span id="timer-box">⏰ <span id="time-left">15</span>s</span>
+      <span>স্কোর: <span id="live-score">0</span></span>
+    </div>
+
+    <div class="question-area" id="question-text">লোড হচ্ছে...</div>
+    <div class="options-grid" id="options-box"></div>
+  </div>
+
+  <div id="result-screen">
+    <h1 style="color: var(--primary);">দারুণ পারফরম্যান্স! 🏆</h1>
+    <p>তুমি সিনোনিম ও অ্যান্টোনিম কুইজ শেষ করেছ!</p>
+    <div class="score-circle" id="final-score">0</div>
+    <p style="font-size: 1.2rem;">তোমার স্কোর: <span id="score-text">0</span>/15</p>
+    
+    <a href="#" class="wa-btn" onclick="sendResult()">Sir-কে রেজাল্ট পাঠাও ⮕</a>
+    <br>
+    <button class="retry-btn" onclick="location.reload()">আবার খেলো 🔄</button>
+  </div>
+</div>
+
+<audio id="sound-correct" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="sound-wrong" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+<script>
+const quizData = [
+  {q: "Beautiful-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Ugly", "Pretty", "Small", "Slow"], a: 1},
+  {q: "Happy-এর বিপরীত (Antonym) শব্দ কোনটি?", o: ["Joyful", "Glad", "Sad", "Large"], a: 2},
+  {q: "Begin-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Finish", "End", "Start", "Slow"], a: 2},
+  {q: "Big-এর বিপরীত (Antonym) শব্দ কোনটি?", o: ["Huge", "Small", "Large", "Quick"], a: 1},
+  {q: "Fast-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Slow", "Sluggish", "Quick", "End"], a: 2},
+  {q: "Ugly শব্দটি Beautiful-এর কী?", o: ["Synonym", "Antonym", "Same meaning", "None"], a: 1},
+  {q: "Joyful-এর সমার্থক শব্দ কোনটি?", o: ["Sad", "Happy", "Begin", "Tiny"], a: 1},
+  {q: "Finish শব্দটি Begin-এর কী?", o: ["Synonym", "Antonym", "Partner", "None"], a: 1},
+  {q: "Huge-এর সমার্থক শব্দ কোনটি?", o: ["Tiny", "Big", "Small", "Short"], a: 1},
+  {q: "Slow-এর বিপরীত শব্দ কোনটি?", o: ["Fast", "Sluggish", "Lazy", "End"], a: 0},
+  {q: "Lovely শব্দটির অর্থ কী?", o: ["Big", "Beautiful", "Sad", "Fast"], a: 1},
+  {q: "Commence শব্দটির সমার্থক শব্দ কোনটি?", o: ["End", "Finish", "Begin", "Stop"], a: 2},
+  {q: "Tiny শব্দটি Big-এর কী?", o: ["Synonym", "Antonym", "Verb", "None"], a: 1},
+  {q: "Rapid শব্দটির অর্থ কী?", o: ["Slow", "Fast", "Big", "Happy"], a: 1},
+  {q: "Miserable শব্দটি Happy-এর কী?", o: ["Synonym", "Antonym", "Adverb", "None"], a: 1}
+];
+
+let currentIdx = 0;
+let score = 0;
+let timer;
+let timeLeft = 15;
+
+function startTimer() {
+  timeLeft = 15;
+  document.getElementById('time-left').innerText = timeLeft;
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('time-left').innerText = timeLeft;
+    if(timeLeft <= 0) {
+      clearInterval(timer);
+      checkAns(-1);
+    }
+  }, 1000);
+}
+
+function loadQ() {
+  const data = quizData[currentIdx];
+  document.getElementById('q-num').innerText = currentIdx + 1;
+  document.getElementById('question-text').innerText = data.q;
+  const box = document.getElementById('options-box');
+  box.innerHTML = '';
+  
+  data.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerText = opt;
+    btn.onclick = () => checkAns(i, btn);
+    box.appendChild(btn);
+  });
+  startTimer();
+}
+
+function checkAns(idx, btn) {
+  clearInterval(timer);
+  const correct = quizData[currentIdx].a;
+  const allBtns = document.getElementsByClassName('opt-btn');
+  
+  for(let b of allBtns) b.style.pointerEvents = 'none';
+
+  if(idx === correct) {
+    score++;
+    btn.classList.add('correct-ans');
+    document.getElementById('sound-correct').play();
+    document.getElementById('live-score').innerText = score;
+  } else {
+    if(btn) btn.classList.add('wrong-ans');
+    allBtns[correct].classList.add('correct-ans');
+    document.getElementById('sound-wrong').play();
+  }
+
+  setTimeout(() => {
+    currentIdx++;
+    if(currentIdx < quizData.length) loadQ();
+    else showFinal();
+  }, 1500);
+}
+
+function showFinal() {
+  document.getElementById('game-ui').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('final-score').innerText = score;
+  document.getElementById('score-text').innerText = score;
+}
+
+function sendResult() {
+  let name = prompt("তোমার নাম লেখো:");
+  if(!name) name = "একজন ছাত্র";
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি Vocabulary (P-1) কুইজ শেষ করেছি।\nনাম: ${name}\nস্কোর: ${score}/15`;
+  const url = `https://wa.me/918017247298?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+loadQ();
+</script>
+
+</body>
+</html>
