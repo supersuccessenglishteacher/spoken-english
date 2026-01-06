@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synonym Quiz P-5 - SSCEC</title>
+<style>
+  :root { --primary: #8b5cf6; --secondary: #4c1d95; --bg: #f5f3ff; --wrong: #ef4444; --correct: #10b981; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .stats { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; background: #ede9fe; padding: 10px; border-radius: 10px; }
+  .q-text { font-size: 1.2rem; font-weight: bold; text-align: center; margin-bottom: 20px; min-height: 50px; }
+  .opt-grid { display: grid; gap: 10px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; background: white; cursor: pointer; text-align: center; transition: 0.2s; font-weight: 500; }
+  .opt:hover { border-color: var(--primary); background: #f9fafb; }
+  .correct { background: var(--correct) !important; color: white; }
+  .wrong { background: var(--wrong) !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; display: inline-block; margin-top: 15px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="quiz-card" id="q-box">
+  <div style="text-align: center; margin-bottom: 15px;">
+    <h3 style="color: var(--secondary); margin: 0;">Vocabulary Quiz (Part-5)</h3>
+    <small>SSCEC - 2026</small>
+  </div>
+  <div id="game">
+    <div class="stats">
+      <span>প্রশ্ন: <span id="qn">1</span>/15</span>
+      <span style="color:red">⏰ <span id="tm">15</span>s</span>
+      <span>স্কোর: <span id="sc">0</span></span>
+    </div>
+    <div class="q-text" id="qt">Loading Question...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--primary);">চমৎকার পারফরম্যান্স! 🏆</h2>
+    <div style="font-size: 3.5rem; color: var(--primary); font-weight: bold;" id="fs">0</div>
+    <p>তোমার মোট স্কোর: <span id="st">0</span>/15</p>
+    <a href="#" class="wa-btn" onclick="send()">Sir-কে রেজাল্ট পাঠাও ⮕</a>
+    <br><button onclick="location.reload()" style="margin-top:20px; cursor:pointer; padding: 8px 15px; border-radius: 5px;">আবার চেষ্টা করো 🔄</button>
+  </div>
+</div>
+
+<script>
+const quizData = [
+  {q: "Large-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Tiny", "Huge", "Small", "Light"], a: 1},
+  {q: "Heavy-এর বিপরীত (Antonym) শব্দ কোনটি?", o: ["Weighty", "Solid", "Light", "Large"], a: 2},
+  {q: "Beautiful-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Ugly", "Pretty", "Horrible", "Heavy"], a: 1},
+  {q: "Tiny-এর বিপরীত (Antonym) শব্দ কোনটি?", o: ["Small", "Little", "Giant", "Light"], a: 2},
+  {q: "Light-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Heavy", "Weightless", "Dark", "Huge"], a: 1},
+  {q: "Ugly শব্দটি Beautiful-এর কী?", o: ["Synonym", "Antonym", "Verb", "None"], a: 1},
+  {q: "Huge শব্দটির অর্থ কী?", o: ["ছোট", "বিশাল", "সুন্দর", "হালকা"], a: 1},
+  {q: "Weighty শব্দটির সমার্থক কোনটি?", o: ["Light", "Heavy", "Tiny", "New"], a: 1},
+  {q: "Giant শব্দটি Tiny-এর কী?", o: ["Synonym", "Antonym", "Adverb", "Same"], a: 1},
+  {q: "Lovely শব্দটির মানে কী?", o: ["কুৎসিত", "ভারী", "সুন্দর", "ছোট"], a: 2},
+  {q: "Weightless-এর বিপরীত শব্দ কোনটি?", o: ["Light", "Heavy", "Soft", "Tiny"], a: 1},
+  {q: "Horrible-এর বিপরীত শব্দ কোনটি?", o: ["Ugly", "Bad", "Beautiful", "Little"], a: 2},
+  {q: "Little শব্দটি Tiny-এর কী?", o: ["Synonym", "Antonym", "Opposite", "None"], a: 0},
+  {q: "Thin-এর বিপরীত শব্দ কোনটি?", o: ["Light", "Heavy", "Small", "Pretty"], a: 1},
+  {q: "Solid-এর সমার্থক শব্দ কোনটি?", o: ["Light", "Heavy", "Tiny", "Beautiful"], a: 1}
+];
+
+let ci = 0, s = 0, t, tl = 15;
+
+function startT() {
+  tl = 15; document.getElementById('tm').innerText = tl;
+  t = setInterval(() => { tl--; document.getElementById('tm').innerText = tl; if(tl<=0){ clearInterval(t); check(-1); } }, 1000);
+}
+
+function load() {
+  const d = quizData[ci]; document.getElementById('qn').innerText = ci+1;
+  document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => { const b = document.createElement('div'); b.className='opt'; b.innerText=o; b.onclick=()=>check(i, b); g.appendChild(b); });
+  startT();
+}
+
+function check(i, b) {
+  clearInterval(t); const c = quizData[ci].a; const opts = document.getElementsByClassName('opt');
+  for(let x of opts) x.style.pointerEvents = 'none';
+  if(i === c) { s++; if(b) b.classList.add('correct'); }
+  else { if(b) b.classList.add('wrong'); opts[c].classList.add('correct'); }
+  document.getElementById('sc').innerText = s;
+  setTimeout(() => { ci++; if(ci < quizData.length) load(); else show(); }, 1200);
+}
+
+function show() { 
+  document.getElementById('game').style.display = 'none'; 
+  document.getElementById('result').style.display = 'block'; 
+  document.getElementById('fs').innerText = s; 
+  document.getElementById('st').innerText = s; 
+}
+
+function send() { 
+  let n = prompt("তোমার নাম লেখো:"); 
+  const m = `শ্রদ্ধেয় স্যার,\nআমি Vocabulary Quiz (Part-5) সম্পন্ন করেছি।\nনাম: ${n || 'ছাত্র'}\nস্কোর: ${s}/15`; 
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(m)}`); 
+}
+load();
+</script>
+</body>
+</html>
