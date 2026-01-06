@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synonym Quiz P-4 - SSCEC</title>
+<style>
+  :root { --primary: #8b5cf6; --secondary: #4c1d95; --bg: #f5f3ff; --wrong: #ef4444; --correct: #10b981; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .stats { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; background: #ede9fe; padding: 10px; border-radius: 10px; }
+  .q-text { font-size: 1.2rem; font-weight: bold; text-align: center; margin-bottom: 20px; min-height: 50px; }
+  .opt-grid { display: grid; gap: 10px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; background: white; cursor: pointer; text-align: center; transition: 0.2s; }
+  .correct { background: var(--correct) !important; color: white; }
+  .wrong { background: var(--wrong) !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; display: inline-block; margin-top: 15px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="quiz-card" id="q-box">
+  <div style="text-align: center; margin-bottom: 15px;">
+    <h3 style="color: var(--secondary); margin: 0;">Vocabulary Quiz (Part-4)</h3>
+    <small>SSCEC - 2026</small>
+  </div>
+  <div id="game">
+    <div class="stats">
+      <span>প্রশ্ন: <span id="qn">1</span>/15</span>
+      <span style="color:red">⏰ <span id="tm">15</span>s</span>
+      <span>স্কোর: <span id="sc">0</span></span>
+    </div>
+    <div class="q-text" id="qt">Loading Question...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--primary);">দারুণ রেজাল্ট! 🏆</h2>
+    <div style="font-size: 3rem; margin: 10px 0;" id="fs">0</div>
+    <p>তোমার মোট স্কোর: <span id="st">0</span>/15</p>
+    <a href="#" class="wa-btn" onclick="send()">Sir-কে রেজাল্ট পাঠাও ⮕</a>
+    <br><button onclick="location.reload()" style="margin-top:20px; cursor:pointer;">আবার খেলো 🔄</button>
+  </div>
+</div>
+
+<script>
+const quizData = [
+  {q: "Always-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Never", "Rarely", "Forever", "Slow"], a: 2},
+  {q: "Fast-এর বিপরীত (Antonym) शब्द কোনটি?", o: ["Quick", "Rapid", "Slow", "New"], a: 2},
+  {q: "Never-এর বিপরীত (Antonym) শব্দ কোনটি?", o: ["Rarely", "Always", "Not ever", "Old"], a: 1},
+  {q: "Old-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["New", "Young", "Ancient", "Fast"], a: 2},
+  {q: "Slow-এর সমার্থক (Synonym) শব্দ কোনটি?", o: ["Quick", "Sluggish", "Fast", "Active"], a: 1},
+  {q: "Quick শব্দটি Fast-এর কী?", o: ["Synonym", "Antonym", "Verb", "None"], a: 0},
+  {q: "Young শব্দটি Old-এর কী?", o: ["Synonym", "Antonym", "Same", "Noun"], a: 1},
+  {q: "Rarely শব্দটি Always-এর কী?", o: ["Synonym", "Antonym", "Pronoun", "None"], a: 1},
+  {q: "Ancient-এর বিপরীত শব্দ কোনটি?", o: ["Old", "Aged", "New", "Slow"], a: 2},
+  {q: "Rapid শব্দটির অর্থ কী?", o: ["ধীর", "দ্রুত", "পুরানো", "সর্বদা"], a: 1},
+  {q: "Constantly-এর বিপরীত শব্দ কোনটি?", o: ["Always", "Never", "Forever", "Quick"], a: 1},
+  {q: "Sluggish-এর বিপরীত শব্দ কোনটি?", o: ["Slow", "Fast", "Lazy", "Ancient"], a: 1},
+  {q: "Ever শব্দটি Never-এর কী?", o: ["Synonym", "Antonym", "Verb", "None"], a: 1},
+  {q: "Aged-এর সমার্থক শব্দ কোনটি?", o: ["Young", "New", "Old", "Fast"], a: 2},
+  {q: "New শব্দটি Old-এর কী?", o: ["Synonym", "Antonym", "Same", "Adverb"], a: 1}
+];
+
+let ci = 0, s = 0, t, tl = 15;
+
+function startT() {
+  tl = 15; document.getElementById('tm').innerText = tl;
+  t = setInterval(() => { tl--; document.getElementById('tm').innerText = tl; if(tl<=0){ clearInterval(t); check(-1); } }, 1000);
+}
+
+function load() {
+  const d = quizData[ci]; document.getElementById('qn').innerText = ci+1;
+  document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => { const b = document.createElement('div'); b.className='opt'; b.innerText=o; b.onclick=()=>check(i, b); g.appendChild(b); });
+  startT();
+}
+
+function check(i, b) {
+  clearInterval(t); const c = quizData[ci].a; const opts = document.getElementsByClassName('opt');
+  for(let x of opts) x.style.pointerEvents = 'none';
+  if(i === c) { s++; b.classList.add('correct'); }
+  else { if(b) b.classList.add('wrong'); opts[c].classList.add('correct'); }
+  document.getElementById('sc').innerText = s;
+  setTimeout(() => { ci++; if(ci < quizData.length) load(); else show(); }, 1200);
+}
+
+function show() { document.getElementById('game').style.display = 'none'; document.getElementById('result').style.display = 'block'; document.getElementById('fs').innerText = s; document.getElementById('st').innerText = s; }
+
+function send() { 
+  let n = prompt("নাম:"); 
+  const m = `স্যার, আমি Vocabulary Quiz (P-4) শেষ করেছি।\nনাম: ${n || 'ছাত্র'}\nস্কোর: ${s}/15`; 
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(m)}`); 
+}
+load();
+</script>
+</body>
+</html>
