@@ -3,131 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spoken English - SSCEC</title>
+    <title>Spoken English Masterclass - SSCEC</title>
     <style>
-        :root {
-            --spoken: #10b981; 
-            --bg: #f3f4f6;
-            --primary-dark: #064e3b;
-        }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 0; }
-
-        /* Center Header Style */
-        .center-header {
-            background: linear-gradient(135deg, var(--primary-dark), #059669);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-bottom: 5px solid #fbbf24;
-        }
-        .center-header h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
-        .center-header p.address { margin: 10px 0; font-size: 14px; opacity: 0.9; }
-        .center-header p.tagline { 
-            margin-top: 15px; 
-            font-style: italic; 
-            font-weight: bold; 
-            color: #fbbf24; 
-            font-size: 1.1rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        .contact-info { margin-top: 10px; font-weight: bold; font-size: 15px; }
-
+        :root { --primary: #064e3b; --accent: #10b981; --light-bg: #f3f4f6; --yellow: #fbbf24; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--light-bg); margin: 0; padding: 0; }
+        header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; text-align: center; padding: 40px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-bottom: 5px solid var(--yellow); }
+        header h1 { margin: 0; font-size: 2rem; }
+        .tagline { font-style: italic; color: var(--yellow); font-weight: bold; margin-top: 10px; font-size: 1.1rem; }
         .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
-        
-        .section-title { 
-            font-size: 1.8rem; 
-            font-weight: bold; 
-            margin-bottom: 25px; 
-            padding-left: 15px; 
-            border-left: 6px solid var(--spoken);
-            color: var(--primary-dark);
-        }
-
+        .nav-back a { text-decoration: none; color: var(--primary); font-weight: bold; }
+        .section-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 30px; padding-left: 15px; border-left: 6px solid var(--accent); color: var(--primary); }
         .card-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-
-        .card { 
-            background: white; 
-            border-top: 6px solid var(--spoken); 
-            padding: 25px; 
-            border-radius: 15px; 
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06); 
-            flex: 1; 
-            min-width: 280px; 
-            max-width: 320px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between;
-            transition: 0.3s;
-        }
-        .card:hover { transform: translateY(-8px); }
-        .card-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
-        .card h3 { color: var(--primary-dark); margin: 10px 0; }
-        .card p { color: #4b5563; font-size: 14px; line-height: 1.6; }
-
-        .btn { 
-            background: var(--spoken); 
-            color: white; 
-            text-align: center; 
-            padding: 12px; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            margin-top: 20px;
-        }
-        .nav-back { text-align: center; margin-bottom: 20px; }
-        .nav-back a { color: var(--primary-dark); text-decoration: none; font-weight: bold; }
+        .card { background: white; border-top: 6px solid var(--accent); padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); flex: 1; min-width: 280px; max-width: 320px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); }
+        .btn { background: var(--accent); color: white; text-align: center; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
-
-<header class="center-header">
+<header>
     <h1>SUPER SUCCESS COMPUTER EDUCATION CENTER</h1>
-    <p class="address">22/1 BIPIN PAUL ROAD, NIMTA SHYAMAPRASAD NAGAR, KOLKATA - 700049</p>
-    <div class="contact-info">📞 8017247298 | 9874152080</div>
+    <p>22/1 BIPIN PAUL ROAD, NIMTA, KOLKATA - 700049 | 📞 8017247298</p>
     <p class="tagline">"Empowering Minds, Shaping Futures – Your Success Starts Here."</p>
 </header>
-
 <div class="container">
-    <div class="nav-back">
-        <a href="index.html">⬅ হোম পেজে ফিরে যাও</a>
-    </div>
-
-    <div class="section-title">🎙️ Spoken English Masterclass</div>
-    
+    <div class="nav-back"><a href="index.html">⬅ হোম পেজে ফিরে যাও</a></div>
+    <h2 class="section-title">🎙️ Spoken English Lessons</h2>
     <div class="card-container">
         <div class="card">
-            <div>
-                <span class="card-icon">👋</span>
-                <h3>Lesson 1: Greetings</h3>
-                <p>আত্মবিশ্বাসের সাথে কথা বলা শুরু করার প্রথম ধাপ। জানুন বিভিন্ন পরিস্থিতিতে অভিবাদন জানানোর সঠিক নিয়ম।</p>
-            </div>
-            <a href="lesson1.html" class="btn">পড়া শুরু করুন ⮕</a>
+            <div><span style="font-size:3rem">👋</span><h3>Lesson 1: Greetings</h3>
+            <p>বিভিন্ন পরিস্থিতিতে স্মার্টলি অভিবাদন জানানোর সঠিক উপায় শিখুন।</p></div>
+            <a href="spoken-lesson-01.html" class="btn">পড়া শুরু করুন ⮕</a>
         </div>
-
         <div class="card">
-            <div>
-                <span class="card-icon">⏰</span>
-                <h3>Lesson 2: Daily Life</h3>
-                <p>সকাল থেকে রাত পর্যন্ত আপনার প্রতিদিনের রুটিন এবং কাজগুলো ইংরেজিতে বলার সহজ কৌশল শিখুন।</p>
-            </div>
-            <a href="lesson2.html" class="btn">পড়া শুরু করুন ⮕</a>
-        </div>
-
-        <div class="card">
-            <div>
-                <span class="card-icon">🛍️</span>
-                <h3>Lesson 3: Market</h3>
-                <p>কেনাকাটা, দরদাম এবং শপিং মলে গিয়ে স্মার্টলি ইংরেজিতে কথা বলার প্রয়োজনীয় বাক্য ও কথোপকথন।</p>
-            </div>
-            <a href="lesson3.html" class="btn">পড়া শুরু করুন ⮕</a>
+            <div><span style="font-size:3rem">⏰</span><h3>Lesson 2: Daily Life</h3>
+            <p>প্রতিদিনের রুটিন এবং কাজগুলো অনর্গল ইংরেজিতে বলার কৌশল।</p></div>
+            <a href="#" class="btn" style="background:#ccc">Coming Soon</a>
         </div>
     </div>
 </div>
-
-<footer style="text-align: center; padding: 20px; color: #6b7280; font-size: 13px;">
-    © 2026 SSCEC | All Rights Reserved
-</footer>
-
 </body>
 </html>
