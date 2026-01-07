@@ -6,45 +6,51 @@
 <title>Final Spoken English Exam & Certificate - SSCEC</title>
 <style>
   :root { --primary: #1e293b; --accent: #b45309; --bg: #f1f5f9; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 5px; }
   
-  .exam-card { background: white; max-width: 800px; width: 100%; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin: auto; border-top: 8px solid var(--accent); box-sizing: border-box; }
+  .exam-card { background: white; max-width: 800px; width: 100%; padding: 20px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin: auto; border-top: 8px solid var(--accent); box-sizing: border-box; }
+  
   .header { text-align: center; margin-bottom: 25px; }
   .input-group { margin-bottom: 15px; text-align: left; }
   .input-group label { display: block; font-weight: bold; margin-bottom: 5px; }
   .input-group input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
 
   #exam-area, #result-area { display: none; }
-  .question { font-size: 1.2rem; font-weight: bold; color: #1e293b; margin-bottom: 20px; padding: 15px; background: #fffbeb; border-radius: 10px; border-left: 5px solid var(--accent); }
+  .question { font-size: 1.1rem; font-weight: bold; color: #1e293b; margin-bottom: 20px; padding: 15px; background: #fffbeb; border-radius: 10px; border-left: 5px solid var(--accent); }
   .opt-grid { display: grid; gap: 10px; }
   .opt { padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px; cursor: pointer; background: #f8fafc; transition: 0.3s; font-weight: 500; }
   .opt:hover { background: #e2e8f0; border-color: var(--accent); }
 
-  /* সার্টিফিকেট ডিজাইন */
+  /* সার্টিফিকেট রেসপন্সিভ ডিজাইন */
   .certificate-box { 
-    width: 100%; max-width: 750px; background: #fff; padding: 40px; 
-    border: 15px solid #1e293b; margin: 20px auto; position: relative; 
+    width: 100%; max-width: 750px; background: #fff; padding: 25px; 
+    border: 10px solid #1e293b; margin: 10px auto; position: relative; 
     box-sizing: border-box; border-image: linear-gradient(45deg, #d4af37, #b45309) 20;
     box-shadow: 0 0 30px rgba(0,0,0,0.2); text-align: center;
+    overflow: hidden; /* মোবাইল স্ক্রিনে বাইরে যাবে না */
   }
-  .cert-header { color: #1e293b; font-size: 32px; font-weight: bold; margin: 0; }
-  .cert-sub { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #64748b; margin-bottom: 25px; display: block; }
-  .cert-title { font-family: 'Georgia', serif; color: #b45309; font-size: 42px; margin: 20px 0; font-style: italic; }
-  .student-name { font-size: 36px; color: #1e40af; font-weight: bold; border-bottom: 2px solid #b45309; display: inline-block; padding: 0 20px; margin: 15px 0; font-family: 'Times New Roman', serif; }
   
-  /* সিগনেচার সেকশন */
-  .sig-container { margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 30px; }
-  .sig-item { text-align: center; width: 180px; }
-  .sig-image { width: 110px; height: auto; margin-bottom: -15px; position: relative; z-index: 1; }
-  .sig-line { border-top: 2px solid #1e293b; padding-top: 5px; font-weight: bold; font-size: 14px; color: #000; }
+  .cert-header { color: #1e293b; font-size: clamp(20px, 5vw, 32px); font-weight: bold; margin: 0; }
+  .cert-sub { font-size: clamp(10px, 2.5vw, 13px); letter-spacing: 2px; text-transform: uppercase; color: #64748b; margin-bottom: 15px; display: block; }
+  .cert-title { font-family: 'Georgia', serif; color: #b45309; font-size: clamp(24px, 6vw, 42px); margin: 10px 0; font-style: italic; }
+  .student-name { font-size: clamp(22px, 5vw, 36px); color: #1e40af; font-weight: bold; border-bottom: 2px solid #b45309; display: inline-block; padding: 0 10px; margin: 10px 0; font-family: 'Times New Roman', serif; }
+  
+  /* সিগনেচার সেকশন রেসপন্সিভ */
+  .sig-container { margin-top: 30px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 10px; }
+  .sig-item { text-align: center; width: 40%; }
+  .sig-image { width: clamp(70px, 15vw, 110px); height: auto; margin-bottom: -10px; position: relative; z-index: 1; }
+  .sig-line { border-top: 2px solid #1e293b; padding-top: 5px; font-weight: bold; font-size: clamp(10px, 2.5vw, 14px); color: #000; }
 
-  .btn { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; color: white; }
+  .btn { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-top: 10px; color: white; }
 
+  /* প্রিন্ট সেটিংস */
   @media print {
+    @page { size: landscape; margin: 0; }
     body { background: white; padding: 0; }
-    .exam-card, .btn, .header, #intro { display: none !important; }
+    .exam-card { box-shadow: none; border: none; width: 100%; max-width: 100%; padding: 0; }
+    .btn, .header, #intro { display: none !important; }
     #result-area { display: block !important; }
-    .certificate-box { margin: 0; border: 10px solid #1e293b; width: 100%; box-shadow: none; }
+    .certificate-box { margin: 0; border: 15px solid #1e293b; width: 100%; max-width: 100%; height: 95vh; }
   }
 </style>
 </head>
@@ -53,7 +59,7 @@
 <div class="exam-card">
   <div id="intro">
     <div class="header">
-      <h1 style="color: var(--accent);">SSCEC Spoken English</h1>
+      <h1 style="color: var(--accent); font-size: 1.8rem; margin:0;">SSCEC Spoken English</h1>
       <p>ফাইনাল পরীক্ষা ও ডিজিটাল সার্টিফিকেট</p>
     </div>
     <div class="input-group">
@@ -78,13 +84,13 @@
         <div class="cert-header">SUPER SUCCESS</div>
         <span class="cert-sub">Computer Education Center</span>
         <h1 class="cert-title">Certificate of Achievement</h1>
-        <p style="font-size: 20px; margin: 0;">This is to certify that</p>
+        <p style="font-size: clamp(14px, 3vw, 18px); margin: 0;">This is to certify that</p>
         <div class="student-name" id="certName">Student Name</div>
-        <p style="font-size: 19px; margin-top: 10px;">has successfully completed the <b>Spoken English Course</b></p>
-        <p style="font-size: 18px;">with an outstanding score of <b id="certScore" style="color: #b45309;">0</b> out of 20</p>
+        <p style="font-size: clamp(14px, 3vw, 18px); margin-top: 5px;">has successfully completed the <b>Spoken English Course</b></p>
+        <p style="font-size: clamp(14px, 3vw, 18px);">with an outstanding score of <b id="certScore" style="color: #b45309;">0</b> out of 20</p>
 
         <div class="sig-container">
-            <div style="text-align: left; font-size: 14px; line-height: 1.6;">
+            <div style="text-align: left; font-size: clamp(10px, 2.5vw, 14px); line-height: 1.4;">
                 <p style="margin:0;"><b>ID:</b> <span id="certId">---</span></p>
                 <p style="margin:0;"><b>Date:</b> <span id="certDate">07/01/2026</span></p>
                 <p style="color: #10b981; font-weight: bold; margin:0;">✓ Verified Online</p>
@@ -92,7 +98,7 @@
             <div class="sig-item">
                 <img src="signature_with_seal.png" alt="Signature" class="sig-image">
                 <div class="sig-line">BIPUL SARKAR</div>
-                <div style="font-size: 11px; color: #64748b; font-weight: bold;">PRINCIPAL, SSCEC</div>
+                <div style="font-size: clamp(8px, 2vw, 11px); color: #64748b; font-weight: bold;">PRINCIPAL, SSCEC</div>
             </div>
         </div>
     </div>
@@ -102,26 +108,27 @@
 </div>
 
 <script>
+// (আপনার জাভাস্ক্রিপ্ট কোডটি এখানে হুবহু আগের মতোই থাকবে, কোনো পরিবর্তন দরকার নেই)
 const questions = [
-  {q: "সে যায় - ইংরেজি কোনটি?", o: ["He go", "He goes", "He going", "He gone"], a: 1},
-  {q: "May I come in? - এটি কখন বলা হয়?", o: ["বিদায় নেওয়া", "অনুমতি নেওয়া", "ধন্যবাদ দেওয়া", "ডাকা"], a: 1},
+  {q: "সে যায় - ইংরেজি কোনটি?", o: ["He go", "He goes", "He going", "He gone"], a: 1},
+  {q: "May I come in? - এটি কখন বলা হয়?", o: ["বিদায় নেওয়া", "অনুমতি নেওয়া", "ধন্যবাদ দেওয়া", "ডাকা"], a: 1},
   {q: "১০টা ১৫ মিনিটকে ইংরেজিতে কী বলে?", o: ["Half past ten", "Quarter past ten", "Quarter to ten", "Ten fifteen"], a: 1},
   {q: "I _____ my teeth every morning.", o: ["Brush", "Brushing", "Brushes", "Brushed"], a: 0},
   {q: "সাফল্যের ইংরেজি শব্দ কোনটি?", o: ["Failure", "Success", "Happy", "Goal"], a: 1},
-  {q: "Introduce yourself মানে কী?", o: ["গল্প করা", "নিজের পরিচয় দেওয়া", "ঘুরতে যাওয়া", "খাওয়ানো"], a: 1},
+  {q: "Introduce yourself মানে কী?", o: ["গল্প করা", "নিজের পরিচয় দেওয়া", "ঘুরতে যাওয়া", "খাওয়ানো"], a: 1},
   {q: "This phone is _____ than that one.", o: ["Good", "Better", "Best", "Gooder"], a: 1},
   {q: "Yesterday মানে কোন দিন?", o: ["আজ", "আগামীকাল", "গতকাল", "পরশু"], a: 2},
   {q: "সকাল ৮টার খাবারকে কী বলে?", o: ["Lunch", "Dinner", "Breakfast", "Snacks"], a: 2},
   {q: "How are you? - এর সঠিক উত্তর কোনটি?", o: ["I am come", "I am fine, thank you", "I am go", "I am eat"], a: 1},
-  {q: "Please hold the line - এটি কোথায় বলা হয়?", o: ["বাসে", "স্কুলে", "ফোনে", "বাজারে"], a: 2},
+  {q: "Please hold the line - এটি কোথায় বলা হয়?", o: ["বাসে", "স্কুলে", "ফোনে", "বাজারে"], a: 2},
   {q: "The sun rises in the _____.", o: ["West", "North", "South", "East"], a: 3},
   {q: "My Aim in Life মানে কী?", o: ["পরিবার", "শখ", "জীবনের লক্ষ্য", "রুটিন"], a: 2},
   {q: "Rainy Season মানে কোন ঋতু?", o: ["শীত", "গ্রীষ্ম", "বর্ষা", "শরৎ"], a: 2},
   {q: "Happy এর বিপরীত শব্দ কী?", o: ["Sad", "Angry", "Fast", "Big"], a: 0},
   {q: "I _____ to SSCEC every day.", o: ["Goes", "Going", "Go", "Gone"], a: 2},
   {q: "১০টা বাজতে ১৫ মিনিট বাকি - ইংরেজি কী?", o: ["Quarter past ten", "Quarter to ten", "Ten fifteen", "Ten past"], a: 1},
-  {q: "ধন্যবাদ দেওয়ার জবাবে কী বলতে হয়?", o: ["Sorry", "Welcome", "Please", "Hello"], a: 1},
-  {q: "Welcome মানে কী?", o: ["বিদায়", "স্বাগতম", "ধন্যবাদ", "দুঃখিত"], a: 1},
+  {q: "ধন্যবাদ দেওয়ার জবাবে কী বলতে হয়?", o: ["Sorry", "Welcome", "Please", "Hello"], a: 1},
+  {q: "Welcome মানে কী?", o: ["বিদায়", "স্বাগতম", "ধন্যবাদ", "দুঃখিত"], a: 1},
   {q: "SSCEC-এর পুরো নাম কী?", o: ["Super Success Computer Education Center", "Success Center", "Smart Study", "None"], a: 0}
 ];
 
@@ -163,7 +170,7 @@ function showResult() {
 function sendResult() {
   const name = document.getElementById('stuName').value;
   const id = document.getElementById('stuId').value;
-  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English Final Exam* শেষ করেছি।\n\n👤 *নাম:* ${name}\n🆔 *রোল/ফোন:* ${id}\n🎯 *স্কোর:* ${score}/20\n\n(স্যার, আমি অটো-জেনারেটেড সার্টিফিকেটটি ডাউনলোড করেছি)`;
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English Final Exam* শেষ করেছি।\n\n👤 *নাম:* ${name}\n🆔 *রোল/ফোন:* ${id}\n🎯 *স্কোর:* ${score}/20\n\n(স্যার, আমি অটো-জেনারেটেড সার্টিফিকেটটি ডাউনলোড করেছি)`;
   window.open(`https://wa.me/918017247298?text=${encodeURIComponent(msg)}`);
 }
 </script>
