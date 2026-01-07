@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Quiz - SSCEC</title>
+<style>
+  :root { --primary: #7c3aed; --dark: #4c1d95; --bg: #f5f3ff; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .opt-grid { display: grid; gap: 10px; margin-top: 20px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 500; }
+  .correct { background: #7c3aed !important; color: white; border-color: #5b21b6; }
+  .wrong { background: #ef4444 !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="quiz-card">
+  <div id="game">
+    <div style="text-align: center; color: var(--primary); font-weight: bold;">Lesson 5: Interview Skills Quiz</div>
+    <div id="qt" style="font-size:1.2rem; font-weight:bold; text-align:center; margin-top:15px; color: var(--dark);">Loading...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--dark);">ভবিষ্যতের জন্য শুভকামনা! 💼</h2>
+    <p style="font-size: 1.5rem;">তোমার স্কোর: <span id="sc">0</span>/10</p>
+    <button onclick="send()" class="wa-btn">📲 স্যারকে রেজাল্ট পাঠাও</button>
+  </div>
+</div>
+
+<script>
+const data = [
+  {q: "'Tell me about yourself' এর অর্থ কী?", o: ["তোমার ঠিকানা বলো", "তোমার নিজের সম্পর্কে বলো", "তুমি কেন আসবে?", "তোমার বয়স কত?"], a: 1},
+  {q: "Strength মানে কী?", o: ["দুর্বলতা", "শক্তিশালী দিক", "অলসতা", "শখ"], a: 1},
+  {q: "ইন্টারভিউ শুরুর আগে অনুমতি নিতে কী বলবেন?", o: ["May I come in?", "I am coming", "Let me in", "Who are you?"], a: 0},
+  {q: "Experience মানে কী?", o: ["যোগ্যতা", "অভিজ্ঞতা", "পরীক্ষা", "চাকরি"], a: 1},
+  {q: "Hardworking এর অর্থ কী?", o: ["অলস", "পরিশ্রমী", "ধনী", "চালাক"], a: 1},
+  {q: "ইন্টারভিউ শেষে কী বলা উচিত?", o: ["Goodbye", "Thank you, sir", "No thanks", "See you"], a: 1},
+  {q: "Hire মানে কী?", o: ["বাদ দেওয়া", "চাকরিতে নিয়োগ দেওয়া", "কেনা", "বেচা"], a: 1},
+  {q: "Dedicated মানে কী?", o: ["অসৎ", "নিষ্ঠাবান বা একনিষ্ঠ", "অলস", "ভীত"], a: 1},
+  {q: "CV বা Resume কী কাজে লাগে?", o: ["খেলার জন্য", "চাকরির আবেদনের জন্য", "পড়ার জন্য", "ছবি আঁকার জন্য"], a: 1},
+  {q: "ইন্টারভিউতে কথা বলার সময় কেমন হওয়া উচিত?", o: ["খুব জোরে", "ভীতু", "আত্মবিশ্বাসী (Confident)", "খুব আস্তে"], a: 2}
+];
+
+let ci = 0, s = 0;
+function load() {
+  const d = data[ci]; document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => {
+    const b = document.createElement('div'); b.className = 'opt'; b.innerText = o;
+    b.onclick = () => check(i, b); g.appendChild(b);
+  });
+}
+function check(i, b) {
+  const c = data[ci].a;
+  if(i === c) { s++; b.classList.add('correct'); }
+  else { b.classList.add('wrong'); document.querySelectorAll('.opt')[c].classList.add('correct'); }
+  setTimeout(() => { ci++; if(ci < data.length) load(); else show(); }, 1000);
+}
+function show() { document.getElementById('game').style.display = 'none'; document.getElementById('result').style.display = 'block'; document.getElementById('sc').innerText = s; }
+function send() { 
+  let n = prompt("তোমার নাম লেখো:"); 
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English (Lesson-05)* কুইজ শেষ করেছি।\n\n👤 *নাম:* ${n || 'ছাত্র/ছাত্রী'}\n🎯 *স্কোর:* ${s}/10`;
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(msg)}`); 
+}
+load();
+</script>
+</body>
+</html>
