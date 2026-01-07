@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Routine Quiz - SSCEC</title>
+<style>
+  :root { --primary: #10b981; --dark: #064e3b; --bg: #f0fdf4; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .opt-grid { display: grid; gap: 10px; margin-top: 20px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 500; }
+  .correct { background: #10b981 !important; color: white; border-color: #064e3b; }
+  .wrong { background: #ef4444 !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="quiz-card">
+  <div id="game">
+    <div style="text-align: center; color: var(--primary); font-weight: bold;">Lesson 14: Daily Routine Quiz</div>
+    <div id="qt" style="font-size:1.2rem; font-weight:bold; text-align:center; margin-top:15px; color: var(--dark);">Loading...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--dark);">দারুণ রুটিন তোমার! 📅</h2>
+    <p style="font-size: 1.5rem;">তোমার স্কোর: <span id="sc">0</span>/10</p>
+    <button onclick="send()" class="wa-btn">📲 স্যারকে রেজাল্ট পাঠাও</button>
+  </div>
+</div>
+
+<script>
+const data = [
+  {q: "ঘুম থেকে ওঠাকে ইংরেজিতে কী বলে?", o: ["Go to bed", "Wake up", "Breakfast", "Sleep"], a: 1},
+  {q: "রাতের খাবারকে ইংরেজিতে কী বলে?", o: ["Lunch", "Dinner", "Breakfast", "Snacks"], a: 1},
+  {q: "দুপুরে অল্প সময় ঘুমানোকে কী বলে?", o: ["Deep sleep", "Take a nap", "Night sleep", "Wake up"], a: 1},
+  {q: "দাঁত মাজার ইংরেজি কোনটি?", o: ["Wash face", "Brush teeth", "Take bath", "Eat food"], a: 1},
+  {q: "I _____ to school every day. (শূন্যস্থান পূরণ করো)", o: ["Go", "Goes", "Going", "Gone"], a: 0},
+  {q: "সালেহা সকালে কম্পিউটার ক্লাসে যায় - ইংরেজি কী?", o: ["Saleha go class", "Saleha goes to computer class", "Saleha computer class", "Saleha going class"], a: 1},
+  {q: "Usually মানে কী?", o: ["কখনো না", "মাঝে মাঝে", "সাধারণত", "একবার"], a: 2},
+  {q: "ঘুমানোর আগে আমরা কী বলি?", o: ["Good morning", "Good night", "Good afternoon", "Hello"], a: 1},
+  {q: "সকালের নাস্তাকে কী বলে?", o: ["Breakfast", "Lunch", "Dinner", "Supper"], a: 0},
+  {q: "Return home মানে কী?", o: ["বাড়ি যাওয়া", "বাড়ি থেকে আসা", "বাড়ি ফিরে আসা", "বাড়ি কেনা"], a: 2}
+];
+
+let ci = 0, s = 0;
+function load() {
+  const d = data[ci]; document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => {
+    const b = document.createElement('div'); b.className = 'opt'; b.innerText = o;
+    b.onclick = () => check(i, b); g.appendChild(b);
+  });
+}
+function check(i, b) {
+  const c = data[ci].a;
+  if(i === c) { s++; b.classList.add('correct'); }
+  else { b.classList.add('wrong'); document.querySelectorAll('.opt')[c].classList.add('correct'); }
+  setTimeout(() => { ci++; if(ci < data.length) load(); else show(); }, 1000);
+}
+function show() { document.getElementById('game').style.display = 'none'; document.getElementById('result').style.display = 'block'; document.getElementById('sc').innerText = s; }
+function send() { 
+  let n = prompt("তোমার নাম লেখো:"); 
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English (Lesson-14)* কুইজ শেষ করেছি।\n\n👤 *নাম:* ${n || 'ছাত্র/ছাত্রী'}\n🎯 *স্কোর:* ${s}/10`;
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(msg)}`); 
+}
+load();
+</script>
+</body>
+</html>
