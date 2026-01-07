@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounts Basics Mock Test - SSCEC</title>
+<style>
+    :root {
+        --primary: #1e3a8a;
+        --secondary: #3b82f6;
+        --success: #10b981;
+        --danger: #ef4444;
+        --bg: #f1f5f9;
+        --white: #ffffff;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background-color: var(--bg);
+        margin: 0; padding: 0;
+        display: flex; flex-direction: column; align-items: center;
+    }
+
+    .header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white; width: 100%; padding: 40px 20px;
+        text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .container {
+        max-width: 800px; width: 90% ; margin: 30px auto;
+    }
+
+    .quiz-card {
+        background: var(--white); border-radius: 20px; padding: 30px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px;
+        display: none; /* Initially hidden for JS control */
+    }
+
+    .quiz-card.active { display: block; animation: fadeIn 0.5s; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .question { font-size: 20px; font-weight: bold; margin-bottom: 20px; color: var(--primary); }
+
+    .options-container { display: flex; flex-direction: column; gap: 12px; }
+
+    .option {
+        padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px;
+        cursor: pointer; transition: 0.3s; font-weight: 500;
+    }
+
+    .option:hover { background-color: #f8fafc; border-color: var(--secondary); }
+
+    .option.correct { background-color: #d1fae5; border-color: var(--success); color: #065f46; }
+
+    .option.wrong { background-color: #fee2e2; border-color: var(--danger); color: #991b1b; }
+
+    .score-container {
+        text-align: center; background: white; padding: 40px;
+        border-radius: 20px; display: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .progress-bar {
+        width: 100%; height: 10px; background: #e2e8f0;
+        border-radius: 5px; margin-bottom: 30px; overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%; background: var(--success); width: 0%; transition: 0.5s;
+    }
+
+    .btn-next {
+        margin-top: 20px; background: var(--primary); color: white;
+        border: none; padding: 12px 30px; border-radius: 8px;
+        cursor: pointer; font-weight: bold; display: none;
+    }
+
+    .btn-restart {
+        background: var(--success); color: white; border: none;
+        padding: 15px 40px; border-radius: 12px; font-size: 18px;
+        cursor: pointer; margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📝 Accounts Basics Mock Test</h1>
+    <p>SUPER SUCCESS COMPUTER EDUCATION CENTER</p>
+</div>
+
+<div class="container">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div id="quiz-box">
+        </div>
+
+    <div id="score-box" class="score-container">
+        <h2 style="font-size: 3rem;">🎉</h2>
+        <h2>টেস্ট সম্পন্ন হয়েছে!</h2>
+        <p style="font-size: 24px;">আপনার স্কোর: <span id="finalScore">0</span> / 25</p>
+        <div id="feedback-msg"></div>
+        <button class="btn-restart" onclick="location.reload()">আবার চেষ্টা করুন</button>
+        <br><br>
+        <a href="tally-prime.html" style="text-decoration: none; color: var(--primary); font-weight: bold;">⬅️ ব্যাক টু মডিউল</a>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    { q: "অ্যাকাউন্টিং-কে ব্যবসার কী বলা হয়?", a: ["ব্যবসায়ের ভাষা", "ব্যবসায়ের ইতিহাস", "ব্যবসায়ের আইন", "ব্যবসায়ের ইঞ্জিন"], c: 0 },
+    { q: "নিচের কোনটি একটি 'Asset' বা সম্পত্তির উদাহরণ?", a: ["Cash (নগদ টাকা)", "Salary Paid", "Bank Loan", "Electricity Bill"], c: 0 },
+    { q: "গোল্ডেন রুল অনুযায়ী 'Real Account'-এর নিয়ম কী?", a: ["Debit Receiver, Credit Giver", "Debit what comes in, Credit what goes out", "Debit Expense, Credit Income", "None of these"], c: 1 },
+    { q: "ট্যালিতে কাজ শুরু করার প্রথম ধাপ কোনটি?", a: ["Voucher Entry", "Printing Reports", "Company Creation", "Backup Data"], c: 2 },
+    { q: "মালিক যখন ব্যবসায় টাকা বিনিয়োগ করেন, তখন তাকে কী বলে?", a: ["Capital (মূলধন)", "Drawing", "Liability", "Profit"], c: 0 },
+    { q: "Double Entry System-এ প্রতিটি লেনদেনের কমপক্ষে কয়টি পক্ষ থাকে?", a: ["১টি", "২টি", "৩টি", "৪টি"], c: 1 },
+    { q: "ব্যবসায়ের 'Indirect Expense'-এর একটি উদাহরণ হলো—", a: ["Office Rent", "Purchase Goods", "Machinery", "Wages"], c: 0 },
+    { q: "সঠিক অ্যাকাউন্টিং ইকুয়েশন কোনটি?", a: ["Assets = Liabilities - Capital", "Assets = Liabilities + Capital", "Capital = Assets + Liabilities", "None"], c: 1 },
+    { q: "কোনটি 'Nominal Account'-এর অন্তর্ভুক্ত?", a: ["Furniture", "Commission Received", "SBI Bank", "Goodwill"], c: 1 },
+    { q: "লেনদেনের লিখিত প্রমাণকে কী বলা হয়?", a: ["Ledger", "Voucher (ভাউচার)", "Balance Sheet", "Journal"], c: 1 },
+    { q: "ট্যালিতে ফিচার পরিবর্তন করতে কোন শর্টকাট কি ব্যবহৃত হয়?", a: ["F1", "F2", "F11", "F12"], c: 2 },
+    { q: "ব্যক্তিগত প্রয়োজনে মালিক টাকা নিলে তাকে কী বলে?", a: ["Expense", "Investment", "Drawing (উত্তোলন)", "Loss"], c: 2 },
+    { q: "ব্যাংক লোন (Bank Loan) কোন গ্রুপের অন্তর্ভুক্ত?", a: ["Loans (Liability)", "Current Assets", "Indirect Income", "Fixed Asset"], c: 0 },
+    { q: "ট্যালি প্রাইমে ডেটা সেভ করার শর্টকাট কী?", a: ["Ctrl + S", "Ctrl + A", "Alt + S", "Ctrl + P"], c: 1 },
+    { q: "নিচের কোনটি 'Personal Account'?", a: ["Cash Account", "Ram & Co.", "Rent A/c", "Furniture"], c: 1 },
+    { q: "সুনাম (Goodwill) কী ধরনের সম্পত্তি?", a: ["Tangible Asset", "Intangible Asset", "Liability", "Current Asset"], c: 1 },
+    { q: "লাভ-ক্ষতি জানার জন্য কোন রিপোর্ট দেখা হয়?", a: ["Balance Sheet", "Profit & Loss A/c", "Stock Summary", "Day Book"], c: 1 },
+    { q: "ভারতে আর্থিক বছর (Financial Year) কবে শুরু হয়?", a: ["১লা জানুয়ারি", "১লা এপ্রিল", "১লা জুলাই", "৩১শে মার্চ"], c: 1 },
+    { q: "নিচের কোনটি 'Current Asset' নয়?", a: ["Bank Balance", "Cash", "Building", "Stock"], c: 2 },
+    { q: "গোল্ডেন রুল অনুসারে সব খরচ (Expenses) কী হয়?", a: ["Debit", "Credit", "Asset", "Liability"], c: 0 },
+    { q: "ট্যালিতে ডিফল্টভাবে কতগুলো গ্রুপ থাকে?", a: ["১৫টি", "২৮টি", "৫০টি", "১০টি"], c: 1 },
+    { q: "সুদের আয় (Interest Received) কোন ধরনের অ্যাকাউন্ট?", a: ["Real Account", "Personal Account", "Nominal Account", "Suspense"], c: 2 },
+    { q: "ব্যবসায়ের প্রধান উদ্দেশ্য কী?", a: ["Social Service", "Profit Making", "Recording Data", "Getting Loans"], c: 1 },
+    { q: "ট্যালিতে ব্যাকআপ সুবিধা কোথায় থাকে?", a: ["Print Menu", "Export Menu", "Data Menu", "Display"], c: 2 },
+    { q: "বকেয়া বেতন (Outstanding Salary) হলো একটি—", a: ["Asset", "Liability (দায়)", "Income", "Expense"], c: 1 }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+    const quizBox = document.getElementById('quiz-box');
+    const qData = quizData[currentQuestion];
+    
+    let optionsHtml = qData.a.map((opt, index) => 
+        `<div class="option" onclick="checkAnswer(${index}, this)">${opt}</div>`
+    ).join('');
+
+    quizBox.innerHTML = `
+        <div class="quiz-card active">
+            <div style="color: #64748b; font-weight: bold; margin-bottom: 10px;">প্রশ্ন ${currentQuestion + 1} / 25</div>
+            <div class="question">${qData.q}</div>
+            <div class="options-container">${optionsHtml}</div>
+            <button id="nextBtn" class="btn-next" onclick="nextQuestion()">পরবর্তী প্রশ্ন ⮕</button>
+        </div>
+    `;
+    updateProgress();
+}
+
+function checkAnswer(index, element) {
+    const correctIndex = quizData[currentQuestion].c;
+    const options = document.querySelectorAll('.option');
+    
+    // Disable all options after click
+    options.forEach(opt => opt.style.pointerEvents = 'none');
+
+    if(index === correctIndex) {
+        element.classList.add('correct');
+        score++;
+    } else {
+        element.classList.add('wrong');
+        options[correctIndex].classList.add('correct');
+    }
+    document.getElementById('nextBtn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if(currentQuestion < quizData.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function updateProgress() {
+    const progress = ((currentQuestion) / quizData.length) * 100;
+    document.getElementById('progressFill').style.width = progress + "%";
+}
+
+function showResults() {
+    document.getElementById('quiz-box').style.display = 'none';
+    document.getElementById('progressFill').parentElement.style.display = 'none';
+    document.getElementById('score-box').style.display = 'block';
+    document.getElementById('finalScore').innerText = score;
+    
+    let msg = "";
+    if(score >= 20) msg = "<b style='color:green'>অসাধারণ! আপনি অ্যাকাউন্টিং-এ দক্ষ।</b>";
+    else if(score >= 12) msg = "<b style='color:orange'>ভালো হয়েছে, তবে আরও প্র্যাকটিস প্রয়োজন।</b>";
+    else msg = "<b style='color:red'>দয়া করে লেসনগুলো আবার ভালো করে পড়ুন।</b>";
+    document.getElementById('feedback-msg').innerHTML = msg;
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
