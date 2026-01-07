@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veg & Fish Quiz - SSCEC</title>
+<style>
+  :root { --primary: #d97706; --dark: #064e3b; --bg: #fff7ed; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .opt-grid { display: grid; gap: 10px; margin-top: 20px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 500; }
+  .correct { background: #d97706 !important; color: white; border-color: #92400e; }
+  .wrong { background: #ef4444 !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="quiz-card">
+  <div id="game">
+    <div style="text-align: center; color: var(--primary); font-weight: bold;">Lesson 3B: Vegetable & Fish Market Quiz</div>
+    <div id="qt" style="font-size:1.2rem; font-weight:bold; text-align:center; margin-top:15px; color: var(--dark);">Loading...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--dark);">দারুণ হয়েছে! 🐟🥦</h2>
+    <p style="font-size: 1.5rem;">তোমার স্কোর: <span id="sc">0</span>/10</p>
+    <button onclick="send()" class="wa-btn">📲 স্যারকে রেজাল্ট পাঠাও</button>
+  </div>
+</div>
+
+<script>
+const data = [
+  {q: "'Fresh' মানে কী?", o: ["বাসি", "টাটকা", "পচা", "শুকনো"], a: 1},
+  {q: "এক কেজি আলুর দাম কত? - ইংরেজি কী হবে?", o: ["Where is potato?", "How much is a kilo of potatoes?", "Eat potato", "Price potato"], a: 1},
+  {q: "Fish seller মানে কী?", o: ["মাছ বিক্রেতা", "সবজি বিক্রেতা", "ক্রেতা", "দোকানদার"], a: 0},
+  {q: "ওজন করার ইংরেজি কোনটি?", o: ["Count", "Weigh", "See", "Eat"], a: 1},
+  {q: "কাঁচা লঙ্কা-র ইংরেজি কোনটি?", o: ["Red Chilli", "Green Chilli", "Potato", "Onion"], a: 1},
+  {q: "আধা কেজি-র ইংরেজি কী?", o: ["One kilo", "Half a kilo", "Two kilo", "Gram"], a: 1},
+  {q: "Expensive এর বিপরীত শব্দ কোনটি?", o: ["Costly", "Cheap", "Hard", "Bad"], a: 1},
+  {q: "Onion মানে কী?", o: ["আদা", "রসুন", "পেঁয়াজ", "আলু"], a: 2},
+  {q: "দাম কমানোর অনুরোধ করতে কী বলবেন?", o: ["Give more", "Reduce the price", "Go away", "No money"], a: 1},
+  {q: "Local fish মানে কী?", o: ["নদীর মাছ", "দেশি মাছ", "সমুদ্রের মাছ", "পচা মাছ"], a: 1}
+];
+
+let ci = 0, s = 0;
+function load() {
+  const d = data[ci]; document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => {
+    const b = document.createElement('div'); b.className = 'opt'; b.innerText = o;
+    b.onclick = () => check(i, b); g.appendChild(b);
+  });
+}
+function check(i, b) {
+  const c = data[ci].a;
+  if(i === c) { s++; b.classList.add('correct'); }
+  else { b.classList.add('wrong'); document.querySelectorAll('.opt')[c].classList.add('correct'); }
+  setTimeout(() => { ci++; if(ci < data.length) load(); else show(); }, 1000);
+}
+function show() { document.getElementById('game').style.display = 'none'; document.getElementById('result').style.display = 'block'; document.getElementById('sc').innerText = s; }
+function send() { 
+  let n = prompt("তোমার নাম লেখো:"); 
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English (Lesson-03B)* কুইজ শেষ করেছি।\n\n👤 *নাম:* ${n || 'ছাত্র/ছাত্রী'}\n🎯 *স্কোর:* ${s}/10`;
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(msg)}`); 
+}
+load();
+</script>
+</body>
+</html>
