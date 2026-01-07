@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student ID Card Generator - SSCEC</title>
+<style>
+  :root { --primary: #064e3b; --accent: #10b981; --bg: #f3f4f6; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); text-align: center; padding: 20px; }
+  
+  .input-form { background: white; max-width: 500px; margin: auto; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 30px; }
+  .input-group { margin-bottom: 15px; text-align: left; }
+  .input-group label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--primary); }
+  .input-group input { width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+
+  /* আইডি কার্ড ডিজাইন */
+  #id-card-display { display: none; }
+  .id-card { 
+    width: 320px; height: 500px; background: white; margin: auto; 
+    border-radius: 15px; overflow: hidden; position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 1px solid #ddd;
+  }
+  .card-header { 
+    background: linear-gradient(135deg, var(--primary), var(--accent)); 
+    color: white; padding: 20px 10px; height: 100px;
+  }
+  .card-header h2 { font-size: 18px; margin: 0; }
+  .card-header p { font-size: 9px; margin: 5px 0; opacity: 0.9; }
+
+  .photo-area { 
+    width: 120px; height: 140px; background: #eee; margin: -50px auto 10px; 
+    border: 4px solid white; border-radius: 10px; overflow: hidden; position: relative;
+  }
+  #output-img { width: 100%; height: 100%; object-fit: cover; }
+
+  .details { padding: 10px 20px; }
+  .details h3 { color: var(--primary); margin: 5px 0; font-size: 22px; text-transform: uppercase; }
+  .details p { margin: 5px 0; font-size: 14px; color: #555; font-weight: bold; }
+
+  .barcode { width: 80%; margin: 15px auto; }
+  
+  .card-footer { 
+    background: var(--primary); color: white; padding: 10px; 
+    position: absolute; bottom: 0; width: 100%; box-sizing: border-box; font-size: 11px;
+  }
+
+  .btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+  
+  @media print { .input-form, .btn { display: none; } body { background: white; } .id-card { box-shadow: none; border: 1px solid #000; } }
+</style>
+</head>
+<body>
+
+<div class="input-form">
+  <h2 style="color: var(--primary);">Generate ID Card</h2>
+  <div class="input-group">
+    <label>ছাত্রের নাম:</label>
+    <input type="text" id="nameInput" placeholder="উদা: Bipul Sarkar">
+  </div>
+  <div class="input-group">
+    <label>রোল/আইডি নম্বর:</label>
+    <input type="text" id="idInput" placeholder="উদা: SSCEC/2026/01">
+  </div>
+  <div class="input-group">
+    <label>কোর্সের নাম:</label>
+    <input type="text" id="courseInput" value="Spoken English Masterclass">
+  </div>
+  <div class="input-group">
+    <label>নিজের ছবি আপলোড করুন:</label>
+    <input type="file" id="imageInput" accept="image/*">
+  </div>
+  <button class="btn" onclick="generateCard()">তৈরি করুন ⮕</button>
+</div>
+
+<div id="id-card-display">
+  <div class="id-card" id="capture">
+    <div class="card-header">
+      <h2>SUPER SUCCESS</h2>
+      <p>COMPUTER EDUCATION CENTER</p>
+      <p>Nimta, Kolkata - 700049</p>
+    </div>
+    
+    <div class="photo-area">
+      <img id="output-img" src="" alt="Student Photo">
+    </div>
+
+    <div class="details">
+      <h3 id="out-name">Name</h3>
+      <p>ID: <span id="out-id">0000</span></p>
+      <p>Course: <span id="out-course">Course Name</span></p>
+      <p>Valid Up to: Dec 2026</p>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=50x50&data=SSCEC-VERIFIED" style="width: 50px;">
+        <p style="font-size: 9px; margin: 0; font-weight: bold; color: green;">VERIFIED STUDENT</p>
+    </div>
+
+    <div class="card-footer">
+      📞 8017247298 | www.sscec.com
+    </div>
+  </div>
+  <br>
+  <button class="btn" style="background: #ef4444;" onclick="window.print()">📥 ডাউনলোড / প্রিন্ট করুন</button>
+</div>
+
+<script>
+function generateCard() {
+  const name = document.getElementById('nameInput').value;
+  const id = document.getElementById('idInput').value;
+  const course = document.getElementById('courseInput').value;
+  const imageInput = document.getElementById('imageInput');
+
+  if(!name || !id || !imageInput.files[0]) {
+    alert("সবগুলো ঘর পূরণ করুন এবং ছবি আপলোড করুন!");
+    return;
+  }
+
+  document.getElementById('out-name').innerText = name;
+  document.getElementById('out-id').innerText = id;
+  document.getElementById('out-course').innerText = course;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('output-img').src = e.target.result;
+    document.getElementById('id-card-display').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+  reader.readAsDataURL(imageInput.files[0]);
+}
+</script>
+
+</body>
+</html>
