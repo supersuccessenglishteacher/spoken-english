@@ -8,51 +8,43 @@
   :root { --primary: #1e293b; --accent: #b45309; --bg: #f1f5f9; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 10px; }
   
-  /* রেজিস্ট্রেশন কার্ড */
   .exam-card { background: white; max-width: 800px; width: 100%; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin: auto; border-top: 8px solid var(--accent); box-sizing: border-box; }
   .header { text-align: center; margin-bottom: 25px; }
   .input-group { margin-bottom: 15px; text-align: left; }
   .input-group label { display: block; font-weight: bold; margin-bottom: 5px; }
   .input-group input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
 
-  /* পরীক্ষা এরিয়া */
-  #exam-area { display: none; }
+  #exam-area, #result-area { display: none; }
   .question { font-size: 1.2rem; font-weight: bold; color: #1e293b; margin-bottom: 20px; padding: 15px; background: #fffbeb; border-radius: 10px; border-left: 5px solid var(--accent); }
   .opt-grid { display: grid; gap: 10px; }
   .opt { padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px; cursor: pointer; background: #f8fafc; transition: 0.3s; font-weight: 500; }
   .opt:hover { background: #e2e8f0; border-color: var(--accent); }
 
-  /* অটোমেটিক সার্টিফিকেট ডিজাইন */
-  #result-area { display: none; text-align: center; }
+  /* সার্টিফিকেট ডিজাইন */
   .certificate-box { 
-    width: 100%; max-width: 700px; background: white; padding: 50px; 
-    border: 20px solid #1e293b; margin: 20px auto; position: relative; 
-    box-sizing: border-box; border-image: url('https://i.imgur.com/7p4v4fB.png') 30 fill; /* গোল্ডেন বর্ডার ইফেক্ট */
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); /* পেপার টেক্সচার */
+    width: 100%; max-width: 750px; background: #fff; padding: 40px; 
+    border: 15px solid #1e293b; margin: 20px auto; position: relative; 
+    box-sizing: border-box; border-image: linear-gradient(45deg, #d4af37, #b45309) 20;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2); text-align: center;
   }
-  .cert-header { color: #1e293b; font-size: 28px; font-weight: bold; margin: 0; }
-  .cert-sub { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #64748b; margin-bottom: 20px; }
-  .cert-title { font-family: 'Georgia', serif; color: #b45309; font-size: 38px; margin: 20px 0; font-style: italic; }
-  .student-name { font-size: 32px; color: #1e293b; font-weight: bold; border-bottom: 2px solid #b45309; display: inline-block; padding: 0 15px; margin: 15px 0; font-family: 'Times New Roman', serif; }
+  .cert-header { color: #1e293b; font-size: 32px; font-weight: bold; margin: 0; }
+  .cert-sub { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #64748b; margin-bottom: 25px; display: block; }
+  .cert-title { font-family: 'Georgia', serif; color: #b45309; font-size: 42px; margin: 20px 0; font-style: italic; }
+  .student-name { font-size: 36px; color: #1e40af; font-weight: bold; border-bottom: 2px solid #b45309; display: inline-block; padding: 0 20px; margin: 15px 0; font-family: 'Times New Roman', serif; }
   
-  /* সিগনেচার এরিয়া */
-  .sig-container { margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 20px; }
-  .sig-item { text-align: center; width: 200px; }
-  .sig-image { width: 150px; height: auto; display: block; margin: 0 auto -10px auto; }
-  .sig-line { border-top: 2px solid #1e293b; padding-top: 5px; font-weight: bold; font-size: 14px; }
+  /* সিগনেচার সেকশন */
+  .sig-container { margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 30px; }
+  .sig-item { text-align: center; width: 180px; }
+  .sig-image { width: 110px; height: auto; margin-bottom: -15px; position: relative; z-index: 1; }
+  .sig-line { border-top: 2px solid #1e293b; padding-top: 5px; font-weight: bold; font-size: 14px; color: #000; }
 
-  /* বাটন */
-  .btn { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; }
-  .btn-wa { background: #25d366; color: white; }
-  .btn-print { background: #ef4444; color: white; }
+  .btn { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px; color: white; }
 
   @media print {
     body { background: white; padding: 0; }
-    .exam-card { box-shadow: none; border: none; width: 100%; max-width: 100%; }
-    .btn, .header, #intro { display: none; }
-    #result-area { display: block; }
-    .certificate-box { margin: 0; border: 15px solid #1e293b; width: 100%; }
+    .exam-card, .btn, .header, #intro { display: none !important; }
+    #result-area { display: block !important; }
+    .certificate-box { margin: 0; border: 10px solid #1e293b; width: 100%; box-shadow: none; }
   }
 </style>
 </head>
@@ -61,64 +53,55 @@
 <div class="exam-card">
   <div id="intro">
     <div class="header">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=SSCEC-VERIFIED" style="float: right; width: 60px;">
-      <h1 style="text-align: left; color: var(--accent);">SSCEC Spoken English</h1>
-      <p style="text-align: left;">ফাইনাল পরীক্ষা ও সার্টিফিকেট জেনারেটর</p>
+      <h1 style="color: var(--accent);">SSCEC Spoken English</h1>
+      <p>ফাইনাল পরীক্ষা ও ডিজিটাল সার্টিফিকেট</p>
     </div>
     <div class="input-group">
-      <label>আপনার সম্পূর্ণ নাম (Certificate-এ যা থাকবে):</label>
+      <label>আপনার সম্পূর্ণ নাম:</label>
       <input type="text" id="stuName" placeholder="উদা: Bipul Sarkar">
     </div>
     <div class="input-group">
       <label>রোল নম্বর / ফোন নম্বর:</label>
-      <input type="text" id="stuId" placeholder="আপনার আইডি নম্বর দিন">
+      <input type="text" id="stuId" placeholder="আপনার আইডি দিন">
     </div>
-    <button class="btn" style="background: var(--primary); color: white;" onclick="startExam()">পরীক্ষা শুরু করুন ⮕</button>
+    <button class="btn" style="background: var(--primary);" onclick="startExam()">পরীক্ষা শুরু করুন ⮕</button>
   </div>
 
   <div id="exam-area">
-    <div style="font-weight: bold; color: var(--accent); margin-bottom: 5px;">Progress: <span id="qCount">1</span>/20</div>
+    <div style="font-weight: bold; color: var(--accent); margin-bottom: 10px;">প্রশ্ন: <span id="qCount">1</span>/20</div>
     <div id="qt" class="question">Loading...</div>
     <div class="opt-grid" id="og"></div>
   </div>
 
   <div id="result-area">
     <div id="certificate" class="certificate-box">
-        <p class="cert-header">SUPER SUCCESS</p>
-        <p class="cert-sub">Computer Education Center</p>
-        
+        <div class="cert-header">SUPER SUCCESS</div>
+        <span class="cert-sub">Computer Education Center</span>
         <h1 class="cert-title">Certificate of Achievement</h1>
-        
-        <p style="font-size: 18px; margin: 0;">This is to certify that</p>
+        <p style="font-size: 20px; margin: 0;">This is to certify that</p>
         <div class="student-name" id="certName">Student Name</div>
-        
-        <p style="font-size: 18px; margin-top: 10px;">has successfully completed the <b>Spoken English Course</b></p>
+        <p style="font-size: 19px; margin-top: 10px;">has successfully completed the <b>Spoken English Course</b></p>
         <p style="font-size: 18px;">with an outstanding score of <b id="certScore" style="color: #b45309;">0</b> out of 20</p>
 
         <div class="sig-container">
-            <div style="text-align: left; font-size: 13px;">
-                <p><b>Student ID:</b> <span id="certId">---</span></p>
-                <p><b>Issue Date:</b> <span id="certDate">--/--/----</span></p>
-                <p style="color: green; font-weight: bold;">✓ Verified Online</p>
+            <div style="text-align: left; font-size: 14px; line-height: 1.6;">
+                <p style="margin:0;"><b>ID:</b> <span id="certId">---</span></p>
+                <p style="margin:0;"><b>Date:</b> <span id="certDate">07/01/2026</span></p>
+                <p style="color: #10b981; font-weight: bold; margin:0;">✓ Verified Online</p>
             </div>
-            
             <div class="sig-item">
-                <img src="signature_with_seal.png" alt="Signature" class="sig-image" id="sigImg">
-                <div class="sig-line">Bipul Sarkar</div>
-                <div style="font-size: 11px; color: #64748b;">Principal/Director, SSCEC</div>
+                <img src="signature_with_seal.png" alt="Signature" class="sig-image">
+                <div class="sig-line">BIPUL SARKAR</div>
+                <div style="font-size: 11px; color: #64748b; font-weight: bold;">PRINCIPAL, SSCEC</div>
             </div>
         </div>
     </div>
-
-    <button class="btn btn-print" onclick="window.print()">📥 সার্টিফিকেট PDF ডাউনলোড করুন</button>
-    <button class="btn btn-wa" onclick="sendResult()">📲 রেজাল্ট স্যারকে পাঠিয়ে দিন</button>
+    <button class="btn" style="background: #ef4444;" onclick="window.print()">📥 সার্টিফিকেট PDF ডাউনলোড করুন</button>
+    <button class="btn" style="background: #25d366;" onclick="sendResult()">📲 রেজাল্ট স্যারকে পাঠিয়ে দিন</button>
   </div>
 </div>
 
 <script>
-// আপনার সিগনেচার ইমেজের নাম এখানে দিন (ফাইলটি একই ফোল্ডারে থাকতে হবে)
-const MY_SIGNATURE_FILE = "signature_with_seal.png"; 
-
 const questions = [
   {q: "সে যায় - ইংরেজি কোনটি?", o: ["He go", "He goes", "He going", "He gone"], a: 1},
   {q: "May I come in? - এটি কখন বলা হয়?", o: ["বিদায় নেওয়া", "অনুমতি নেওয়া", "ধন্যবাদ দেওয়া", "ডাকা"], a: 1},
@@ -175,7 +158,6 @@ function showResult() {
   document.getElementById('certId').innerText = document.getElementById('stuId').value;
   document.getElementById('certScore').innerText = score;
   document.getElementById('certDate').innerText = new Date().toLocaleDateString();
-  document.getElementById('sigImg').src = MY_SIGNATURE_FILE; 
 }
 
 function sendResult() {
