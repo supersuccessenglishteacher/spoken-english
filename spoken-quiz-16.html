@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Quiz - SSCEC</title>
+<style>
+  :root { --primary: #065f46; --dark: #064e3b; --bg: #f0fdf4; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .opt-grid { display: grid; gap: 10px; margin-top: 20px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 500; }
+  .correct { background: #065f46 !important; color: white; border-color: #064e3b; }
+  .wrong { background: #ef4444 !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="quiz-card">
+  <div id="game">
+    <div style="text-align: center; color: var(--primary); font-weight: bold;">Lesson 16: Health & Doctor Quiz</div>
+    <div id="qt" style="font-size:1.2rem; font-weight:bold; text-align:center; margin-top:15px; color: var(--dark);">Loading...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--dark);">সুস্থ থেকো! 💊</h2>
+    <p style="font-size: 1.5rem;">তোমার স্কোর: <span id="sc">0</span>/10</p>
+    <button onclick="send()" class="wa-btn">📲 স্যারকে রেজাল্ট পাঠাও</button>
+  </div>
+</div>
+
+<script>
+const data = [
+  {q: "মাথা ব্যথার ইংরেজি কী?", o: ["Backache", "Headache", "Stomach ache", "Toothache"], a: 1},
+  {q: "কাশি-কে ইংরেজিতে কী বলে?", o: ["Cold", "Fever", "Cough", "Dizzy"], a: 2},
+  {q: "ডাক্তারের লিখে দেওয়া ওষুধের কাগজকে কী বলে?", o: ["Letter", "Paper", "Prescription", "Note"], a: 2},
+  {q: "Sore throat মানে কী?", o: ["পেট ব্যথা", "গলা ব্যথা", "কান ব্যথা", "পা ব্যথা"], a: 1},
+  {q: "I am not feeling well - এর অর্থ কী?", o: ["আমি ভালো আছি", "আমার শরীর ভালো নেই", "আমি খেতে চাই", "আমি ঘুমাতে চাই"], a: 1},
+  {q: "মাথা ঘোরালে কোন শব্দটি ব্যবহার করবেন?", o: ["Happy", "Dizzy", "Strong", "Healthy"], a: 1},
+  {q: "Severe pain মানে কী?", o: ["অল্প ব্যথা", "তীব্র ব্যথা", "মাঝারি ব্যথা", "ব্যথা নেই"], a: 1},
+  {q: "Medicine শব্দের অর্থ কী?", o: ["খাবার", "ওষুধ", "বিশ্রাম", "ব্যায়াম"], a: 1},
+  {q: "Since when? - এর অর্থ কী?", o: ["কখন থেকে?", "কোথায় থেকে?", "কীভাবে?", "কেন?"], a: 0},
+  {q: "জ্বর মাপার যন্ত্রকে কী বলে?", o: ["Scale", "Thermometer", "Clock", "Meter"], a: 1}
+];
+
+let ci = 0, s = 0;
+function load() {
+  const d = data[ci]; document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => {
+    const b = document.createElement('div'); b.className = 'opt'; b.innerText = o;
+    b.onclick = () => check(i, b); g.appendChild(b);
+  });
+}
+function check(i, b) {
+  const c = data[ci].a;
+  if(i === c) { s++; b.classList.add('correct'); }
+  else { b.classList.add('wrong'); document.querySelectorAll('.opt')[c].classList.add('correct'); }
+  setTimeout(() => { ci++; if(ci < data.length) load(); else show(); }, 1000);
+}
+function show() { document.getElementById('game').style.display = 'none'; document.getElementById('result').style.display = 'block'; document.getElementById('sc').innerText = s; }
+function send() { 
+  let n = prompt("তোমার নাম লেখো:"); 
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English (Lesson-16)* কুইজ শেষ করেছি।\n\n👤 *নাম:* ${n || 'ছাত্র/ছাত্রী'}\n🎯 *স্কোর:* ${s}/10`;
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(msg)}`); 
+}
+load();
+</script>
+</body>
+</html>
