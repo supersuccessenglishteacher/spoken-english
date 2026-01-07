@@ -4,229 +4,166 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken English & Grammar - SSCEC</title>
-
+ 
 <script>
-  /* =============================================
-     এখানে আপনার পাসওয়ার্ড সেট করুন (নিচে হাইলাইট করা)
-     ============================================= */
-  const correctPassword = "123456789"; // <--- আপনার পাসওয়ার্ড
-
+  const correctPassword = "123456789"; 
   function checkPassword() {
-    let enteredPassword = prompt("SSCEC পোর্টালে স্বাগতম!\nঅনুগ্রহ করে অ্যাক্সেস পাসওয়ার্ডটি দিন:");
-    
+    let enteredPassword = prompt("SSCEC পোর্টালে স্বাগতম!\nঅনুগ্রহ করে অ্যাক্সেস পাসওয়ার্ডটি দিন:");
     if (enteredPassword === correctPassword) {
-      alert("পাসওয়ার্ড সঠিক হয়েছে। স্বাগতম!");
-      document.body.style.display = "flex"; // সঠিক হলে পেজ দেখাবে
+      alert("পাসওয়ার্ড সঠিক হয়েছে। স্বাগতম!");
+      document.body.style.display = "flex"; 
     } else {
-      alert("দুঃখিত, পাসওয়ার্ড ভুল! আবার চেষ্টা করুন।");
-      location.reload(); // ভুল হলে পেজ রিফ্রেশ হবে
+      alert("দুঃখিত, পাসওয়ার্ড ভুল! আবার চেষ্টা করুন।");
+      location.reload(); 
     }
   }
 </script>
-
+ 
 <style>
   :root {
     --primary: #1e3a8a;
     --secondary: #3b82f6;
     --bg: #f8fafc;
     --text: #1e293b;
-    --spoken: #059669;
-    --tense: #d97706;
-    --grammar: #7c3aed;
-    --story: #db2777;
+    --tally: #00428a; /* Tally Blue */
   }
   
   body { 
     font-family: 'Segoe UI', Roboto, sans-serif; 
     background-color: var(--bg); 
-    margin: 0; 
-    padding: 10px; 
-    display: none; /* পাসওয়ার্ড না দেওয়া পর্যন্ত পেজ হাইড থাকবে */
+    margin: 0; padding: 10px; 
+    display: none; 
     flex-direction: column; 
     align-items: center;
     color: var(--text);
   }
   
-  /* Header Section */
   .header { 
     background: linear-gradient(135deg, #1e3a8a, #0284c7); 
-    color: white; 
-    width: 100%; 
-    max-width: 900px; 
-    text-align: center; 
-    padding: 40px 20px; 
-    border-radius: 30px; 
-    box-shadow: 0 15px 30px rgba(30, 58, 138, 0.2); 
-    margin-bottom: 30px;
-    margin-top: 10px;
-    box-sizing: border-box;
+    color: white; width: 100%; max-width: 900px; 
+    text-align: center; padding: 40px 20px; 
+    border-radius: 30px; box-shadow: 0 15px 30px rgba(30, 58, 138, 0.2); 
+    margin-bottom: 30px; margin-top: 10px; box-sizing: border-box;
   }
   
-  .header h1 { font-size: 28px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-  .header p { opacity: 0.9; font-size: 15px; margin-top: 10px; line-height: 1.6; }
+  .header h1 { font-size: 28px; margin: 0; text-transform: uppercase; }
   
-  /* Section Title Styling */
-  .section-container {
-    width: 100%;
-    max-width: 950px;
-    margin-bottom: 40px;
-  }
+  .section-container { width: 100%; max-width: 950px; margin-bottom: 40px; }
   
   .section-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text);
-    margin: 30px 0 20px 0;
-    font-size: 22px;
-    font-weight: 800;
-    padding-left: 10px;
-    border-left: 5px solid var(--primary);
+    display: flex; align-items: center; gap: 10px;
+    color: var(--text); margin: 30px 0 20px 0;
+    font-size: 22px; font-weight: 800;
+    padding-left: 10px; border-left: 5px solid var(--primary);
   }
   
-  /* Grid Layout */
   .card-container { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 20px; 
-    width: 100%;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; width: 100%;
   }
   
-  /* Card Design */
   .card { 
-    background: white; 
-    padding: 25px 20px; 
-    border-radius: 20px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
+    background: white; padding: 25px 20px; border-radius: 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;
+    border: 1px solid #e2e8f0; display: flex; flex-direction: column;
+    justify-content: space-between; position: relative; overflow: hidden;
   }
   
-  .card:hover { 
-    transform: translateY(-8px); 
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  }
+  .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); }
   
   .card-icon { font-size: 40px; margin-bottom: 15px; display: block; }
   .card h3 { margin: 5px 0; font-size: 18px; color: var(--primary); }
-  .card p { font-size: 14px; color: #64748b; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
+  .card p { font-size: 14px; color: #64748b; margin-bottom: 20px; line-height: 1.5; }
   
-  /* Buttons */
+  .badge {
+    position: absolute; top: 15px; right: -30px;
+    background: #ff4757; color: white; padding: 5px 40px;
+    font-size: 10px; font-weight: bold; transform: rotate(45deg);
+  }
+
   .btn { 
-    display: block; 
-    background: var(--secondary); 
-    color: white; 
-    text-decoration: none; 
-    padding: 12px; 
-    border-radius: 12px; 
-    font-weight: bold; 
-    text-align: center;
-    transition: 0.3s;
-    font-size: 15px;
+    display: block; background: var(--secondary); color: white; 
+    text-decoration: none; padding: 12px; border-radius: 12px; 
+    font-weight: bold; text-align: center; transition: 0.3s;
   }
   
-  .btn:hover { filter: brightness(1.1); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
-  
-  @media (max-width: 600px) {
-    .header h1 { font-size: 22px; }
-    .card-container { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 600px) { .header h1 { font-size: 22px; } }
 </style>
 </head>
 <body onload="checkPassword()">
  
- <div class="header">
+<div class="header">
    <h1>🗣️ Spoken English & Grammar</h1>
-   <p><b>SUPER SUCCESS COMPUTER EDUCATION CENTER</b><br>
+  <p><b>SUPER SUCCESS COMPUTER EDUCATION CENTER</b><br>
    📍 22/1 Bipin Paul Road, Nimta, Kolkata - 49<br>
    📞 8017247298 | 9874152080</p>
- </div>
+</div>
  
 <div style="width: 100%; max-width: 1100px; margin: 25px auto; padding: 0 15px; box-sizing: border-box;">
-   
-   <div style="background: linear-gradient(135deg, #064e3b 0%, #0fa36b 100%); 
-               padding: 35px; 
-               border-radius: 25px; 
-               color: white; 
-               display: flex; 
-               align-items: center; 
-               flex-wrap: wrap; 
-               gap: 20px; 
-               box-shadow: 0 15px 35px rgba(6, 78, 59, 0.2); 
-               border: 1px solid rgba(255,255,255,0.1); 
-               position: relative; 
-               overflow: hidden;">
-        
+   <div style="background: linear-gradient(135deg, #064e3b 0%, #0fa36b 100%); padding: 35px; border-radius: 25px; color: white; display: flex; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 15px 35px rgba(6, 78, 59, 0.2); border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
         <div style="position: absolute; right: -30px; bottom: -30px; width: 150px; height: 150px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
- 
         <div style="flex: 2; min-width: 280px; position: relative; z-index: 1;">
-            <span style="background: #fbbf24; color: #064e3b; padding: 5px 15px; border-radius: 50px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">NEW COURSE LAUNCHED</span>
-            
-            <h2 style="margin: 15px 0 10px 0; font-size: 2.2rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">Spoken English Masterclass 🎙️</h2>
-            
-            <p style="margin: 0 0 25px 0; font-size: 1.1rem; opacity: 0.9; line-height: 1.5; font-weight: 400;">
-                সহজ কৌশলে ইংরেজি বলতে শিখুন এবং নিজের ক্যারিয়ারকে এক ধাপ এগিয়ে নিয়ে যান। আজই যোগ দিন আমাদের বিশেষ পাঠশালায়।
-            </p>
-            
-            <a href="spoken-english.html" style="background: white; color: #064e3b; padding: 14px 30px; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 16px; display: inline-block; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-                আজই শেখা শুরু করো ⮕
-            </a>
+            <span style="background: #fbbf24; color: #064e3b; padding: 5px 15px; border-radius: 50px; font-size: 11px; font-weight: 800; text-transform: uppercase;">NEW COURSE LAUNCHED</span>
+            <h2 style="margin: 15px 0 10px 0; font-size: 2.2rem; font-weight: 800;">Spoken English Masterclass 🎙️</h2>
+            <p style="margin: 0 0 25px 0; font-size: 1.1rem; opacity: 0.9;">সহজ কৌশলে ইংরেজি বলতে শিখুন এবং নিজের ক্যারিয়ারকে এক ধাপ এগিয়ে নিয়ে যান।</p>
+            <a href="spoken-english.html" style="background: white; color: #064e3b; padding: 14px 30px; border-radius: 12px; text-decoration: none; font-weight: 800; display: inline-block;">আজই শেখা শুরু করো ⮕</a>
         </div>
- 
         <div style="flex: 1; display: flex; justify-content: center; align-items: center; min-width: 180px;">
-            <div style="font-size: 6rem; filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.3));">🗣️</div>
+            <div style="font-size: 6rem;">🗣️</div>
         </div>
    </div>
 </div>
-<div class="section-container"> <div class="section-title" style="border-color: #10b981;">🆔 Student Services & Achievement</div> <div class="card-container"> <div class="card" style="border-top: 6px solid #10b981; background: #f0fdf4;"> <span class="badge" style="background: #10b981;">OFFICIAL</span> <div> <span class="card-icon">🪪</span> <h3>Digital ID Card</h3> <p>আপনার নাম ও ছবি দিয়ে SSCEC-এর নিজস্ব ডিজিটাল আইডি কার্ড তৈরি করে নিন।</p> </div> <a href="id-card.html" class="btn" style="background: #10b981;">কার্ড তৈরি করুন</a> </div> <div class="card" style="border-top: 6px solid #b45309; background: #fff7ed;"> <span class="badge" style="background: #b45309;">GRADUATION</span> <div> <span class="card-icon">🎓</span> <h3>Exam & Certificate</h3> <p>কোর্স শেষে পরীক্ষা দিন এবং আপনার মেধার স্বীকৃতি হিসেবে সার্টিফিকেট ডাউনলোড করুন।</p> </div> <a href="spoken-final-exam.html" class="btn" style="background: #b45309;">পরীক্ষা দিন</a> </div> </div> </div>
 
 <div class="section-container">
+    <div class="section-title" style="border-color: #00428a;">📊 Accounting & Business Management</div>
+    <div class="card-container">
+        <div class="card" style="border-top: 6px solid #00428a;">
+            <span class="badge" style="background: #00428a;">POPULAR</span>
+            <div>
+                <span class="card-icon">📊</span>
+                <h3>Tally Prime with GST</h3>
+                <p>অ্যাকাউন্টিং এবং জিএসটি শিখে নিজেকে একজন প্রফেশনাল অ্যাকাউন্ট্যান্ট হিসেবে গড়ে তুলুন।</p>
+            </div>
+            <a href="tally-prime.html" class="btn" style="background: #00428a;">কোর্সটি দেখুন ⮕</a>
+        </div>
+        
+        </div>
+</div>
+
+<div class="section-container"> 
+    <div class="section-title" style="border-color: #10b981;">🆔 Student Services & Achievement</div>
+    <div class="card-container"> 
+        <div class="card" style="border-top: 6px solid #10b981; background: #f0fdf4;">
+            <div> <span class="card-icon">🪪</span>
+            <h3>Digital ID Card</h3> <p>আপনার নাম ও ছবি দিয়ে SSCEC-এর নিজস্ব ডিজিটাল আইডি কার্ড তৈরি করে নিন।</p>
+            </div> <a href="id-card.html" class="btn" style="background: #10b981;">কার্ড তৈরি করুন</a>
+        </div> 
+        <div class="card" style="border-top: 6px solid #b45309; background: #fff7ed;"> 
+            <div><span class="card-icon">🎓</span>
+            <h3>Exam & Certificate</h3> <p>কোর্স শেষে পরীক্ষা দিন এবং আপনার মেধার স্বীকৃতি হিসেবে সার্টিফিকেট ডাউনলোড করুন।</p>
+            </div> <a href="spoken-final-exam.html" class="btn" style="background: #b45309;">পরীক্ষা দিন</a> </div>
+    </div> 
+</div>
+ 
+<div class="section-container">
     <div class="section-title" style="border-color: #ef4444;">📩 Support & Payments</div>
-    
     <div style="background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;">
         <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: flex-start;">
-            
             <div style="flex: 1; min-width: 280px; background: #fef2f2; padding: 20px; border-radius: 15px; border-top: 5px solid #ef4444;">
-                <div style="font-size: 35px; margin-bottom: 10px;">💳</div>
+               <div style="font-size: 35px; margin-bottom: 10px;">💳</div>
                 <h3 style="color: #ef4444; margin: 0 0 10px 0;">Student Fee Info</h3>
-                <p style="color: #64748b; font-size: 14px; margin-bottom: 20px; line-height: 1.5;">
-                    আপনার মাসিক কোর্স ফি বা অ্যাডমিশন ফি সম্পর্কে বিস্তারিত জানতে নিচের বাটনে ক্লিক করে সরাসরি যোগাযোগ করুন।
-                </p>
-                <a href="https://wa.me/918017247298?text=Hello%20Sir,%20I%20want%20to%20know%20about%20the%20Fee%20Structure." 
-                   style="display: block; background: #ef4444; color: white; padding: 12px; text-decoration: none; border-radius: 10px; font-weight: bold; text-align: center;">
-                   ফি সম্পর্কে জানুন
-                </a>
-            </div>
-
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">আপনার মাসিক কোর্স ফি বা অ্যাডমিশন ফি সম্পর্কে বিস্তারিত জানতে যোগাযোগ করুন।</p>
+                <a href="https://wa.me/918017247298" style="display: block; background: #ef4444; color: white; padding: 12px; text-decoration: none; border-radius: 10px; font-weight: bold; text-align: center;">ফি সম্পর্কে জানুন</a>
+           </div>
             <div style="flex: 1.5; min-width: 280px;">
                 <h3 style="color: #7c3aed; margin-top: 0;">🆘 Help Desk & Support</h3>
-                <p style="color: #64748b; font-size: 14px; line-height: 1.5;">
-                    ভর্তি বা অন্য যেকোনো জিজ্ঞাসার জন্য আমাদের সাপোর্ট টিমের সাথে যোগাযোগ করুন।
-                </p>
-                
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
-                    <a href="https://wa.me/918017247298" style="background: #25d366; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        <span>💬 WhatsApp Support</span>
-                    </a>
-                    
-                    <a href="tel:+918017247298" style="background: #1e3a8a; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                        <span>📞 Call Office</span>
-                    </a>
-                </div>
-
-                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; font-size: 13px; color: #64748b;">
-                    <p style="margin: 3px 0;">📍 <b>ঠিকানা:</b> বিপি পাল রোড, নিমতা, কলকাতা - ৪৯</p>
-                    <p style="margin: 3px 0;">📧 <b>ইমেইল:</b> supersuccess.com.cent@gmail.com</p>
+                   <a href="https://wa.me/918017247298" style="background: #25d366; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; text-align: center;">💬 WhatsApp Support</a>
+                   <a href="tel:+918017247298" style="background: #1e3a8a; color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; text-align: center;">📞 Call Office</a>
                 </div>
             </div>
-
         </div>
-    </div>
+   </div>
 </div>
   <div class="section-container">
     <div class="section-title" style="border-color: var(--tense);">🎮 Tense Mastery & Games</div>
