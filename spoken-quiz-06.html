@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Railway Quiz - SSCEC</title>
+<style>
+  :root { --primary: #e11d48; --dark: #881337; --bg: #fff1f2; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 15px; display: flex; justify-content: center; }
+  .quiz-card { background: white; max-width: 600px; width: 100%; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--primary); }
+  .opt-grid { display: grid; gap: 10px; margin-top: 20px; }
+  .opt { padding: 12px; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; text-align: center; font-weight: 500; }
+  .correct { background: #e11d48 !important; color: white; border-color: #be123c; }
+  .wrong { background: #ef4444 !important; color: white; }
+  #result { display: none; text-align: center; }
+  .wa-btn { background: #25d366; color: white; padding: 12px 25px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="quiz-card">
+  <div id="game">
+    <div style="text-align: center; color: var(--primary); font-weight: bold;">Lesson 6: Railway Enquiry Quiz</div>
+    <div id="qt" style="font-size:1.2rem; font-weight:bold; text-align:center; margin-top:15px; color: var(--dark);">Loading...</div>
+    <div class="opt-grid" id="og"></div>
+  </div>
+  <div id="result">
+    <h2 style="color: var(--dark);">শুভ যাত্রা! 🚆</h2>
+    <p style="font-size: 1.5rem;">তোমার স্কোর: <span id="sc">0</span>/10</p>
+    <button onclick="send()" class="wa-btn">📲 স্যারকে রেজাল্ট পাঠাও</button>
+  </div>
+</div>
+
+<script>
+const data = [
+  {q: "রেলস্টেশনে তথ্যের জন্য কোথায় যেতে হয়?", o: ["Canteen", "Enquiry Counter", "Waiting Room", "Exit"], a: 1},
+  {q: "'Arrive' মানে কী?", o: ["ছেড়ে যাওয়া", "পৌঁছানো বা আসা", "থামা", "দেরি হওয়া"], a: 1},
+  {q: "ট্রেন দেরি করে চললে কী বলা হয়?", o: ["Fast", "On time", "Delayed/Late", "Early"], a: 2},
+  {q: "'Vacant seat' এর অর্থ কী?", o: ["ভর্তি সিট", "খালি সিট", "ভাঙা সিট", "বসার সিট"], a: 1},
+  {q: "Platform মানে কী?", o: ["বাস স্ট্যান্ড", "রেলগাড়ি দাঁড়ানোর জায়গা", "টিকিট ঘর", "রাস্তা"], a: 1},
+  {q: "পরের ট্রেন কখন? - এর ইংরেজি কী?", o: ["Where is train?", "When is the next train?", "Who is in train?", "Train when?"], a: 1},
+  {q: "Ticket counter কোথায়? - ইংরেজি কোনটি?", o: ["Where is the ticket counter?", "How is the ticket?", "Give me ticket", "Ticket no?"], a: 0},
+  {q: "'On time' মানে কী?", o: ["দেরিতে", "সঠিক সময়ে", "আগে আগে", "কখনো না"], a: 1},
+  {q: "Departure মানে কী?", o: ["আগমন", "প্রস্থান বা ছেড়ে যাওয়া", "বিরতি", "যাত্রা"], a: 1},
+  {q: "ট্রেন কোন প্ল্যাটফর্মে আসবে - এটি কীভাবে জিজ্ঞেস করবেন?", o: ["Which platform?", "What is platform?", "Where is platform?", "How platform?"], a: 0}
+];
+
+let ci = 0, s = 0;
+function load() {
+  const d = data[ci]; document.getElementById('qt').innerText = d.q;
+  const g = document.getElementById('og'); g.innerHTML = '';
+  d.o.forEach((o, i) => {
+    const b = document.createElement('div'); b.className = 'opt'; b.innerText = o;
+    b.onclick = () => check(i, b); g.appendChild(b);
+  });
+}
+function check(i, b) {
+  const c = data[ci].a;
+  if(i === c) { s++; b.classList.add('correct'); }
+  else { b.classList.add('wrong'); document.querySelectorAll('.opt')[c].classList.add('correct'); }
+  setTimeout(() => { ci++; if(ci < data.length) load(); else show(); }, 1000);
+}
+function show() { document.getElementById('game').style.display = 'none'; document.getElementById('result').style.display = 'block'; document.getElementById('sc').innerText = s; }
+function send() { 
+  let n = prompt("তোমার নাম লেখো:"); 
+  const msg = `শ্রদ্ধেয় স্যার,\nআমি *Spoken English (Lesson-06)* কুইজ শেষ করেছি।\n\n👤 *নাম:* ${n || 'ছাত্র/ছাত্রী'}\n🎯 *স্কোর:* ${s}/10`;
+  window.open(`https://wa.me/918017247298?text=${encodeURIComponent(msg)}`); 
+}
+load();
+</script>
+</body>
+</html>
