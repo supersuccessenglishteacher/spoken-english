@@ -5,25 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken English & Grammar - SSCEC</title>
 
-<script>
-  /* =============================================
-     এখানে আপনার পাসওয়ার্ড সেট করুন (নিচে হাইলাইট করা)
-     ============================================= */
-  const correctPassword = "123456789"; // <--- আপনার পাসওয়ার্ড
-
-  function checkPassword() {
-    let enteredPassword = prompt("SSCEC পোর্টালে স্বাগতম!\nঅনুগ্রহ করে অ্যাক্সেস পাসওয়ার্ডটি দিন:");
-    
-    if (enteredPassword === correctPassword) {
-      alert("পাসওয়ার্ড সঠিক হয়েছে। স্বাগতম!");
-      document.body.style.display = "flex"; // সঠিক হলে পেজ দেখাবে
-    } else {
-      alert("দুঃখিত, পাসওয়ার্ড ভুল! আবার চেষ্টা করুন।");
-      location.reload(); // ভুল হলে পেজ রিফ্রেশ হবে
-    }
-  }
-</script>
-
 <style>
   :root {
     --primary: #1e3a8a;
