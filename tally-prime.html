@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tally Prime with GST - SSCEC</title>
+<title>Tally Prime with GST Masterclass - SSCEC</title>
 <style>
   :root {
     --tally-blue: #00428a;
     --tally-yellow: #ffc412;
     --bg-light: #f8fafc;
     --text-dark: #1e293b;
+    --success-green: #10b981;
   }
  
   body { 
     font-family: 'Segoe UI', Tahoma, sans-serif; 
     background-color: var(--bg-light); 
     margin: 0; padding: 0; color: var(--text-dark);
+    line-height: 1.6;
   }
  
   /* Header Section */
@@ -26,56 +28,68 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   }
   .tally-header h1 { font-size: 32px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
-  .tally-header .institute-name { font-size: 22px; font-weight: bold; margin-top: 15px; color: var(--tally-yellow); }
+  .tally-header .institute-name { font-size: 24px; font-weight: bold; margin-top: 15px; color: var(--tally-yellow); }
   .tally-header .address { font-size: 14px; opacity: 0.9; margin-top: 10px; line-height: 1.5; }
  
   .container { max-width: 1000px; margin: -30px auto 40px; padding: 0 20px; }
  
-  /* Highlight Box */
-  .highlight-box {
-    background: white; color: var(--tally-blue);
-    padding: 25px; border-radius: 20px; font-weight: bold;
-    text-align: center; margin-bottom: 30px; font-size: 18px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    border: 1px solid #e2e8f0;
+  /* Navigation Dashboard Button */
+  .gateway-nav {
+    background: var(--tally-yellow);
+    color: var(--tally-blue);
+    padding: 20px; border-radius: 15px;
+    text-align: center; margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border: 2px solid white;
   }
- 
+  .btn-gateway {
+    display: inline-block; background: var(--tally-blue); color: white;
+    padding: 12px 25px; text-decoration: none; border-radius: 8px;
+    font-weight: bold; font-size: 18px; transition: 0.3s;
+  }
+  .btn-gateway:hover { background: #002a5a; transform: scale(1.05); }
+
+  /* Course Grid */
   .course-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    gap: 25px; margin-top: 20px;
   }
  
   .module-card {
     background: white; border-radius: 20px; padding: 25px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    border-top: 5px solid var(--tally-yellow);
+    border-top: 5px solid var(--tally-blue);
     transition: 0.3s ease;
   }
-  .module-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-  .module-card h3 { color: var(--tally-blue); margin-top: 0; display: flex; align-items: center; gap: 10px; }
-  .module-card ul { padding-left: 20px; font-size: 15px; line-height: 2; color: #475569; }
+  .module-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top-color: var(--tally-yellow); }
+  .module-card h3 { color: var(--tally-blue); margin-top: 0; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+  .module-card ul { list-style: none; padding: 0; margin-top: 15px; }
+  .module-card ul li { margin-bottom: 12px; font-size: 16px; }
  
-  /* Link Styling for Modules */
   .module-link {
-    text-decoration: none;
-    color: #1e3a8a;
-    font-weight: bold;
-    transition: 0.3s;
+    text-decoration: none; color: #334155; font-weight: 500; display: flex; align-items: center;
   }
-  .module-link:hover {
-    color: #ffc412;
-    text-decoration: underline;
-  }
+  .module-link::before { content: "📖"; margin-right: 10px; }
+  .module-link:hover { color: var(--tally-blue); font-weight: bold; }
 
-  .btn-container { text-align: center; margin-top: 50px; }
+  /* Mock Test Sections */
+  .mock-section { margin-top: 30px; padding: 25px; border-radius: 15px; text-align: center; transition: 0.3s; }
+  .mock-btn {
+    display: inline-block; padding: 15px 35px; text-decoration: none; 
+    border-radius: 50px; font-weight: bold; font-size: 18px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; color: white;
+  }
+  .mock-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+
+  .btn-container { text-align: center; margin-top: 50px; background: white; padding: 30px; border-radius: 20px; }
   .btn-home {
     background: var(--tally-blue); color: white; padding: 15px 40px;
     text-decoration: none; border-radius: 12px; font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0,66,138,0.3);
   }
  
   @media (max-width: 600px) {
     .tally-header h1 { font-size: 24px; }
+    .course-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -91,117 +105,87 @@
 </div>
  
 <div class="container">
-    <div class="highlight-box">
-        🚀 এই কোর্সটি সম্পন্ন করে আপনি প্রফেশনাল অ্যাকাউন্টিং ক্যারিয়ার শুরু করুন।
+    
+    <div class="gateway-nav">
+        <h3 style="margin-top:0;">🎮 Quick Access Dashboard</h3>
+        <p>ট্যালির সব মডিউল এবং সচিত্র গাইড এক জায়গায় পেতে নিচের বাটনে ক্লিক করুন:</p>
+        <a href="tally-gateway-index.html" class="btn-gateway">🖥️ Open Digital Gateway</a>
     </div>
- 
+
     <div class="course-grid">
-<div class="module-card">
-  <h3>📂 Accounts Basics</h3>
-  <ul>
-    <li><a href="accounting-intro.html" class="module-link">📖 Introduction to Accounting</a></li>
-    <li><a href="double-entry.html" class="module-link">📖 Double Entry System</a></li>
-    <li><a href="tally-company-creation.html" class="module-link">📖 Company Creation in Tally</a></li>
-    <li><a href="tally-ledger-creation.html" class="module-link">📖 Ledger & Chart of Accounts</a></li>
-  </ul>
-</div> 
-      
- <div class="module-card">
-  <h3>📦 Inventory Info</h3>
-  <ul>
-    <li><a href="tally-inventory-info.html" class="module-link">📖 Stock Item & Grouping</a></li>
-    <li><a href="tally-godown-mgmt.html" class="module-link">📖 Godown Management</a></li>
-    <li><a href="tally-purchase-sales-cycle.html" class="module-link">📖 Purchase & Sales Cycle</a></li>    
-    <li><a href="tally-stock-summary.html" class="module-link">📖 Stock Summary Analysis</a></li>
-  </ul>
-</div>
- 
-       <div class="module-card">
-          <h3>🧾 GST Compliance</h3>
+        <div class="module-card">
+          <h3>📂 Accounts Basics</h3>
           <ul>
-           <li><a href="tally-gst-registration.html" class="module-link">📖 GST Registration Details</a></li>                
-           <li><a href="tally-gst-calculation.html" class="module-link">📖 CGST, SGST & IGST Calculation</a></li>
-           <li><a href="tally-eway-bill.html" class="module-link">📖 E-Way Bill Generation</a></li>           
-            <li><a href="tally-gstr-reports.html" class="module-link">📖 GSTR Reports & Taxation</a></li>
+            <li><a href="accounting-intro.html" class="module-link">Introduction to Accounting</a></li>
+            <li><a href="double-entry.html" class="module-link">Double Entry System</a></li>
+            <li><a href="tally-company-creation.html" class="module-link">Company Creation in Tally</a></li>
+            <li><a href="tally-ledger-creation.html" class="module-link">Ledger & Chart of Accounts</a></li>
           </ul>
-          </div>
-      
-<div class="module-card">
-          <h3>📜 Reporting & Tools</h3>
+        </div> 
+          
+        <div class="module-card">
+          <h3>📦 Inventory Info</h3>
           <ul>
-           <li><a href="tally-final-reports.html" class="module-link">📖 Balance Sheet & P/L Account</a></li>           
-            <li><a href="tally-ratio-analysis.html" class="module-link">📖 Ratio Analysis</a></li>
-           <li><a href="tally-backup-restore.html" class="module-link">📖 Data Backup & Restore</a></li>
-           <li><a href="tally-security.html" class="module-link">📖 Tally Vault & Security</a></li>
+            <li><a href="tally-inventory-info.html" class="module-link">Stock Item & Grouping</a></li>
+            <li><a href="tally-godown-mgmt.html" class="module-link">Godown Management</a></li>
+            <li><a href="tally-purchase-sales-cycle.html" class="module-link">Purchase & Sales Cycle</a></li>    
+            <li><a href="tally-stock-summary.html" class="module-link">Stock Summary Analysis</a></li>
           </ul>
         </div>
-    </div>
-      
-      
-      
- 
+     
+        <div class="module-card">
+          <h3>🧾 GST Compliance</h3>
+          <ul>
+           <li><a href="tally-gst-registration.html" class="module-link">GST Registration Details</a></li>                
+           <li><a href="tally-gst-calculation.html" class="module-link">CGST, SGST & IGST Calculation</a></li>
+           <li><a href="tally-eway-bill.html" class="module-link">E-Way Bill Generation</a></li>           
+           <li><a href="tally-gstr-reports.html" class="module-link">GSTR Reports & Taxation</a></li>
+          </ul>
+        </div>
+          
         <div class="module-card">
           <h3>📜 Reporting & Tools</h3>
           <ul>
-           <li>Balance Sheet & P/L Account</li>
-           <li>Ratio Analysis</li>
-           <li>Data Backup & Restore</li>
-           <li>Tally Vault & Security</li>
+           <li><a href="tally-final-reports.html" class="module-link">Balance Sheet & P/L Account</a></li>           
+           <li><a href="tally-ratio-analysis.html" class="module-link">Ratio Analysis</a></li>
+           <li><a href="tally-backup-restore.html" class="module-link">Data Backup & Restore</a></li>
+           <li><a href="tally-security.html" class="module-link">Tally Vault & Security</a></li>
           </ul>
         </div>
     </div>
-<div style="text-align: center; margin-top: 40px;">
-    <a href="tally-mock-test.html" style="background: #10b981; color: white; padding: 15px 30px; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 18px; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);">
-        🎯 অনলাইনে মক টেস্ট দিন (২৫টি প্রশ্ন)
-    </a>
-</div>
 
-<div style="margin-top: 30px; padding: 20px; background: #fff4e5; border-radius: 15px; border: 2px dashed #ffc412; text-align: center;">
-    <h3 style="color: #00428a; margin-top: 0;">🎯 Inventory & Cycle Mock Test</h3>
-    <p style="color: #334155;">সবগুলো চ্যাপ্টার পড়া শেষ হলে নিচের বাটনে ক্লিক করে পরীক্ষা দাও।</p>
-    
-    <a href="inventory-mock-test.html" style="display: inline-block; background: #10b981; color: white; padding: 15px 35px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4); transition: 0.3s;">
-        📝 মক টেস্ট শুরু করো (২৫টি প্রশ্ন)
-    </a>
-    
-    <p style="font-size: 12px; color: #64748b; margin-top: 10px;">* রেজাল্ট সরাসরি স্যারের হোয়াটসঅ্যাপে চলে যাবে।</p>
-</div>
+    <div class="mock-section" style="background: #fff4e5; border: 2px dashed #ffc412;">
+        <h3 style="color: #00428a;">🎯 Inventory & Cycle Mock Test</h3>
+        <p>সবগুলো চ্যাপ্টার পড়া শেষ হলে পরীক্ষা দাও।</p>
+        <a href="inventory-mock-test.html" class="mock-btn" style="background: #10b981;">📝 মক টেস্ট শুরু করো (২৫টি প্রশ্ন)</a>
+        <p style="font-size: 12px; color: #64748b; margin-top: 10px;">* রেজাল্ট সরাসরি স্যারের হোয়াটসঅ্যাপে চলে যাবে।</p>
+    </div>
 
-  <div style="margin-top: 35px; padding: 25px; background: #ecfdf5; border-radius: 15px; border: 2px dashed #059669; text-align: center;">
-    <h3 style="color: #064e3b; margin-top: 0;">🎯 GST & Taxation Final Mock Test</h3>
-    <p style="color: #374151;">GST-র সব চ্যাপ্টার ঝালিয়ে নিতে এখনই এই পরীক্ষাটি দাও।</p>
-    
-    <a href="gst-mock-test.html" style="display: inline-block; background: #059669; color: white; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4); transition: 0.3s;">
-        📝 GST মক টেস্ট শুরু করো
-    </a>
-</div>
+    <div class="mock-section" style="background: #ecfdf5; border: 2px dashed #059669;">
+        <h3 style="color: #064e3b;">🎯 GST & Taxation Final Mock Test</h3>
+        <p>GST-র সব চ্যাপ্টার ঝালিয়ে নিতে এখনই এই পরীক্ষাটি দাও।</p>
+        <a href="gst-mock-test.html" class="mock-btn" style="background: #059669;">📝 GST মক টেস্ট শুরু করো</a>
+    </div>
 
-  <div style="margin-top: 30px; padding: 20px; background: #fefce8; border-radius: 15px; border: 2px dashed #854d0e; text-align: center;">
-    <h3 style="color: #451a03; margin-top: 0;">🎯 Final Assessment: Reporting & Security</h3>
-    <p>Balance Sheet থেকে শুরু করে Security Control পর্যন্ত সব বিষয়ের পরীক্ষা দাও।</p>
-    <a href="reporting-security-mock-test.html" style="display: inline-block; background: #1e293b; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-        পরীক্ষা শুরু করো (১৫টি প্রশ্ন)
-    </a>
-</div>
-  
-  
+    <div class="mock-section" style="background: #fefce8; border: 2px dashed #854d0e;">
+        <h3 style="color: #451a03;">🎯 Final Assessment: Reporting & Security</h3>
+        <p>Balance Sheet থেকে শুরু করে Security Control পর্যন্ত সব বিষয়ের পরীক্ষা।</p>
+        <a href="reporting-security-mock-test.html" class="mock-btn" style="background: #1e293b; border-radius: 8px;">📋 পরীক্ষা শুরু করো (১৫টি প্রশ্ন)</a>
+    </div>
+      
     <div class="btn-container">
         <div style="margin-bottom: 25px;">
-            <span style="color: #64748b;">যোগাযোগ করুন:</span><br>
-           <b>8017247298 | 9874152080</b>
+            <span style="color: #64748b;">যেকোনো প্রয়োজনে যোগাযোগ করুন:</span><br>
+            <b style="font-size: 20px; color: var(--tally-blue);">8017247298 | 9874152080</b>
         </div>
         <a href="index.html" class="btn-home">🏠 ব্যাক টু হোম পেজ</a>
     </div>
 </div>
  
 <div style="text-align: center; padding: 20px; color: #94a3b8; font-size: 13px;">
-    © 2026 SUPER SUCCESS COMPUTER EDUCATION CENTER. All Rights Reserved.
+    © 2026 SUPER SUCCESS COMPUTER EDUCATION CENTER. <br>
+    22/1 Bipin Paul Road, Nimta, Kolkata-49. All Rights Reserved.
 </div>
  
 </body>
 </html>
-
-
-
-
-
